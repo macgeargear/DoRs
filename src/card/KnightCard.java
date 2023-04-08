@@ -1,5 +1,12 @@
 package card;
 
-public class KnightCard {
+import type.CardType;
+
+public class KnightCard extends EffectCard {
+
+	public KnightCard(CardType type) {
+		super(type);
+		// TODO Auto-generated constructor stub
+	}
 
 }
