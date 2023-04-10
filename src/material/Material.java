@@ -1,4 +1,4 @@
-package items;
+package material;
 
 import type.MaterialType;
 

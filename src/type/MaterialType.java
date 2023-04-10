@@ -1,7 +1,9 @@
 package type;
 
 public enum MaterialType {
-	KNIGHT,
-	THIEF,
-	PLAYER,
+	WOOD,
+	ROCK,
+	GUNPOWDER,
+	SAND,
+	WATER,
 }

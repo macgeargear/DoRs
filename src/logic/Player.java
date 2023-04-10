@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import buildings.Building;
 import card.EffectCard;
 import entities.Entity;
-import items.Material;
-import items.MaterialPack;
+import material.Material;
+import material.MaterialPack;
 
 public class Player {
 	private String name;
