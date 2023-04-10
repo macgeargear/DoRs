@@ -1,25 +1,33 @@
 package buildings;
 
-import java.util.ArrayList;
 
+import logic.Player;
 import type.BuildingType;
+
 
 public abstract class Building {
 	private BuildingType type;
+	private Player owner;
 	
 	public Building(BuildingType type) {
-		this.setType(type);
+		this.type = type;
 	}
-	
-	public ArrayList<Point>getPosition() {}
-	
-	
+
+	public Player getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Player owner) {
+		this.owner = owner;
+	}
+
 	public BuildingType getType() {
-		return this.type;
+		return type;
 	}
 	
 	public void setType(BuildingType type) {
 		this.type = type;
 	}
+	
 	
 }

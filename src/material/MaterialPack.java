@@ -1,4 +1,4 @@
-package items;
+package material;
 
 import type.MaterialType;
 
@@ -8,6 +8,7 @@ public class MaterialPack extends Material {
 	
 	public MaterialPack(MaterialType type) {
 		super(type);
+		this.setAmount(0);
 	}
 	public MaterialPack(MaterialType type, int amount) {
 		super(type);

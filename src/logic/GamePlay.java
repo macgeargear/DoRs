@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 import buildings.Building;
-import items.Map;
+import material.Map;
 
 public class GamePlay {
 	public static GamePlay instance;

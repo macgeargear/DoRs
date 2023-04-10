@@ -1,13 +1,48 @@
 package buildings;
 
+
+import utils.getTotalOwners;
+
 import type.BuildingType;
 
-public class Edge extends Building {
-	public Edge(BuildingType type, Point positionStart, Point positionEnd) {
+public class Edge extends Building implements Upgradeable, Destroyable {
+	private Node startNode;
+	private Node endNode;
+
+	public Edge(BuildingType type, Node startNode, Node endNode) {
 		super(type);
-		// TODO Auto-generated constructor stub
+		this.startNode = startNode;
+		this.endNode = endNode;
 	}
 
-	public ArrayList<Point> getPosition() {}
+	public void destroy() {
+		if (!this.getType().equals(BuildingType.SUPERROAD)) {
+			this.setType(BuildingType.EMPTYROAD);
+			this.setOwner(null);
+		}
+	}
+
+	public void upgrade() {
+		// TODO 
+	}
+
+	public boolean canDestroy() {
+		if (this.getType().equals(BuildingType.EMPTYROAD) || this.getType().equals(BuildingType.SUPERROAD)) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean canUpgrade() {
+		// do something
+	}
+
+	public Node getEndNode() {
+		return this.endNode;
+	}
+
+	public Node getStartNode() {
+		return this.startNode;
+	}
 
 }
