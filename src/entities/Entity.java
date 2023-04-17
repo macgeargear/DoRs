@@ -26,7 +26,11 @@ public class Entity implements Moveable {
 	@Override
 	public boolean canMove(Node node) {
 		// TODO Auto-generated method stub
-		return false;
+		GamePlay instance = GamePlay.getInstance();
+		if(this.type == EntityType.PLAYER) {
+			return node.getOwner().equals(instance.getAllPlayers().get(instance.getCurrentPlayer()));
+		}
+		return node.getOwner() != null;
 	}
 
 	@Override
@@ -42,10 +46,10 @@ public class Entity implements Moveable {
 	public void decreaseDuration(int round) {
 		this.duration -= round;
 		if(this.duration <= 0) {
-//			GamePlay.getInstance()
-//			remove it from GamePlay
+			GamePlay.getInstance().removeEntity(this);
 		}
 	}
+	
 	public EntityType getType() {
 		return type;
 	}
