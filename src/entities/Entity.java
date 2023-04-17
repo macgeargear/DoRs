@@ -3,6 +3,7 @@ package entities;
 import java.util.ArrayList;
 
 import buildings.Node;
+import logic.GamePlay;
 import logic.Player;
 import material.Material;
 import type.EntityType;
@@ -16,7 +17,10 @@ public class Entity implements Moveable {
 	private ArrayList<Material> wantMaterials;
 	
 	public Entity(EntityType type, Player owner, int duration, ArrayList<Material> wantMaterials) {
-		
+		this.type = type;
+		this.setOwner(owner);
+		this.setDuration(duration);
+		this.wantMaterials = wantMaterials;
 	}
 
 	@Override
@@ -28,9 +32,20 @@ public class Entity implements Moveable {
 	@Override
 	public void moveTo(Node node) {
 		// TODO Auto-generated method stub
-		
+		this.setPosition(node);
 	}
-
+	
+	public void handleIsMove() {
+		this.isMove = !isMove;
+	}
+	
+	public void decreaseDuration(int round) {
+		this.duration -= round;
+		if(this.duration <= 0) {
+//			GamePlay.getInstance()
+//			remove it from GamePlay
+		}
+	}
 	public EntityType getType() {
 		return type;
 	}
@@ -62,12 +77,6 @@ public class Entity implements Moveable {
 	public ArrayList<Material> getWantMaterials() {
 		return wantMaterials;
 	}
-
-	public void setWantMaterials(ArrayList<Material> wantMaterials) {
-		this.wantMaterials = wantMaterials;
-	}
-
-
 
 	
 }

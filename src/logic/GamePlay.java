@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 import buildings.Building;
+import card.EffectCard;
 import material.Map;
 
 public class GamePlay {
@@ -11,7 +12,7 @@ public class GamePlay {
 	private ArrayList<Player> allPlayers;
 	private ArrayList<Building> allBuilding;
 	private ArrayList<Map> allMaps;
-	private ArrayList<Card> cardInDeck;
+	private ArrayList<EffectCard> cardInDeck;
 	private int currentPlayer;
 	
 	GamePlay() {}
