@@ -69,18 +69,18 @@ public class GamePlay {
 		return false;
 	}
 	
-	public GamePlay getInstance() {
-		if(this.instance == null) {
-			this.instance = new GamePlay();
+	public static GamePlay getInstance() {
+		if(instance == null) {
+			instance = new GamePlay();
 		}
-		return this.instance;
+		return instance;
 	}
 	
-	public GamePlay getInstance(int roundAmount) {
-		if(this.instance == null) {
-			this.instance = new GamePlay(roundAmount);
+	public static GamePlay getInstance(int roundAmount) {
+		if(instance == null) {
+			instance = new GamePlay(roundAmount);
 		}
-		return this.instance;
+		return instance;
 	}
 	
 	public ArrayList<Player> getResult(){
