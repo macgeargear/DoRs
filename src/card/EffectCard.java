@@ -2,9 +2,13 @@ package card;
 
 import type.CardType;
 
-public class EffectCard {
-	public EffectCard(CardType type) {}
+public abstract class EffectCard {
+	private CardType type;
 	
-	public boolean canPlay() {}
-	public void play() {}
+	public EffectCard(CardType type) {
+		this.type = type;
+	}
+	
+	public abstract boolean canPlay();
+	public abstract void play();
 }
