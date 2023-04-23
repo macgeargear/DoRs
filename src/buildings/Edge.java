@@ -5,7 +5,7 @@ import logic.GamePlay;
 import logic.Player;
 import type.BuildingType;
 
-public class Edge extends Building implements Upgradeable, Destroyable {
+public class Edge extends Building {
 	private Node startNode;
 	private Node endNode;
 
