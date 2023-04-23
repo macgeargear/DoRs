@@ -1,5 +1,6 @@
 package card;
 
+import buildings.Place;
 import type.CardType;
 
 public abstract class EffectCard {
@@ -9,6 +10,6 @@ public abstract class EffectCard {
 		this.type = type;
 	}
 	
-	public abstract boolean canPlay();
-	public abstract void play();
+	public abstract boolean canPlay(Place place);
+	public abstract void play(Place place);
 }

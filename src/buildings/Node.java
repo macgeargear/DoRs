@@ -2,6 +2,7 @@ package buildings;
 
 import java.util.ArrayList;
 
+import logic.GamePlay;
 import logic.Player;
 import type.BuildingType;
 import utils.getTotalOwners;
@@ -56,7 +57,7 @@ public class Node extends Building implements Upgradeable, Destroyable {
 	}
 
 	public void setSideEdge(int position, Edge edge) {
-		this.sideEdges.get(position) = edge;
+		this.sideEdges.set(position, edge);
 	}
 
 	@Override
@@ -69,11 +70,23 @@ public class Node extends Building implements Upgradeable, Destroyable {
 
 	@Override
 	public boolean canUpgrade() {
-		if ((this.getType().equals(BuildingType.EMPTYHOUSE) && this.getSideEdges().size() > 1)
+		if ((this.getType().equals(BuildingType.EMPTYHOUSE) && this.checkSideEdges() == false)
 				|| (this.getType().equals(BuildingType.CITY))) {
 			return false;
 		}
+//		edit later
 		return true;
+	}
+	
+	public boolean checkSideEdges() {
+		GamePlay gameInstance = GamePlay.getInstance();
+		Player p = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
+		for(Edge edge: sideEdges) {
+			if(edge.getOwner().equals(p)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

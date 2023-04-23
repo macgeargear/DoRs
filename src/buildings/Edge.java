@@ -1,8 +1,8 @@
 package buildings;
 
-
 import utils.getTotalOwners;
-
+import logic.GamePlay;
+import logic.Player;
 import type.BuildingType;
 
 public class Edge extends Building implements Upgradeable, Destroyable {
@@ -23,7 +23,13 @@ public class Edge extends Building implements Upgradeable, Destroyable {
 	}
 
 	public void upgrade() {
-		// TODO 
+		if (this.getType().equals(BuildingType.EMPTYROAD)) {
+			this.setType(BuildingType.ROAD);
+			GamePlay gameInstance = GamePlay.getInstance();
+			this.setOwner(gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer()));
+		} else if (this.getType().equals(BuildingType.ROAD)) {
+			this.setType(BuildingType.SUPERROAD);
+		}
 	}
 
 	public boolean canDestroy() {
@@ -32,9 +38,15 @@ public class Edge extends Building implements Upgradeable, Destroyable {
 		}
 		return true;
 	}
-	
+
 	public boolean canUpgrade() {
-		// do something
+		GamePlay gameInstance = GamePlay.getInstance();
+		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
+		if (this.getOwner() != null || this.getType().equals(BuildingType.SUPERROAD)
+				|| !(startNode.getOwner().equals(currentPlayer) || endNode.getOwner().equals(currentPlayer))) {
+			return false;
+		}
+		return true;
 	}
 
 	public Node getEndNode() {
