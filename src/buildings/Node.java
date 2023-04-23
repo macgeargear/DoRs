@@ -7,7 +7,7 @@ import logic.Player;
 import type.BuildingType;
 import utils.getTotalOwners;
 
-public class Node extends Building  {
+public class Node extends Building {
 	private int score;
 	private ArrayList<Edge> sideEdges;
 
