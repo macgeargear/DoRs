@@ -5,7 +5,7 @@ import logic.Player;
 import type.BuildingType;
 
 
-public abstract class Building {
+public abstract class Building extends Place {
 	private BuildingType type;
 	private Player owner;
 	
