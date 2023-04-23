@@ -36,8 +36,12 @@ public class KnightCard extends EffectCard {
 		GamePlay gameInstance = GamePlay.getInstance();
 		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
 		Entity newEntity = new Entity(EntityType.KNIGHT, currentPlayer, 3, new ArrayList<Material>());
-		newEntity.setPosition((Node)place);
+		newEntity.setPosition((Node) place);
 		gameInstance.addEntity(newEntity);
+
+		currentPlayer.getMaterialPack(new Material(MaterialType.WOOD)).decrease(1);
+		currentPlayer.getMaterialPack(new Material(MaterialType.ROCK)).decrease(1);
+		currentPlayer.getMaterialPack(new Material(MaterialType.WATER)).decrease(1);
 	}
 
 }

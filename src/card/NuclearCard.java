@@ -33,6 +33,11 @@ public class NuclearCard extends EffectCard {
 	@Override
 	public void play(Place place) {
 		place.handleIsActive();
+
+		GamePlay gameInstance = GamePlay.getInstance();
+		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
+		currentPlayer.getMaterialPack(new Material(MaterialType.SAND)).decrease(3);
+		currentPlayer.getMaterialPack(new Material(MaterialType.GUNPOWDER)).decrease(5);
 	}
 
 }

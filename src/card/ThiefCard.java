@@ -38,6 +38,11 @@ public class ThiefCard extends EffectCard {
 		Entity newEntity = new Entity(EntityType.THIEF, currentPlayer, 3, new ArrayList<Material>());
 		newEntity.setPosition((Node)place);
 		gameInstance.addEntity(newEntity);
+		
+		currentPlayer.getMaterialPack(new Material(MaterialType.GUNPOWDER)).decrease(1);
+		currentPlayer.getMaterialPack(new Material(MaterialType.ROCK)).decrease(1);
+		currentPlayer.getMaterialPack(new Material(MaterialType.WATER)).decrease(1);
+	
 	}
 
 }
