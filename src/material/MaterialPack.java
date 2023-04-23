@@ -2,16 +2,16 @@ package material;
 
 import type.MaterialType;
 
-public class MaterialPack extends Material {
-	private MaterialType type;
+public class MaterialPack {
+	private Material type;
 	private int amount;
 	
-	public MaterialPack(MaterialType type) {
-		super(type);
+	public MaterialPack(Material type) {
+		this.type = type;
 		this.setAmount(0);
 	}
-	public MaterialPack(MaterialType type, int amount) {
-		super(type);
+	public MaterialPack(Material type, int amount) {
+		this.type = type;
 		this.setAmount(amount);
 	}
 	
@@ -31,7 +31,7 @@ public class MaterialPack extends Material {
 		return this.amount;
 	}
 	
-	public MaterialType getType() {
+	public Material getType() {
 		return this.type;
 	}
 	

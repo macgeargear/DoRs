@@ -21,6 +21,15 @@ public class Player {
 	public void removeMaterial(Material material) {}
 	public int countMaterial(Material material) {return 0;}
 
+	public MaterialPack getMaterialPack(Material material) {
+		for(MaterialPack pack: this.allMaterials) {
+			if(pack.getType().equals(material)) {
+				return pack;
+			}
+		}
+		return new MaterialPack(null);
+	}
+	
 	public String getName() {
 		return name;
 	}
