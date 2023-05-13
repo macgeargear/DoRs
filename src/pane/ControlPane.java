@@ -15,8 +15,8 @@ public class ControlPane {
 
 		gameScene = new Scene(new GamePane(), 1000, 600);
 		homeScene = new Scene(new HomePane(), 1000, 600);	
-//		this.showHomePane();
-		this.showGameScene();
+		this.showHomeScene();
+//		this.showGameScene();
 	}
 	
 	public static ControlPane getInstance() {
