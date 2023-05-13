@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 public class HomePane extends VBox {
 	
 	private Button playButton;
+	private Button startButton;
 	private HBox amountSelector;
 	
 	public HomePane() {
@@ -26,7 +27,7 @@ public class HomePane extends VBox {
 		
 		this.initPlayButton();
 		this.initStartButton();
-		getChildren().addAll(welcomeText, playButton, amountSelector);
+		getChildren().addAll(welcomeText, playButton, amountSelector, startButton);
 	}
 	
 	private void initPlayButton() {
@@ -39,6 +40,7 @@ public class HomePane extends VBox {
 			public void handle(MouseEvent arg0) {
 				playButton.setVisible(false);
 				amountSelector.setVisible(true);
+				startButton.setVisible(true);
 //				ControlPane.getInstance().showGameScene();
 			}
 		});
@@ -46,5 +48,19 @@ public class HomePane extends VBox {
 	
 	private void initStartButton() {
 		amountSelector = new AmountSelector();
+		
+		startButton = new Button();
+		startButton.setText("Start");
+		startButton.setVisible(false);
+		startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				startButton.setVisible(false);
+				amountSelector.setVisible(false);
+				playButton.setVisible(true);
+				ControlPane.getInstance().showGameScene();
+			}
+		});
 	}
 }
