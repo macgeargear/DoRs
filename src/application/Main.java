@@ -88,9 +88,9 @@ public class Main extends Application {
 		ControlPane instance = ControlPane.getInstance(primaryStage);
 		
 //        Scene scene = new Scene(controlPane, 1000, 600);
-//        primaryStage.setTitle("DoR");
 //        primaryStage.setScene(scene);
-//        primaryStage.show();
+		primaryStage.setTitle("DoR");
+        primaryStage.show();
 	}
 
 	public static void main(String[] args) {

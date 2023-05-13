@@ -8,7 +8,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class HomePane extends VBox {
+	
 	private Button playButton;
+	
 	public HomePane() {
 		setAlignment(Pos.CENTER);
 		setSpacing(20);
@@ -20,13 +22,11 @@ public class HomePane extends VBox {
 	private void initPlayButton() {
 		playButton = new Button();
 		playButton.setText("Play");
-		
 		playButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				ControlPane.getInstance().showGamePane();
+				ControlPane.getInstance().showGameScene();
 			}
 		});
 	}

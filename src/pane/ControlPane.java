@@ -1,23 +1,22 @@
 package pane;
 
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class ControlPane extends Pane {
+public class ControlPane {
 	
 	private static ControlPane instance = null;
-	private GamePane gamePane;
-	private HomePane homePane;
+	private Scene gameScene;
+	private Scene homeScene;
 	private Stage stage;
 	
 	public ControlPane(Stage stage) {
-		gamePane = new GamePane();
-		homePane = new HomePane();
-		
 		this.stage = stage;
-		showHomePane();
-		this.stage.show();
+
+		gameScene = new Scene(new GamePane(), 1000, 600);
+		homeScene = new Scene(new HomePane(), 1000, 600);	
+//		this.showHomePane();
+		this.showGameScene();
 	}
 	
 	public static ControlPane getInstance() {
@@ -31,11 +30,11 @@ public class ControlPane extends Pane {
 		return instance;
 	}
 	
-	public void showHomePane() {
-		stage.setScene(new Scene(homePane, 1000, 600));
+	public void showHomeScene() {
+		stage.setScene(homeScene);
 	}
 	
-	public void showGamePane() {
-		stage.setScene(new Scene(gamePane, 1000, 600));
+	public void showGameScene() {
+		stage.setScene(gameScene);
 	}
 }
