@@ -13,7 +13,9 @@ public class Player {
 	private ArrayList<EffectCard> allEffectCards;
 	private ArrayList<MaterialPack> allMaterials;
 	
-	public Player(String name) {}
+	public Player(String name) {
+		this.name = name;
+	}
 	
 	public void addEffect(EffectCard card) {}
 	public void addMaterial(Material material) {}
@@ -32,6 +34,10 @@ public class Player {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public ArrayList<EffectCard> getAllEffectCards() {

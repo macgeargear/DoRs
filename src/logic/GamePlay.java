@@ -36,8 +36,8 @@ public class GamePlay {
 		this.allEntities = new ArrayList<Entity>();
 	}
 	
-	public GamePlay(int roundAmount) {
-		this.roundAmount = roundAmount;
+	public GamePlay(int playerAmount) {
+		this.roundAmount = 10;
 		this.currentRound = 0;
 		this.currentPlayer = 0;
 		this.marketplace = new Marketplace();
@@ -47,11 +47,17 @@ public class GamePlay {
 		this.allMaps = new ArrayList<Map>();
 		this.cardInDeck = new ArrayList<EffectCard>();
 		this.allEntities = new ArrayList<Entity>();
+		
+		for(int i=0;i<playerAmount;++i) {			
+			allPlayers.add(new Player("P"+Integer.toString(i)));
+		}
 	}
 	
 	public void draw() {}
 	
-	public void goToNextPlayer() {}
+	public void goToNextPlayer() {
+		
+	}
 	
 	public void rollDice() {}
 	
