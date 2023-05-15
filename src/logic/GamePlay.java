@@ -77,9 +77,7 @@ public class GamePlay {
 	}
 	
 	public static GamePlay getInstance(int roundAmount) {
-		if(instance == null) {
-			instance = new GamePlay(roundAmount);
-		}
+		instance = new GamePlay(roundAmount);
 		return instance;
 	}
 	
