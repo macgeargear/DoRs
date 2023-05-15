@@ -2,6 +2,7 @@ package pane;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import logic.GamePlay;
 
 public class ControlPane {
 	
@@ -15,8 +16,9 @@ public class ControlPane {
 
 		gameScene = new Scene(new GamePane(), 1000, 600);
 		homeScene = new Scene(new HomePane(), 1000, 600);	
-		this.showHomeScene();
-//		this.showGameScene();
+//		this.showHomeScene();
+		GamePlay.getInstance(4);
+		this.showGameScene();
 	}
 	
 	public static ControlPane getInstance() {
