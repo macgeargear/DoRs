@@ -88,6 +88,7 @@ public class GamePlay {
 	}
 	
 	public ArrayList<Player> getResult(){
+		instance = null;
 		return new ArrayList<Player>();
 	}
 
