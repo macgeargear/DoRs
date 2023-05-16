@@ -40,4 +40,13 @@ public class ControlPane {
 	public void showGameScene() {
 		stage.setScene(gameScene);
 	}
+
+	public Scene getGameScene() {
+		return gameScene;
+	}
+
+	public Scene getHomeScene() {
+		return homeScene;
+	}
+	
 }

@@ -2,10 +2,13 @@ package components;
 
 import config.Config;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -13,12 +16,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import logic.GamePlay;
+import utils.Utilities;
 
 public class HeaderGame extends HBox {
-	
+
 	private int roundCount;
 	private Text roundAmount;
-	
+
 	public HeaderGame() {
 		roundCount = GamePlay.getInstance().getCurrentRound();
 
@@ -29,7 +33,7 @@ public class HeaderGame extends HBox {
 		initRoundText();
 		initExitButton();
 	}
-	
+
 	private void initRoundText() {
 		HBox roundDisplay = new HBox();
 		roundDisplay.setAlignment(Pos.CENTER);
@@ -38,7 +42,7 @@ public class HeaderGame extends HBox {
 		roundDisplay.getChildren().addAll(roundText, roundAmount);
 		getChildren().add(roundDisplay);
 	}
-	
+
 	private void initExitButton() {
 		Button exitButton = new Button();
 		exitButton.setText("X");
@@ -47,7 +51,7 @@ public class HeaderGame extends HBox {
 			
 			@Override
 			public void handle(ActionEvent arg0) {
-				
+				Utilities.alertGenerate(AlertType.CONFIRMATION, "Exit", "Sure to leave?", ()->{Utilities.exitGame();});
 			}
 		});
 		
