@@ -14,11 +14,11 @@ public class ControlPane {
 	
 	public ControlPane(Stage stage) {
 		this.stage = stage;
-
-		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
-		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);	
-//		this.showHomeScene();
 		GamePlay.getInstance(4);
+
+		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);	
+		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
+//		this.showHomeScene();
 		this.showGameScene();
 	}
 	
@@ -38,6 +38,7 @@ public class ControlPane {
 	}
 	
 	public void showGameScene() {
+		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
 		stage.setScene(gameScene);
 	}
 
