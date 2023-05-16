@@ -1,7 +1,9 @@
 package logic;
 
 import java.util.ArrayList;
-
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
 
 import buildings.Building;
 import buildings.Edge;
@@ -9,6 +11,8 @@ import buildings.Node;
 import card.EffectCard;
 import entities.Entity;
 import material.Map;
+import material.Material;
+import type.MaterialType;
 
 public class GamePlay {
 	public static GamePlay instance;
@@ -34,6 +38,8 @@ public class GamePlay {
 		this.allMaps = new ArrayList<Map>();
 		this.cardInDeck = new ArrayList<EffectCard>();
 		this.allEntities = new ArrayList<Entity>();
+		
+		this.initMaps();
 	}
 	
 	public GamePlay(int playerAmount) {
@@ -51,6 +57,30 @@ public class GamePlay {
 		for(int i=0;i<playerAmount;++i) {			
 			allPlayers.add(new Player("P"+Integer.toString(i)));
 		}
+		
+		this.initMaps();
+	}
+	
+	private void initMaps() {
+		
+		
+		Material wood = new Material(MaterialType.WOOD);
+		Material water = new Material(MaterialType.WATER);
+		Material rock = new Material(MaterialType.ROCK);
+		Material sand = new Material(MaterialType.SAND);
+		Material gunpowder = new Material(MaterialType.GUNPOWDER);
+		
+		ArrayList<Material> allMaterial = new ArrayList<Material>();
+		allMaterial.addAll(Arrays.asList(wood, water, rock, sand, gunpowder));
+		
+		for (Material material : allMaterial) {
+			for(int i=0;i<5;++i) {
+				Map newMap = new Map(material);
+				allMaps.add(new Map(material));
+			}
+		}
+		
+		Collections.shuffle(allMaps);
 	}
 	
 	public void draw() {}

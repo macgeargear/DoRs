@@ -1,6 +1,7 @@
 package material;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import buildings.Node;
 import buildings.Place;
@@ -13,8 +14,9 @@ public class Map extends Place {
 	
 
 	public Map(Material type) {
+		Random random = new Random();
 		this.type = type;
-		this.setNumber(0);
+		this.setNumber(random.nextInt(6)+1);
 		this.sideNode = new ArrayList<Node>();
 	}
 	
@@ -44,5 +46,11 @@ public class Map extends Place {
 	public ArrayList<Node> getSideNode() {
 		return sideNode;
 	}
+
+	public Material getType() {
+		return type;
+	}
+	
+	
 
 }
