@@ -6,20 +6,24 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class GamePane extends VBox {
+public class GamePane extends StackPane {
 
 	private Button exitButton;
 	private HeaderGame header;
+	private VBox game;
 
 	public GamePane() {
 		header = new HeaderGame();
+		game = new VBox();
+		game.setAlignment(Pos.TOP_CENTER);
 		
-		setAlignment(Pos.CENTER);
 		this.initExitButton();
-		getChildren().addAll(header, exitButton);
+		game.getChildren().addAll(header);
+		getChildren().add(game);
 	}
 
 	private void initExitButton() {

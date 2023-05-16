@@ -1,7 +1,7 @@
 package config;
 
 public class Config {
- /**
-  * this file is for configuration of our GUI
-  */
+	public static final int SCREEN_WIDTH = 1000;
+	public static final int SCREEN_HEIGH = 600;
+	
 }
