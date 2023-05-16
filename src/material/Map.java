@@ -9,7 +9,7 @@ import type.MaterialType;
 
 public class Map extends Place {
 	private Material type;
-	private ArrayList<Node> sideNode;
+	private ArrayList<Node> sideNodes;
 	private int number;
 	
 
@@ -17,13 +17,16 @@ public class Map extends Place {
 		Random random = new Random();
 		this.type = type;
 		this.setNumber(random.nextInt(6)+1);
-		this.sideNode = new ArrayList<Node>();
+		this.sideNodes = new ArrayList<Node>();
+		for(int i=0;i<4;++i) {
+			sideNodes.add(null);
+		}
 	}
 	
 	public void produce() {
 		// TODO
 		if (this.isActive()) {
-			for (Node node : this.sideNode) {
+			for (Node node : this.sideNodes) {
 				node.getOwner().addMaterial(this.type);
 			}
 		}
@@ -31,7 +34,7 @@ public class Map extends Place {
 	
 	public void setSideNode(int position, Node node) {
 		// TODO
-		this.sideNode.set(position, node);
+		this.sideNodes.set(position, node);
 	}
 
 	public int getNumber() {
@@ -43,8 +46,8 @@ public class Map extends Place {
 		this.number = number;
 	}
 
-	public ArrayList<Node> getSideNode() {
-		return sideNode;
+	public ArrayList<Node> getSideNodes() {
+		return sideNodes;
 	}
 
 	public Material getType() {

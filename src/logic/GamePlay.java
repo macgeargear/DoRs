@@ -12,6 +12,7 @@ import card.EffectCard;
 import entities.Entity;
 import material.Map;
 import material.Material;
+import type.BuildingType;
 import type.MaterialType;
 
 public class GamePlay {
@@ -59,11 +60,10 @@ public class GamePlay {
 		}
 		
 		this.initMaps();
+		this.initNodes();
 	}
 	
 	private void initMaps() {
-		
-		
 		Material wood = new Material(MaterialType.WOOD);
 		Material water = new Material(MaterialType.WATER);
 		Material rock = new Material(MaterialType.ROCK);
@@ -76,12 +76,65 @@ public class GamePlay {
 		for (Material material : allMaterial) {
 			for(int i=0;i<5;++i) {
 				Map newMap = new Map(material);
-				allMaps.add(new Map(material));
+				allMaps.add(newMap);
 			}
 		}
 		
 		Collections.shuffle(allMaps);
 	}
+	
+	private void initNodes() {
+		for(int i=0;i<36;++i) {
+			Node newNode = new Node(BuildingType.EMPTYHOUSE);
+			allNodes.add(newNode);
+		}
+		
+		for(int i=0;i<5;++i) {
+			for(int j=0;j<5;++j) {
+				int index = i*5 + j;
+				Map map = allMaps.get(index);
+				
+				Node topLeftNode = allNodes.get(index+i), topRightNode = allNodes.get(index+i+6),
+						botLeftNode = allNodes.get(index+i+1), botRightNode = allNodes.get(index+i+7);
+				
+//				top left
+				map.setSideNode(0, topLeftNode);
+//				top right
+				map.setSideNode(1, topRightNode);
+//				bottom left
+				map.setSideNode(2, botLeftNode);
+//				bottom right
+				map.setSideNode(3, botRightNode);
+			
+//				init edge
+//				must have
+				Edge topEdge = new Edge(BuildingType.EMPTYROAD, topLeftNode, topRightNode);
+				allEdges.add(topEdge);
+				topLeftNode.setSideEdge(1, topEdge);
+				topRightNode.setSideEdge(3, topEdge);
+				
+				Edge leftEdge = new Edge(BuildingType.EMPTYROAD, topLeftNode, botLeftNode);
+				allEdges.add(leftEdge);
+				topLeftNode.setSideEdge(2, leftEdge);
+				botLeftNode.setSideEdge(0, leftEdge);
+				
+//				some condition
+				if(j == 4) {
+					Edge botEdge = new Edge(BuildingType.EMPTYROAD, botLeftNode, botRightNode);					
+					allEdges.add(botEdge);
+					botLeftNode.setSideEdge(1, botEdge);
+					botRightNode.setSideEdge(3, botEdge);
+				}
+				if(i == 4) {					
+					Edge rightEdge = new Edge(BuildingType.EMPTYROAD, topRightNode, botRightNode);
+					allEdges.add(rightEdge);
+					topRightNode.setSideEdge(2, rightEdge);
+					botRightNode.setSideEdge(0, rightEdge);
+				}
+			}
+		}
+	}
+		
 	
 	public void draw() {}
 	
