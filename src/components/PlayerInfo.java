@@ -15,13 +15,15 @@ public class PlayerInfo extends BorderPane {
 	
 	private Player p1;
 	private Player p2;
+	private boolean isLeft;
 	
-	public PlayerInfo(int isLeft, Player p1, Player p2) {
+	public PlayerInfo(boolean isLeft, Player p1, Player p2) {
 		this.p1 = p1;
 		this.p2 = p2;
+		this.isLeft = isLeft;
 		
 		setPrefSize(Config.SIDE_BOARD_WIDTH, Config.SIDE_BOARD_HEIGH);
-		setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
+		setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
 //		setFillWidth(true);
 		setPadding(new Insets(20));
 		initTop();
@@ -29,25 +31,17 @@ public class PlayerInfo extends BorderPane {
 	}
 	
 	private void initTop() {
-		HBox top = new HBox();
-		top.setPrefWidth(Config.SIDE_BOARD_WIDTH);
+		PlayerContainer topContainer = new PlayerContainer(p1, true, isLeft);
 		
-		Text name = new Text(p1.getName());
-		top.getChildren().add(name);
-		
-		setTop(top);
+		setTop(topContainer);
 //		getChildren().add(top);
 	}
 	
 	private void initBottom() {
 		if(p2 == null) return ;
-		HBox bottom = new HBox();
-		bottom.setPrefWidth(Config.SIDE_BOARD_WIDTH);
+		PlayerContainer botContainer = new PlayerContainer(p2, false, isLeft);
 		
-		Text name = new Text(p1.getName());
-		bottom.getChildren().add(name);
-		
-		setBottom(bottom);
+		setBottom(botContainer);
 //		getChildren().add(bottom);
 	}
 }

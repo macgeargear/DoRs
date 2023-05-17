@@ -34,8 +34,8 @@ public class GamePane extends BorderPane {
 		
 		GamePlay gameInstance = GamePlay.getInstance();
 		ArrayList<Player> allPlayer = gameInstance.getAllPlayers();
-		PlayerInfo left = new PlayerInfo(1, allPlayer.get(0), allPlayer.size() >= 3 ? allPlayer.get(2): null);
-		PlayerInfo right = new PlayerInfo(0, allPlayer.get(1), allPlayer.size() >= 4 ? allPlayer.get(3): null);
+		PlayerInfo left = new PlayerInfo(true, allPlayer.get(0), allPlayer.size() >= 3 ? allPlayer.get(2): null);
+		PlayerInfo right = new PlayerInfo(false, allPlayer.get(1), allPlayer.size() >= 4 ? allPlayer.get(3): null);
 		
 		setCenter(gameBoard);
 		setLeft(left);
