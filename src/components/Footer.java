@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.*;
+import logic.GamePlay;
 import pane.ControlPane;
 
 public class Footer extends HBox {
@@ -60,8 +61,20 @@ public class Footer extends HBox {
 	
 	}
 	private void initRollDiceButton() {
+
 		this.rollDiceButton = new RollDice("Roll");
 		this.rollDiceButton.setBackground(new Background(new BackgroundFill(Color.MISTYROSE,null,null)));
+
+		this.rollDiceButton.setOnAction(e->{
+			GamePlay instance = GamePlay.getInstance();
+			if(instance.rollDice()) {
+				int number = instance.getRollNumber();
+				HeaderGame gameHeader = ControlPane.getInstance().getGameHeader();
+				gameHeader.updateDiceNumber();
+			}
+			
+		});
+
 	}
 	
 	private void initBuyNodeButton() {
