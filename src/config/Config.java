@@ -21,8 +21,11 @@ public class Config {
 	 * 2.Create Start Game Button
 	 */
 
-	// Screen
 	public static final int HOMEPANE_HEIGHT = 678;
+
+	
+//	Layout
+
 	public static final int SCREEN_WIDTH = 1200;
 	public static final int SCREEN_HEIGH = 750;
 	
@@ -35,7 +38,19 @@ public class Config {
 	// Map
 	public static final int MAP_WIDTH = 70;
 	public static final int MAP_HEIGH = 70;
+	public static final int NODE_WIDTH = 30;
+	public static final int NODE_HEIGH = 30;
 	
+
 	// Footer
 	public static final int Footer_HEIGHT = 80;
+
+//	Node color
+	public static final String EMPTY = "#ABB2B9";
+	public static final String P1 = "#E67E22";
+	public static final String P2 = "#E74C3C";
+	public static final String P3 = "#8E44AD";
+	public static final String P4 = "#3498DB";
+
+
 }
