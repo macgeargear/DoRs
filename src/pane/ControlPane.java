@@ -22,8 +22,8 @@ public class ControlPane {
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
 		marketScene = new Scene(new MarketPane(), Config.SCREEN_HEIGH , Config.SCREEN_HEIGH);
 //		this.showHomeScene();
-		this.showMarketScene();
-//		this.showGameScene();
+//		this.showMarketScene();
+		this.showGameScene();
 
 	}
 	
