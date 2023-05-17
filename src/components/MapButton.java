@@ -17,7 +17,7 @@ public class MapButton extends Button {
 		
 		setText(Integer.toString(map.getNumber()));
 		setPrefSize(Config.MAP_WIDTH, Config.MAP_HEIGH);
-//		this.setupSyle();
+		this.setupSyle();
 //		setBackground(new Background(new BackgroundFill(this.getColor(), null, null)));
 	}
 	
