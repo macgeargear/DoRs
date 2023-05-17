@@ -134,6 +134,10 @@ public class GamePlay {
 			}
 		}
 	}
+	
+	public int findPlayerIndex(Player p) {
+		return allPlayers.indexOf(p);
+	}
 		
 	
 	public void draw() {}

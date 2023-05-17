@@ -17,8 +17,12 @@ public class MapButton extends Button {
 		
 		setText(Integer.toString(map.getNumber()));
 		setPrefSize(Config.MAP_WIDTH, Config.MAP_HEIGH);
-		setStyle("-fx-font-size: 22px;" + "-fx-background-radius: 10px;" + "-fx-background-color: #" + this.getColor() + ";");
+		this.setupSyle();
 //		setBackground(new Background(new BackgroundFill(this.getColor(), null, null)));
+	}
+	
+	public void setupSyle() {
+		setStyle("-fx-font-size: 22px;" + "-fx-background-radius: 10px;" + "-fx-background-color: #" + this.getColor() + ";");
 	}
 	
 	private String getColor() {
