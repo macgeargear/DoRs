@@ -13,6 +13,10 @@ public class Node extends Building {
 
 	public Node(BuildingType type) {
 		super(type);
+		sideEdges = new ArrayList<Edge>();
+		for(int i=0;i<4;++i) {
+			sideEdges.add(null);
+		}
 	}
 
 	public int getScore() {
