@@ -17,6 +17,19 @@ public class NodeButton extends Button {
 		setPrefSize(Config.NODE_WIDTH, Config.NODE_HEIGH);
 		this.setupSyle();
 		this.initShapeFx();
+		this.initOnHover();
+	}
+	
+	private void initOnHover() {
+		setOnMouseEntered(event -> {
+            setScaleX(1.5);
+            setScaleY(1.5);
+        });
+		
+		setOnMouseExited(event -> {
+            setScaleX(1.0);
+            setScaleY(1.0);
+        });
 	}
 	
 	public void setupSyle() {

@@ -19,6 +19,19 @@ public class MapButton extends Button {
 		setPrefSize(Config.MAP_WIDTH, Config.MAP_HEIGH);
 		this.setupSyle();
 //		setBackground(new Background(new BackgroundFill(this.getColor(), null, null)));
+//		this.initOnHover();
+	}
+	
+	private void initOnHover() {
+		setOnMouseEntered(event -> {
+            setScaleX(1.2);
+            setScaleY(1.2);
+        });
+		
+		setOnMouseExited(event -> {
+            setScaleX(1.0);
+            setScaleY(1.0);
+        });
 	}
 	
 	public void setupSyle() {
