@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import logic.GamePlay;
 import logic.Player;
 import type.BuildingType;
+import utils.Utilities;
 import utils.getTotalOwners;
 
 public class Node extends Building {
@@ -38,20 +39,31 @@ public class Node extends Building {
 	}
 
 	public void upgrade() {
+		GamePlay instance = GamePlay.getInstance();
+		Player currentPlayer = Utilities.getCurrentPlayer();
+		
+//		prepare phase
+		if(instance.getCurrentRound() < 0) {
+			if(this.getType() == BuildingType.EMPTYHOUSE) {
+				this.setType(BuildingType.HOUSE);
+				this.setOwner(currentPlayer);
+			}
+			return ;
+		}
+		
+//		game phase
 		if (!this.getType().equals(BuildingType.CITY)) {
 			if (this.getType().equals(BuildingType.EMPTYHOUSE)) {
-				int owners = utils.getTotalOwners.fromSideEdges(this.getSideEdges());
-				if (owners == 1) {
+				boolean haveSideEdge = Utilities.haveSideEdge(this);
+				if (haveSideEdge) {
 					this.setType(BuildingType.HOUSE);
 				}
-				if (this.getType().equals(BuildingType.HOUSE)) {
-					this.setType(BuildingType.TOWER);
-				}
-				if (this.getType().equals(BuildingType.TOWER)) {
-					this.setType(BuildingType.CITY);
-				}
-
-
+				
+			}else if (this.getType().equals(BuildingType.HOUSE)) {
+				this.setType(BuildingType.TOWER);
+			}
+			else if (this.getType().equals(BuildingType.TOWER)) {
+				this.setType(BuildingType.CITY);
 			}
 		}
 	}

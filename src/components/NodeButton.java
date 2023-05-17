@@ -7,10 +7,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import logic.GamePlay;
+import pane.ControlPane;
 import type.BuildingType;
+import utils.Utilities;
 
 public class NodeButton extends Button {
 	private Node node;
+
 	public NodeButton(Node node) {
 		this.node = node;
 
@@ -18,54 +21,85 @@ public class NodeButton extends Button {
 		this.setupSyle();
 		this.initShapeFx();
 		this.initOnHover();
+		this.initOnAction();
 	}
-	
+
+	private void initOnAction() {
+		NodeButton thisButton = this;
+		setOnAction(e -> {
+			setScaleX(1.5);
+			setScaleY(1.5);
+			ControlPane paneInstance = ControlPane.getInstance();
+			GamePlay gameInstance = GamePlay.getInstance();
+			
+			paneInstance.resetSelect();
+			paneInstance.setSelectNode(thisButton);
+			
+			if (node.getOwner() == null) {
+				paneInstance.getFooter().setBuyNodeDisable(false);
+				paneInstance.getFooter().getBuyNodeButton().setText("Buy Node");
+			} else if (node.getOwner().equals(Utilities.getCurrentPlayer()) && gameInstance.getCurrentRound() > 0) {
+				paneInstance.getFooter().setBuyNodeDisable(false);
+				paneInstance.getFooter().getBuyNodeButton().setText("Upgrade Node");
+			} else {
+				paneInstance.getFooter().setBuyNodeDisable(true);
+				paneInstance.getFooter().getBuyNodeButton().setText("Buy Node");
+			}
+		});
+	}
+
 	private void initOnHover() {
-		setOnMouseEntered(event -> {
-            setScaleX(1.5);
-            setScaleY(1.5);
-        });
+		ControlPane paneInstance = ControlPane.getInstance();
+		NodeButton thisButton = this;
 		
-		setOnMouseExited(event -> {
-            setScaleX(1.0);
-            setScaleY(1.0);
-        });
+		setOnMouseEntered(event -> {
+			setScaleX(1.5);
+			setScaleY(1.5);
+		});
+
+		setOnMouseExited(event -> {				
+			if(paneInstance.getSelectNode() == null || !paneInstance.getSelectNode().equals(thisButton)) {
+				setScaleX(1.0);
+				setScaleY(1.0);	
+			}
+		});
 	}
-	
+
 	public void setupSyle() {
 		setStyle("-fx-background-color: " + this.getColor() + ";");
 	}
-	
+
 	private String getColor() {
 		BuildingType type = node.getType();
-		if(type == BuildingType.EMPTYHOUSE) {
+		if (type == BuildingType.EMPTYHOUSE) {
 			return Config.EMPTY;
 		}
-		
+
 		GamePlay instance = GamePlay.getInstance();
 		int playerIndex = instance.findPlayerIndex(node.getOwner());
-		if(playerIndex == 0) {
+		if (playerIndex == 0) {
 			return Config.P1;
-		}else if(playerIndex == 1) {
+		} else if (playerIndex == 1) {
 			return Config.P2;
-		}else if(playerIndex == 2) {
+		} else if (playerIndex == 2) {
 			return Config.P3;
 		}
 		return Config.P4;
 	}
-	
+
 	public void initShapeFx() {
 		BuildingType type = node.getType();
-		if(type == BuildingType.EMPTYHOUSE || type == BuildingType.HOUSE) {
+		if (type == BuildingType.EMPTYHOUSE || type == BuildingType.HOUSE) {
 			setShape(new Circle(15));
-		}else if(type == BuildingType.TOWER) {
-			setShape(new Polygon(
-	                15.0, 0.0,
-	                0.0, 30.0,
-	                30.0, 30.0
-	        ));
-		}else {
+		} else if (type == BuildingType.TOWER) {
+			setShape(new Polygon(15.0, 0.0, 0.0, 30.0, 30.0, 30.0));
+		} else {
 			setShape(new Rectangle(100, 100));
 		}
+	}
+	
+	public void resetSize() {
+		setScaleX(1.0);
+		setScaleY(1.0);	
 	}
 }

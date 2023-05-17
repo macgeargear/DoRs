@@ -45,6 +45,8 @@ public class Footer extends HBox {
 		HBox.setMargin(this.marketButton, new Insets(8));
 		
 		this.getChildren().addAll(showCardButton, marketButton, buyCardButton, rollDiceButton, buyEdgeButton, buyNodeButton, endTurnButton);
+		
+		ControlPane.getInstance().setFooter(this);
 	}
 	
 	
@@ -64,35 +66,58 @@ public class Footer extends HBox {
 
 		this.rollDiceButton = new RollDice("Roll");
 		this.rollDiceButton.setBackground(new Background(new BackgroundFill(Color.MISTYROSE,null,null)));
-
+		this.rollDiceButton.setDisable(true);
 		this.rollDiceButton.setOnAction(e->{
 			GamePlay instance = GamePlay.getInstance();
 			if(instance.rollDice()) {
-				int number = instance.getRollNumber();
 				HeaderGame gameHeader = ControlPane.getInstance().getGameHeader();
 				gameHeader.updateDiceNumber();
+				rollDiceButton.setDisable(true);
 			}
-			
 		});
 
 	}
 	
 	private void initBuyNodeButton() {
 		this.buyNodeButton = new FooterButton("Buy Node");
+		this.buyNodeButton.setDisable(true);
 	}
 	
 	private void initBuyEdgeButton() {
 		this.buyEdgeButton = new FooterButton("Buy Edge");
+		this.buyEdgeButton.setDisable(true);
 	}
 	
 	
 	private void initEndTurnButton() {
 		this.endTurnButton = new FooterButton("End turn");
 		this.endTurnButton.setBackground(new Background(new BackgroundFill(Color.INDIANRED, new CornerRadii(12), null)));
+		this.endTurnButton.setDisable(true);
 	}
 	
 	private void initShowCardButton() {
 		this.showCardButton = new FooterButton("Show Card");
 		this.endTurnButton.setBackground(new Background(new BackgroundFill(Color.BLANCHEDALMOND, new CornerRadii(12), null)));
 	}
+	
+	public void setBuyNodeDisable(boolean isDisable) {
+		this.buyNodeButton.setDisable(isDisable);
+	}
+	
+	public void setBuyEdgeDisable(boolean isDisable) {
+		this.buyEdgeButton.setDisable(isDisable);
+	}
+
+	public Button getBuyCardButton() {
+		return buyCardButton;
+	}
+
+	public Button getBuyEdgeButton() {
+		return buyEdgeButton;
+	}
+
+	public Button getBuyNodeButton() {
+		return buyNodeButton;
+	}
+	
 }

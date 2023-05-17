@@ -58,7 +58,7 @@ public class HeaderGame extends HBox {
 		roundDisplay.setAlignment(Pos.CENTER);
 		Text roundText = new Text("Round : ");
 		roundText.setFont(new Font(16));
-		roundAmount = new Text(Integer.toString(roundCount));
+		roundAmount = new Text("Prepare 1");
 		roundAmount.setFont(new Font(16));
 		roundDisplay.getChildren().addAll(roundText, roundAmount);
 		setHgrow(roundDisplay, Priority.ALWAYS);
