@@ -25,7 +25,7 @@ public class NodeButton extends Button {
 	}
 
 	private void initOnAction() {
-		NodeButton thisButton = this;
+		NodeButton thisNode = this;
 		setOnAction(e -> {
 			setScaleX(1.5);
 			setScaleY(1.5);
@@ -33,12 +33,12 @@ public class NodeButton extends Button {
 			GamePlay gameInstance = GamePlay.getInstance();
 			
 			paneInstance.resetSelect();
-			paneInstance.setSelectNode(thisButton);
+			paneInstance.setSelectNode(thisNode);
 			
-			if (node.getOwner() == null) {
+			if (Utilities.buyNodeCondition(node) == 1) {
 				paneInstance.getFooter().setBuyNodeDisable(false);
 				paneInstance.getFooter().getBuyNodeButton().setText("Buy Node");
-			} else if (node.getOwner().equals(Utilities.getCurrentPlayer()) && gameInstance.getCurrentRound() > 0) {
+			} else if (Utilities.buyNodeCondition(node) == 2) {
 				paneInstance.getFooter().setBuyNodeDisable(false);
 				paneInstance.getFooter().getBuyNodeButton().setText("Upgrade Node");
 			} else {
@@ -102,4 +102,9 @@ public class NodeButton extends Button {
 		setScaleX(1.0);
 		setScaleY(1.0);	
 	}
+
+	public Node getNode() {
+		return node;
+	}
+	
 }

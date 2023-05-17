@@ -81,11 +81,23 @@ public class Footer extends HBox {
 	private void initBuyNodeButton() {
 		this.buyNodeButton = new FooterButton("Buy Node");
 		this.buyNodeButton.setDisable(true);
+		
+		this.buyNodeButton.setOnAction(e->{
+			ControlPane paneInstance = ControlPane.getInstance();
+			paneInstance.getSelectNode().getNode().upgrade();
+			paneInstance.getSelectNode().setupSyle();
+		});
 	}
 	
 	private void initBuyEdgeButton() {
 		this.buyEdgeButton = new FooterButton("Buy Edge");
 		this.buyEdgeButton.setDisable(true);
+		
+		this.buyEdgeButton.setOnAction(e->{
+			ControlPane paneInstance = ControlPane.getInstance();
+			paneInstance.getSelectEdge().getEdge().upgrade();
+			paneInstance.getSelectEdge().setupSyle();
+		});
 	}
 	
 	

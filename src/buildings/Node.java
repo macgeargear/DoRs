@@ -39,30 +39,16 @@ public class Node extends Building {
 	}
 
 	public void upgrade() {
-		GamePlay instance = GamePlay.getInstance();
 		Player currentPlayer = Utilities.getCurrentPlayer();
 		
-//		prepare phase
-		if(instance.getCurrentRound() < 0) {
-			if(this.getType() == BuildingType.EMPTYHOUSE) {
-				this.setType(BuildingType.HOUSE);
-				this.setOwner(currentPlayer);
-			}
-			return ;
-		}
-		
-//		game phase
-		if (!this.getType().equals(BuildingType.CITY)) {
-			if (this.getType().equals(BuildingType.EMPTYHOUSE)) {
-				boolean haveSideEdge = Utilities.haveSideEdge(this);
-				if (haveSideEdge) {
-					this.setType(BuildingType.HOUSE);
-				}
-				
-			}else if (this.getType().equals(BuildingType.HOUSE)) {
+		if(this.getOwner() == null) {
+			this.setType(BuildingType.HOUSE);
+			this.setOwner(currentPlayer);
+			currentPlayer.increaseNodeCount(1);
+		}else {
+			if(this.getType() == BuildingType.HOUSE) {
 				this.setType(BuildingType.TOWER);
-			}
-			else if (this.getType().equals(BuildingType.TOWER)) {
+			}else {
 				this.setType(BuildingType.CITY);
 			}
 		}

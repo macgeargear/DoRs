@@ -37,10 +37,10 @@ public class EdgeButton extends Rectangle{
 			paneInstance.resetSelect();
 			paneInstance.setSelectEdge(thisEdge);
 			
-			if (edge.getOwner() == null) {
+			if (Utilities.buyEdgeCondition(edge) == 1) {
 				paneInstance.getFooter().setBuyEdgeDisable(false);
 				paneInstance.getFooter().getBuyEdgeButton().setText("Buy Edge");
-			} else if (edge.getOwner().equals(Utilities.getCurrentPlayer()) && gameInstance.getCurrentRound() > 0) {
+			} else if (Utilities.buyEdgeCondition(edge) == 2) {
 				paneInstance.getFooter().setBuyEdgeDisable(false);
 				paneInstance.getFooter().getBuyNodeButton().setText("Upgrade Edge");
 			} else {
@@ -108,6 +108,10 @@ public class EdgeButton extends Rectangle{
 	public void resetSize() {
 		setScaleX(1.0);
 		setScaleY(1.0);	
+	}
+
+	public Edge getEdge() {
+		return edge;
 	}
 
 }

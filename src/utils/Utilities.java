@@ -28,24 +28,70 @@ public class Utilities {
 			methodYes.run();
 		}
 	}
-	
+
 	public static void exitGame() {
 		GamePlay.getInstance().getResult();
 		ControlPane.getInstance().showHomeScene();
 	}
-	
+
 	public static Player getCurrentPlayer() {
 		GamePlay instance = GamePlay.getInstance();
 		Player currentPlayer = instance.getAllPlayers().get(instance.getCurrentPlayer());
 		return currentPlayer;
 	}
-	
+
 	public static boolean haveSideEdge(Node node) {
+		if (node == null) {
+			return false;
+		}
 		Player currentPlayer = getCurrentPlayer();
-		for(Edge edge: node.getSideEdges()) {
-			if(edge != null && edge.getOwner().equals(currentPlayer)) {
+		for (Edge edge : node.getSideEdges()) {
+			if (edge != null && edge.getOwner() != null && edge.getOwner().equals(currentPlayer)) {
 				return true;
 			}
+		}
+		return false;
+	}
+
+	public static int buyNodeCondition(Node node) {
+		GamePlay gameInstance = GamePlay.getInstance();
+		Player currentPlayer = getCurrentPlayer();
+		if ((currentPlayer.getNodeCount() < 1 && gameInstance.getCurrentRound() == -2)
+				|| (currentPlayer.getNodeCount() < 2 && gameInstance.getCurrentRound() == -1)) {
+			if (node.getOwner() == null) { // no owner
+				return 1;
+			}
+			return 0;
+		} else if (gameInstance.getCurrentRound() > 0) {
+			return node.canUpgrade() ? 2 : 0;
+		}
+		return 0;
+	}
+
+	public static int buyEdgeCondition(Edge edge) {
+		GamePlay gameInstance = GamePlay.getInstance();
+		Player currentPlayer = getCurrentPlayer();
+		if (!canCreateEdge(edge)) {
+			return 0;
+		} else if ((currentPlayer.getEdgeCount() < 2 && gameInstance.getCurrentRound() == -2)
+				|| (currentPlayer.getEdgeCount() < 4 && gameInstance.getCurrentRound() == -1)) {
+			if (edge.getOwner() == null) {
+				return 1;
+			}
+			return 0;
+		} else if (gameInstance.getCurrentRound() > 0) {
+			return edge.canUpgrade() ? 2 : 0;
+		}
+		return 0;
+	}
+
+	public static boolean canCreateEdge(Edge edge) {
+		Player currentPlayer = getCurrentPlayer();
+		if ((edge.getStartNode().getOwner() != null && edge.getStartNode().getOwner().equals(currentPlayer))
+				|| (edge.getEndNode().getOwner() != null && edge.getEndNode().getOwner().equals(currentPlayer))) {
+			return true;
+		} else if (haveSideEdge(edge.getStartNode()) || haveSideEdge(edge.getEndNode())) {
+			return true;
 		}
 		return false;
 	}
