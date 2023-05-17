@@ -37,10 +37,13 @@ public class GameBoard extends GridPane{
         for(int i=0;i<5;++i) {
         	for(int j=0;j<5;++j) {
         		
+//        		setup map
         		Map map = allMaps.get(i*5 + j);
         		Button mapButton = new MapButton(map);
         		mapButtons.add(mapButton);
-        		
+        		add(mapButton, 2*i+1, 2*j+1);
+
+//        		setup node
         		Button nodeTopLeft = new NodeButton(map.getSideNodes().get(0));
         		nodeButtons.add(nodeTopLeft);
         		add(nodeTopLeft, 2*i, 2*j);
@@ -62,7 +65,9 @@ public class GameBoard extends GridPane{
             		}
         		}
         		
-        		add(mapButton, 2*i+1, 2*j+1);
+//        		setup edge
+        		
+        		
         	}
         }
 	}

@@ -29,8 +29,8 @@ public class Config {
 	public static final int SIDE_BOARD_HEIGH = 700;
 	public static final int MAP_WIDTH = 70;
 	public static final int MAP_HEIGH = 70;
-	public static final int NODE_WIDTH = 20;
-	public static final int NODE_HEIGH = 20;
+	public static final int NODE_WIDTH = 30;
+	public static final int NODE_HEIGH = 30;
 	
 //	Node color
 	public static final String EMPTY = "#ABB2B9";

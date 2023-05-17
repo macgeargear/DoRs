@@ -3,6 +3,9 @@ package components;
 import buildings.Node;
 import config.Config;
 import javafx.scene.control.Button;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 import logic.GamePlay;
 import type.BuildingType;
 
@@ -13,10 +16,11 @@ public class NodeButton extends Button {
 
 		setPrefSize(Config.NODE_WIDTH, Config.NODE_HEIGH);
 		this.setupSyle();
+		this.initShapeFx();
 	}
 	
 	public void setupSyle() {
-		setStyle("-fx-font-size: 22px;" + "-fx-background-radius: 10px;" + "-fx-background-color: " + this.getColor() + ";");
+		setStyle("-fx-background-color: " + this.getColor() + ";");
 	}
 	
 	private String getColor() {
@@ -35,5 +39,20 @@ public class NodeButton extends Button {
 			return Config.P3;
 		}
 		return Config.P4;
+	}
+	
+	private void initShapeFx() {
+		BuildingType type = node.getType();
+		if(type == BuildingType.EMPTYHOUSE || type == BuildingType.HOUSE) {
+			setShape(new Circle(15));
+		}else if(type == BuildingType.TOWER) {
+			setShape(new Polygon(
+	                15.0, 0.0,
+	                0.0, 30.0,
+	                30.0, 30.0
+	        ));
+		}else {
+			setShape(new Rectangle(100, 100));
+		}
 	}
 }
