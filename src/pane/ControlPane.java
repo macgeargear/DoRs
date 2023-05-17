@@ -1,7 +1,9 @@
 package pane;
 
+import config.Config;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import logic.GamePlay;
 
 public class ControlPane {
 	
@@ -12,14 +14,14 @@ public class ControlPane {
 	
 	public ControlPane(Stage stage) {
 		this.stage = stage;
+		GamePlay.getInstance(4);
 
-		gameScene = new Scene(new GamePane(), 1000, 600);
-		homeScene = new Scene(new HomePane(), 1000, 566);	
-		
-		
-		
-		this.showHomeScene();
-//		this.showGameScene();
+
+		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);	
+		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
+//		this.showHomeScene();
+		this.showGameScene();
+
 	}
 	
 	public static ControlPane getInstance() {
@@ -38,6 +40,16 @@ public class ControlPane {
 	}
 	
 	public void showGameScene() {
+		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
 		stage.setScene(gameScene);
 	}
+
+	public Scene getGameScene() {
+		return gameScene;
+	}
+
+	public Scene getHomeScene() {
+		return homeScene;
+	}
+	
 }
