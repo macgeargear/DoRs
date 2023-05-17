@@ -14,7 +14,11 @@ import logic.GamePlay;
 import material.Map;
 
 public class GameBoard extends GridPane{
+	private ArrayList<Button> mapButtons;
+	
 	public GameBoard() {
+		mapButtons = new ArrayList<Button>();
+		
 		setPrefSize(Config.BOARD_WIDTH, Config.BOARD_HEIGH);
 		setAlignment(Pos.CENTER);
 		setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
@@ -25,6 +29,9 @@ public class GameBoard extends GridPane{
         for(int i=0;i<5;++i) {
         	for(int j=0;j<5;++j) {
         		Button map = new MapButton(allMaps.get(i*5 + j));
+        		mapButtons.add(map);
+        		
+        		
         		add(map, 2*i+1, 2*j+1);
         	}
         }

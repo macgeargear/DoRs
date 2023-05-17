@@ -29,6 +29,7 @@ public class Config {
 	public static final int SIDE_BOARD_HEIGH = 700;
 	public static final int MAP_WIDTH = 70;
 	public static final int MAP_HEIGH = 70;
-	
+	public static final int NODE_WIDTH = 20;
+	public static final int NODE_HEIGH = 20;
 
 }
