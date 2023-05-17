@@ -1,4 +1,4 @@
-package components;
+package pane;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -7,6 +7,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import components.CustomButton;
+import components.MaterialExchange;
 import javafx.geometry.Insets;
 
 public class MarketPane extends BorderPane {
@@ -62,6 +64,10 @@ public class MarketPane extends BorderPane {
 		this.backButton = new CustomButton("back");
 		this.backButton.setFont(Font.font(18));
 		this.backButton.setLineSpacing(20);
+		
+		this.backButton.setOnAction(e->{			
+			ControlPane.getInstance().backToGameScene();
+		});
 	}
 	
 	private void initTitle() {

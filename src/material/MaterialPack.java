@@ -2,7 +2,7 @@ package material;
 
 import type.MaterialType;
 
-public class MaterialPack extends {
+public class MaterialPack {
 	private Material type;
 	private int amount;
 	

@@ -1,6 +1,5 @@
 package pane;
 
-import components.MarketPane;
 import config.Config;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -45,6 +44,10 @@ public class ControlPane {
 	
 	public void showGameScene() {
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
+		stage.setScene(gameScene);
+	}
+	
+	public void backToGameScene() {
 		stage.setScene(gameScene);
 	}
 	
