@@ -14,7 +14,10 @@ public class ControlPane {
 		this.stage = stage;
 
 		gameScene = new Scene(new GamePane(), 1000, 600);
-		homeScene = new Scene(new HomePane(), 1000, 600);	
+		homeScene = new Scene(new HomePane(), 1000, 566);	
+		
+		
+		
 		this.showHomeScene();
 //		this.showGameScene();
 	}
