@@ -16,10 +16,12 @@ public class ControlPane {
 		this.stage = stage;
 		GamePlay.getInstance(4);
 
+
 		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);	
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
 //		this.showHomeScene();
 		this.showGameScene();
+
 	}
 	
 	public static ControlPane getInstance() {
