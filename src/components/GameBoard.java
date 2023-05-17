@@ -25,7 +25,7 @@ public class GameBoard extends GridPane{
         for(int i=0;i<5;++i) {
         	for(int j=0;j<5;++j) {
         		Button map = new MapButton(allMaps.get(i*5 + j));
-        		add(map, i, j);
+        		add(map, 2*i+1, 2*j+1);
         	}
         }
 	}
