@@ -41,7 +41,7 @@ public class NodeButton extends Button {
 		return Config.P4;
 	}
 	
-	private void initShapeFx() {
+	public void initShapeFx() {
 		BuildingType type = node.getType();
 		if(type == BuildingType.EMPTYHOUSE || type == BuildingType.HOUSE) {
 			setShape(new Circle(15));

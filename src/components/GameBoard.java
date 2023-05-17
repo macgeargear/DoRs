@@ -5,23 +5,29 @@ import java.util.ArrayList;
 import buildings.Edge;
 import buildings.Node;
 import config.Config;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import logic.GamePlay;
 import material.Map;
+import type.BuildingType;
 
 public class GameBoard extends GridPane{
 	private ArrayList<Button> mapButtons;
 	private ArrayList<Button> nodeButtons;
+	private ArrayList<Rectangle> edgeButtons;
 	
 	public GameBoard() {
 		mapButtons = new ArrayList<Button>();
 		nodeButtons = new ArrayList<Button>();
+		edgeButtons = new ArrayList<Rectangle>();
 		
 		setPrefSize(Config.BOARD_WIDTH, Config.BOARD_HEIGH);
 		setAlignment(Pos.CENTER);
@@ -66,9 +72,31 @@ public class GameBoard extends GridPane{
         		}
         		
 //        		setup edge
+        		Rectangle topEdge = new EdgeButton(map.getSideNodes().get(0).getSideEdges().get(1), 0);
+        		edgeButtons.add(topEdge);
+        		add(topEdge, 2*i+1, 2*j);
         		
+        		Rectangle leftEdge = new EdgeButton(map.getSideNodes().get(0).getSideEdges().get(2), 1);
+        		edgeButtons.add(leftEdge);
+        		add(leftEdge, 2*i, 2*j+1);
+        		
+        		if(j == 4) {
+        			Rectangle botEdge = new EdgeButton(map.getSideNodes().get(3).getSideEdges().get(3), 0);					
+					edgeButtons.add(botEdge);
+					add(botEdge, 2*i+1, 2*j+2);
+				}
+				if(i == 4) {					
+					Rectangle rightEdge = new EdgeButton(map.getSideNodes().get(3).getSideEdges().get(0), 1);
+					edgeButtons.add(rightEdge);
+					add(rightEdge, 2*i+2, 2*j+1);
+				}
         		
         	}
         }
+        
+        for (Rectangle edge : edgeButtons) {
+    		setValignment(edge, VPos.CENTER);
+    		setHalignment(edge, HPos.CENTER);
+		}
 	}
 }

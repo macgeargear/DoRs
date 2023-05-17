@@ -56,6 +56,8 @@ public class Node extends Building {
 		}
 	}
 
+	
+	
 	public void destroySideEdge(int position) {
 		this.sideEdges.get(position).destroy();
 	}
