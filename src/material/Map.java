@@ -1,28 +1,40 @@
 package material;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import buildings.Node;
+import buildings.Place;
 import type.MaterialType;
 
-public class Map extends Material {
+public class Map extends Place {
 	private Material type;
-	private ArrayList<Node> sideNode;
+	private ArrayList<Node> sideNodes;
 	private int number;
 	
 
-	public Map(MaterialType type) {
-		super(type);
-		this.setNumber(0);
-		this.sideNode = new ArrayList<Node>();
+	public Map(Material type) {
+		Random random = new Random();
+		this.type = type;
+		this.setNumber(random.nextInt(6)+1);
+		this.sideNodes = new ArrayList<Node>();
+		for(int i=0;i<4;++i) {
+			sideNodes.add(null);
+		}
 	}
 	
 	public void produce() {
 		// TODO
+		if (this.isActive()) {
+			for (Node node : this.sideNodes) {
+				node.getOwner().addMaterial(this.type);
+			}
+		}
 	}
 	
 	public void setSideNode(int position, Node node) {
 		// TODO
+		this.sideNodes.set(position, node);
 	}
 
 	public int getNumber() {
@@ -34,8 +46,14 @@ public class Map extends Material {
 		this.number = number;
 	}
 
-	public ArrayList<Node> getSideNode() {
-		return sideNode;
+	public ArrayList<Node> getSideNodes() {
+		return sideNodes;
 	}
+
+	public Material getType() {
+		return type;
+	}
+	
+	
 
 }

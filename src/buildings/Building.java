@@ -5,7 +5,8 @@ import logic.Player;
 import type.BuildingType;
 
 
-public abstract class Building {
+public abstract class Building extends Place implements Upgradeable, Destroyable {
+
 	private BuildingType type;
 	private Player owner;
 	

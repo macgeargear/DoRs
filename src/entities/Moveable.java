@@ -1,6 +1,8 @@
 package entities;
 
+import buildings.Node;
+
 public interface Moveable {
-	public boolean canMove();
-	public boolean moveTo(Point p);
+	public boolean canMove(Node node);
+	public void moveTo(Node node);
 }

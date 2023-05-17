@@ -10,26 +10,34 @@ import material.MaterialPack;
 
 public class Player {
 	private String name;
-	private ArrayList<Entity> allEntities;
 	private ArrayList<EffectCard> allEffectCards;
 	private ArrayList<MaterialPack> allMaterials;
-	private ArrayList<Building> allBuilding;
 	
-	public Player(String name) {}
+	public Player(String name) {
+		this.name = name;
+	}
 	
-	public void addBuilding(Building newBuilding) {}
 	public void addEffect(EffectCard card) {}
-	public void addEntity(Entity newEntity) {}
-	public void removeEntity(Entity entity) {}
-	public boolean canDraw() {return true;}
+	public void addMaterial(Material material) {}
+	public void removeEffect(EffectCard card) {}
+	public void removeMaterial(Material material) {}
 	public int countMaterial(Material material) {return 0;}
 
+	public MaterialPack getMaterialPack(Material material) {
+		for(MaterialPack pack: this.allMaterials) {
+			if(pack.getType().equals(material)) {
+				return pack;
+			}
+		}
+		return new MaterialPack(null);
+	}
+	
 	public String getName() {
 		return name;
 	}
-
-	public ArrayList<Entity> getAllEntities() {
-		return allEntities;
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public ArrayList<EffectCard> getAllEffectCards() {
@@ -38,10 +46,6 @@ public class Player {
 
 	public ArrayList<MaterialPack> getAllMaterials() {
 		return allMaterials;
-	}
-
-	public ArrayList<Building> getAllBuilding() {
-		return allBuilding;
 	}
 
 	
