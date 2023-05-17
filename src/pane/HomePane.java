@@ -1,8 +1,8 @@
 package pane;
 
 import components.AmountSelector;
-import components.CustomButton;
 import components.Footer;
+import components.Button.CustomButton;
 import config.Config;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

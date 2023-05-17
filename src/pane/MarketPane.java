@@ -7,8 +7,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import components.CustomButton;
 import components.MaterialExchange;
+import components.Button.CustomButton;
 import javafx.geometry.Insets;
 
 public class MarketPane extends BorderPane {
