@@ -1,5 +1,6 @@
 package pane;
 
+import components.MarketPane;
 import config.Config;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,6 +11,7 @@ public class ControlPane {
 	private static ControlPane instance = null;
 	private Scene gameScene;
 	private Scene homeScene;
+	private Scene marketScene;
 	private Stage stage;
 	
 	public ControlPane(Stage stage) {
@@ -17,10 +19,12 @@ public class ControlPane {
 		GamePlay.getInstance(4);
 
 
-		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);	
+		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.HOMEPANE_HEIGHT);	
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
+		marketScene = new Scene(new MarketPane(), Config.SCREEN_HEIGH , Config.SCREEN_HEIGH);
 //		this.showHomeScene();
-		this.showGameScene();
+		this.showMarketScene();
+//		this.showGameScene();
 
 	}
 	
@@ -43,6 +47,12 @@ public class ControlPane {
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
 		stage.setScene(gameScene);
 	}
+	
+	public void showMarketScene() {
+		marketScene = new Scene(new MarketPane(), Config.SCREEN_HEIGH, Config.SCREEN_HEIGH);
+		stage.setScene(marketScene);
+	}
+	
 
 	public Scene getGameScene() {
 		return gameScene;

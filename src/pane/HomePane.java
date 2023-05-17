@@ -2,6 +2,7 @@ package pane;
 
 import components.AmountSelector;
 import components.CustomButton;
+import components.Footer;
 import config.Config;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -23,35 +24,35 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class HomePane extends VBox {
-	
+
 	private Button playButton;
 	private Button startButton;
+	private Button buyNodeButton;
+	private Button buyEdgeButton;
 	private HBox amountSelector;
-	
+	private Background background;
 
-    		
-	
 	public HomePane() {
 //		setup pane
-		
+
 		// TODO: Setup Background
 		String imagePath = ClassLoader.getSystemResource("images/background.png").toString();
-		Background background = this.setupBackgroundImage(imagePath);
+		this.setupBackgroundImage(imagePath);
 		this.setBackground(background);
-		
+
 		setAlignment(Pos.CENTER);
 		setSpacing(20);
 
-		//setup text
+		// setup text
 		Text welcomeText = new Text("DoR project");
 		welcomeText.setFont(new Font(60));
-		
+
 		this.initPlayButton();
 		this.initStartButton();
 		StackPane.setMargin(welcomeText, new Insets(80));
 		this.getChildren().addAll(welcomeText, playButton, amountSelector, startButton);
 	}
-	
+
 	private void initPlayButton() {
 		// set style
 		playButton = new CustomButton("Select Mode");
@@ -68,9 +69,10 @@ public class HomePane extends VBox {
 		});
 	}
 	
+
 	private void initStartButton() {
 		amountSelector = new AmountSelector();
-		
+
 		startButton = new CustomButton("Start");
 		startButton.setVisible(false);
 		startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -83,15 +85,16 @@ public class HomePane extends VBox {
 			}
 		});
 	}
-	
-	private Background setupBackgroundImage(String imagePath) {
+
+	private void setupBackgroundImage(String imagePath) {
 		Image image = new Image(imagePath);
-		// new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage, contain, cover)
+		// new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage,
+		// contain, cover)
 		BackgroundSize backgroundSize = new BackgroundSize(1000, 600, true, true, true, false);
 		// new BackgroundImage(image, repeatX, repeatY, position, size)
-		BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+		BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT,
+				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
 		// new Background(images...)
-		Background background = new Background(backgroundImage);
-		return background;
+		this.background = new Background(backgroundImage);
 	}
 }

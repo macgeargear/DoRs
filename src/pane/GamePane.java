@@ -2,6 +2,7 @@ package pane;
 
 import java.util.ArrayList;
 
+import components.Footer;
 import components.GameBoard;
 import components.HeaderGame;
 import components.PlayerInfo;
@@ -40,5 +41,6 @@ public class GamePane extends BorderPane {
 		setCenter(gameBoard);
 		setLeft(left);
 		setRight(right);
+		setBottom(new Footer());
 	}
 }
