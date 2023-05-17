@@ -12,6 +12,7 @@ import card.EffectCard;
 import entities.Entity;
 import material.Map;
 import material.Material;
+import pane.ControlPane;
 import type.BuildingType;
 import type.MaterialType;
 
@@ -20,6 +21,8 @@ public class GamePlay {
 	private int roundAmount;
 	private int currentRound;
 	private int currentPlayer;
+	private int rollNumber;
+	private boolean isRoll;
 	private Marketplace marketplace;
 	private ArrayList<Player> allPlayers;
 	private ArrayList<Node> allNodes;
@@ -44,9 +47,11 @@ public class GamePlay {
 	}
 	
 	public GamePlay(int playerAmount) {
+		this.isRoll = false;
 		this.roundAmount = 10;
-		this.currentRound = 0;
+		this.currentRound = -2;
 		this.currentPlayer = 0;
+		this.rollNumber = 0;
 		this.marketplace = new Marketplace();
 		this.allPlayers = new ArrayList<Player>();
 		this.allNodes = new ArrayList<Node>();
@@ -142,11 +147,24 @@ public class GamePlay {
 	
 	public void draw() {}
 	
-	public void goToNextPlayer() {
-		
+	public boolean goToNextPlayer() {
+		if(!isRoll) return false;
+		isRoll = false;
+		currentPlayer++;
+		if(currentPlayer == 4) {
+			currentPlayer = 0;
+			currentRound++;
+		}
+		return true;
 	}
 	
-	public void rollDice() {}
+	public boolean rollDice() {
+		if(isRoll) return false;
+		isRoll = true;
+		Random random = new Random();
+		rollNumber = random.nextInt(6)+1;
+		return true;
+	}
 	
 	public void trade(Player p1, Player p2) {}
 	
@@ -185,6 +203,10 @@ public class GamePlay {
 
 	public int getCurrentRound() {
 		return currentRound;
+	}
+	
+	public int getRollNumber() {
+		return rollNumber;
 	}
 
 	public int getCurrentPlayer() {

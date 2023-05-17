@@ -16,28 +16,36 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import logic.GamePlay;
 import logic.Player;
+import pane.ControlPane;
 
 public class PlayerContainer extends VBox{
 	private Player p;
-	private boolean isTop, isLeft;
+	private boolean isTop, isLeft, toggle;
 	private Text name;
 	private Text effectCardCount;
 	private Text materialCardCount;
+	private HBox nameContainer;
 	
 	public PlayerContainer(Player p, boolean isTop, boolean isLeft) {
 		this.p = p;
 		this.isTop = isTop;
 		this.isLeft = isLeft;
+		this.toggle = false;
 		setAlignment(Pos.CENTER);
 		setPadding(new Insets(20));
 		setSpacing(10);
 		setPrefWidth(Config.SIDE_BOARD_WIDTH);
 		this.initContainer();
+		ControlPane.getInstance().addPlayerContainer(this);
+		if(GamePlay.getInstance().getAllPlayers().get(GamePlay.getInstance().getCurrentPlayer()).equals(p)) {
+			this.toggleColorNameContainer();
+		}
 	}
 	
 	private void initContainer(){
-		HBox nameContainer = new HBox();
+		nameContainer = new HBox();
 		name = new Text(p.getName());
 		nameContainer.getChildren().add(name);
 		nameContainer.setPrefWidth(Config.SIDE_BOARD_WIDTH);
@@ -97,6 +105,18 @@ public class PlayerContainer extends VBox{
 		}else {
 			getChildren().addAll(containerMaterial, containerEffect);
 		}
-	
 	}
+	
+	public void toggleColorNameContainer() {
+		if(toggle) {
+			nameContainer.setStyle("-fx-background-color: white; -fx-background-radius: 10px;");
+		}else {
+			nameContainer.setStyle("-fx-background-color: lightgreen; -fx-background-radius: 10px;");
+		}
+	}
+
+	public Player getP() {
+		return p;
+	}
+	
 }

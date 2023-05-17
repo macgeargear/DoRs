@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.*;
+import logic.GamePlay;
 import pane.ControlPane;
 
 public class Footer extends HBox {
@@ -51,6 +52,15 @@ public class Footer extends HBox {
 		this.rollDiceButton.setPrefHeight(100);
 		this.rollDiceButton.setPrefWidth(100);
 		
+		this.rollDiceButton.setOnAction(e->{
+			GamePlay instance = GamePlay.getInstance();
+			if(instance.rollDice()) {
+				int number = instance.getRollNumber();
+				HeaderGame gameHeader = ControlPane.getInstance().getGameHeader();
+				gameHeader.updateDiceNumber();
+			}
+			
+		});
 	}
 	
 	private void initBuyNodeButton() {
