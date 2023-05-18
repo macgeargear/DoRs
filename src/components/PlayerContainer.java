@@ -117,6 +117,11 @@ public class PlayerContainer extends VBox{
 		toggle = !toggle;
 	}
 
+	public void updateCount() {
+		effectCardCount.setText(Integer.toString(p.getAllEffectCards().size()));
+		materialCardCount.setText(Integer.toString(p.getMaterialCount()));
+	}
+	
 	public Player getP() {
 		return p;
 	}

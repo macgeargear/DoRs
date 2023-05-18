@@ -80,6 +80,12 @@ public class Footer extends HBox {
 				gameHeader.updateDiceNumber();
 				this.setRollDiceButton(instance.getRollNumber());
 				rollDiceButton.setDisable(true);
+				for(PlayerContainer container: ControlPane.getInstance().getAllPlayerContainers()) {
+					container.updateCount();
+				}
+				if(Utilities.canEndTurn()) {
+					this.endTurnButton.setDisable(false);
+				}
 			}
 		});
 
@@ -142,6 +148,7 @@ public class Footer extends HBox {
 				this.rollDiceButton.setDisable(false);
 			}
 			this.endTurnButton.setDisable(true);
+			paneInstance.resetSelect();
 		});
 	}
 	
@@ -171,8 +178,6 @@ public class Footer extends HBox {
 	public void setRollDiceButton(int number) {
 		this.rollDiceButton.setText(String.valueOf(number));
 	}
-	
-	
 	
 	
 	public void setBuyNodeDisable(boolean isDisable) {

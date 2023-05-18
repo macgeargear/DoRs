@@ -158,6 +158,9 @@ public class GamePlay {
 		}else if(currentRound == -2 && currentPlayer == 4) {
 			currentRound++;
 			currentPlayer--;
+			
+			currentRound = 1;
+			currentPlayer = 0;
 		}else if(currentPlayer == -1 && currentRound == -1) {
 			currentPlayer++;
 			currentRound = 1;
@@ -171,6 +174,14 @@ public class GamePlay {
 		isRoll = true;
 		Random random = new Random();
 		rollNumber = random.nextInt(6)+1;
+		
+		for(Map map: allMaps) {
+			if(map.getNumber() == rollNumber) {
+				map.produce();
+				System.out.println("have");
+			}
+		}
+		
 		return true;
 	}
 	

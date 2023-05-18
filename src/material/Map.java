@@ -26,8 +26,11 @@ public class Map extends Place {
 	public void produce() {
 		// TODO
 		if (this.isActive()) {
+			System.out.println("active");
 			for (Node node : this.sideNodes) {
-				node.getOwner().addMaterial(this.type);
+				if(node.getOwner() != null) {
+					node.getOwner().addMaterial(this.type, 1);					
+				}
 			}
 		}
 	}
