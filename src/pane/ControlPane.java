@@ -25,6 +25,10 @@ public class ControlPane {
 	private Scene homeScene;
 	private Scene marketScene;
 	
+	private GamePane gamePane;
+	private HomePane homePane;
+	private MarketPane marketPane;
+	
 	private Stage stage;
 	
 	
@@ -35,6 +39,10 @@ public class ControlPane {
 		this.stage = stage;
 		this.gameHeader = new HeaderGame();
 		this.allPlayerContainers = new ArrayList<PlayerContainer>();
+		
+//		this.gamePane = new GamePane();
+//		this.homePane = new HomePane();
+//		this.marketPane = new MarketPane();
 		GamePlay.getInstance(4);
 
 		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.HOMEPANE_HEIGHT);	
@@ -43,8 +51,9 @@ public class ControlPane {
 		// TODO: showMaterialCardScene, showMaterialCardScene;
 //		this.showHomeScene();
 //		this.showMarketScene();
+		
+		
 		this.showGameScene();
-
 	}
 	
 	public void addPlayerContainer(PlayerContainer container) {
