@@ -63,7 +63,11 @@ public class Utilities {
 			}
 			return 0;
 		} else if (gameInstance.getCurrentRound() > 0) {
-			return node.canUpgrade() ? 2 : 0;
+			if(node.getOwner() == null && node.canUpgrade()) {
+				return 1;
+			}else if(node.getOwner() != null && node.getOwner().equals(currentPlayer) && node.canUpgrade()) {
+				return 2;
+			}
 		}
 		return 0;
 	}
@@ -80,7 +84,11 @@ public class Utilities {
 			}
 			return 0;
 		} else if (gameInstance.getCurrentRound() > 0) {
-			return edge.canUpgrade() ? 2 : 0;
+			if(edge.getOwner() == null && edge.canUpgrade()) {
+				return 1;
+			}else if(edge.getOwner() != null && edge.getOwner().equals(currentPlayer) && edge.canUpgrade()) {
+				return 2;
+			}
 		}
 		return 0;
 	}

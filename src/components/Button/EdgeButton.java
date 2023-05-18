@@ -42,10 +42,10 @@ public class EdgeButton extends Rectangle{
 				paneInstance.getFooter().getBuyEdgeButton().setText("Buy Edge");
 			} else if (Utilities.buyEdgeCondition(edge) == 2) {
 				paneInstance.getFooter().setBuyEdgeDisable(false);
-				paneInstance.getFooter().getBuyNodeButton().setText("Upgrade Edge");
+				paneInstance.getFooter().getBuyEdgeButton().setText("Upgrade Edge");
 			} else {
 				paneInstance.getFooter().setBuyEdgeDisable(true);
-				paneInstance.getFooter().getBuyNodeButton().setText("Buy Edge");
+				paneInstance.getFooter().getBuyEdgeButton().setText("Buy Edge");
 			}
 		});
 	}

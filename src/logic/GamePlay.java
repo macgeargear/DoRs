@@ -20,6 +20,7 @@ public class GamePlay {
 	public static GamePlay instance;
 	private int roundAmount;
 	private int currentRound;
+	private int playerAmount;
 	private int currentPlayer;
 	private int rollNumber;
 	private boolean isRoll;
@@ -51,6 +52,7 @@ public class GamePlay {
 		this.roundAmount = 10;
 		this.currentRound = -2;
 		this.currentPlayer = 0;
+		this.playerAmount = playerAmount;
 		this.rollNumber = 0;
 		this.marketplace = new Marketplace();
 		this.allPlayers = new ArrayList<Player>();
@@ -152,12 +154,15 @@ public class GamePlay {
 		if(currentRound > 0) isRoll = false;
 		if(currentRound != -1) currentPlayer++;
 		else currentPlayer--;
-		if(currentPlayer == 4 && currentRound != -2) {
+		if(currentPlayer == playerAmount && currentRound != -2) {
 			currentPlayer = 0;
 			currentRound++;
-		}else if(currentRound == -2 && currentPlayer == 4) {
+		}else if(currentRound == -2 && currentPlayer == playerAmount) {
 			currentRound++;
 			currentPlayer--;
+			
+			currentRound = 1;
+			currentPlayer = 0;
 		}else if(currentPlayer == -1 && currentRound == -1) {
 			currentPlayer++;
 			currentRound = 1;
@@ -171,6 +176,13 @@ public class GamePlay {
 		isRoll = true;
 		Random random = new Random();
 		rollNumber = random.nextInt(6)+1;
+		
+		for(Map map: allMaps) {
+			if(map.getNumber() == rollNumber) {
+				map.produce();
+			}
+		}
+		
 		return true;
 	}
 	

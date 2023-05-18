@@ -67,6 +67,7 @@ public class NodeButton extends Button {
 
 	public void setupSyle() {
 		setStyle("-fx-background-color: " + this.getColor() + ";");
+		this.initShapeFx();
 	}
 
 	private String getColor() {

@@ -35,20 +35,20 @@ public class MapButton extends Button {
 	}
 	
 	public void setupSyle() {
-		setStyle("-fx-font-size: 22px;" + "-fx-background-radius: 10px;" + "-fx-background-color: #" + this.getColor() + ";");
+		setStyle("-fx-font-size: 22px;" + "-fx-background-radius: 10px;" + "-fx-background-color: " + this.getColor() + ";");
 	}
 	
 	private String getColor() {
 		MaterialType type = map.getType().getType();
 		if(type == MaterialType.WOOD) {
-			return "A4D77B";
+			return Config.WOOD;
 		}else if(type == MaterialType.WATER) {
-			return "7CD8EC";
+			return Config.WATER;
 		}else if(type == MaterialType.ROCK) {
-			return "0E8468";
+			return Config.ROCK;
 		}else if(type == MaterialType.SAND) {
-			return "E3A8A8";
+			return Config.SAND;
 		}
-		return "D9D9D9";
+		return Config.GUNPOWDER;
 	}
 }
