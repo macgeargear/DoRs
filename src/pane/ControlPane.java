@@ -2,10 +2,9 @@ package pane;
 
 import java.util.ArrayList;
 
-import components.EdgeButton;
+import components.Button.*;
 import components.Footer;
 import components.HeaderGame;
-import components.NodeButton;
 import components.PlayerContainer;
 import config.Config;
 import javafx.scene.Scene;

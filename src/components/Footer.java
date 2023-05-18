@@ -78,7 +78,7 @@ public class Footer extends HBox {
 			if(instance.rollDice()) {
 				HeaderGame gameHeader = ControlPane.getInstance().getGameHeader();
 				gameHeader.updateDiceNumber();
-				this.setRollDiceButton(number);
+				this.setRollDiceButton(instance.getRollNumber());
 				rollDiceButton.setDisable(true);
 			}
 		});
