@@ -1,7 +1,9 @@
 package utils;
 
+import java.util.ArrayList;
 import java.util.function.BiFunction;
 
+import buildings.Building;
 import buildings.Edge;
 import buildings.Node;
 import javafx.scene.control.Alert;
@@ -9,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import logic.GamePlay;
 import logic.Player;
 import pane.ControlPane;
+import type.BuildingType;
 
 public class Utilities {
 	public static void alertGenerate(Alert.AlertType alertType, String title, String content, Runnable methodYes) {
@@ -118,5 +121,21 @@ public class Utilities {
 		}
 		
 		return false;
+	}
+	
+	public static int countBuildingType(Player player, BuildingType type) {
+		GamePlay gameInstance = GamePlay.getInstance();
+		int count = 0;
+		for(Building building : gameInstance.getAllNodes()) {
+			if(building.getOwner() != null && building.getOwner().equals(player) && building.getType() == type) {
+				count++;
+			}
+		}
+		for(Building building : gameInstance.getAllEdges()) {
+			if(building.getOwner() != null && building.getOwner().equals(player) && building.getType() == type) {
+				count++;
+			}
+		}
+		return count;
 	}
 }
