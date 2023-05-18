@@ -80,9 +80,10 @@ public class GamePlay {
 		Material sand = new Material(MaterialType.SAND);
 		Material gunpowder = new Material(MaterialType.GUNPOWDER);
 
-		ArrayList<Material> allMaterial = new ArrayList<Material>();
-		allMaterial.addAll(Arrays.asList(wood, water, rock, sand, gunpowder));
-
+//		ArrayList<Material> allMaterial = new ArrayList<Material>();
+//		allMaterial.addAll(Arrays.asList(wood, water, rock, sand, gunpowder));
+		ArrayList<Material> allMaterial = Utilities.getAllMaterials();
+		
 		for (Material material : allMaterial) {
 			for (int i = 0; i < 5; ++i) {
 				Map newMap = new Map(material);
@@ -226,7 +227,6 @@ public class GamePlay {
 	}
 
 	public ArrayList<Pair<String, Integer>> getResult() {
-		instance = null;
 		ArrayList<Pair<String, Integer>> result = new ArrayList<Pair<String, Integer>>();
 		ArrayList<BuildingType> allBuildingType = new ArrayList<BuildingType>();
 		allBuildingType.addAll(Arrays.asList(BuildingType.HOUSE, BuildingType.TOWER, BuildingType.CITY, BuildingType.ROAD, BuildingType.SUPERROAD));
@@ -242,11 +242,14 @@ public class GamePlay {
 				}else {
 					score += typeCount;
 				}
+				System.out.println(typeCount);
 			}
-			result.add(new Pair<String, Integer>(player.getName(), score));
+			System.out.println(score);
+			result.add(new Pair<String, Integer>(player.getName(), -score));
 		}
 		
 		Collections.sort(result, Comparator.comparingInt(Pair::getValue));
+		instance = null;
 		return result;
 	}
 

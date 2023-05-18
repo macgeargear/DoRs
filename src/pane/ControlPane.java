@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import logic.GamePlay;
+import pane.popup.CardPopup;
 
 public class ControlPane {
 	
@@ -24,6 +25,7 @@ public class ControlPane {
 	private Scene gameScene;
 	private Scene homeScene;
 	private Scene marketScene;
+	private CardPopup cardPopup;
 	
 	private GamePane gamePane;
 	private HomePane homePane;
@@ -80,6 +82,7 @@ public class ControlPane {
 	}
 	
 	public void showGameScene() {
+		GamePlay.getInstance(2);
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
 		stage.setScene(gameScene);
 	}
@@ -143,6 +146,14 @@ public class ControlPane {
 		this.selectEdge = selectEdge;
 	}
 	
+	public CardPopup getCardPopup() {
+		return cardPopup;
+	}
+
+	public void setCardPopup(CardPopup cardPopup) {
+		this.cardPopup = cardPopup;
+	}
+
 	public void resetSelect() {
 		if(selectEdge != null) {
 			selectEdge.resetSize();
@@ -155,5 +166,15 @@ public class ControlPane {
 		footer.setBuyNodeDisable(true);
 		footer.setBuyEdgeDisable(true);
 	}
+
+	public MarketPane getMarketPane() {
+		return marketPane;
+	}
+
+	public void setMarketPane(MarketPane marketPane) {
+		this.marketPane = marketPane;
+	}
+	
+	
 	
 }

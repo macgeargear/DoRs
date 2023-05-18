@@ -38,7 +38,7 @@ public class Player {
 	
 	public void addEffect(EffectCard card) {}
 	
-	public void addMaterial(MaterialType material, int amount) {
+	public void increaseMaterial(MaterialType material, int amount) {
 		for(MaterialPack pack: allMaterials) {
 			if(pack.getType().getType().equals(material)) {
 				pack.increase(amount);
@@ -56,7 +56,9 @@ public class Player {
 	
 	public void removeEffect(EffectCard card) {}
 	public void removeMaterial(Material material) {}
-	public int countMaterial(Material material) {return 0;}
+	public int countMaterial(Material material) {
+		return this.getMaterialPack(material.getType()).getAmount();
+	}
 
 	public MaterialPack getMaterialPack(MaterialType material) {
 		for(MaterialPack pack: this.allMaterials) {

@@ -32,7 +32,9 @@ public class Footer extends HBox {
 	private Button endTurnButton;
 
 	private CardPopup cardPopup;
+
 	private MarketPopup marketPopup;
+
 
 	public Footer() {
 		this.setPrefHeight(Config.Footer_HEIGHT);
@@ -96,12 +98,11 @@ public class Footer extends HBox {
 				gameHeader.updateDiceNumber();
 				this.setRollDiceButton(instance.getRollNumber());
 				rollDiceButton.setDisable(true);
-				for (PlayerContainer container : ControlPane.getInstance().getAllPlayerContainers()) {
-					container.updateCount();
-				}
+
 				if (Utilities.canEndTurn()) {
 					this.endTurnButton.setDisable(false);
 				}
+				Utilities.updateCard();
 			}
 		});
 
@@ -119,9 +120,9 @@ public class Footer extends HBox {
 			if (Utilities.canEndTurn()) {
 				this.endTurnButton.setDisable(false);
 			}
-			for (PlayerContainer container : ControlPane.getInstance().getAllPlayerContainers()) {
-				container.updateCount();
-			}
+
+			Utilities.updateCard();
+
 		});
 	}
 
@@ -137,9 +138,9 @@ public class Footer extends HBox {
 			if (Utilities.canEndTurn()) {
 				this.endTurnButton.setDisable(false);
 			}
-			for (PlayerContainer container : ControlPane.getInstance().getAllPlayerContainers()) {
-				container.updateCount();
-			}
+
+			Utilities.updateCard();
+
 		});
 	}
 
@@ -153,6 +154,9 @@ public class Footer extends HBox {
 			GamePlay gameInstance = GamePlay.getInstance();
 			ControlPane paneInstance = ControlPane.getInstance();
 			Player prevPlayer = Utilities.getCurrentPlayer();
+
+			int prevRound = gameInstance.getCurrentRound();
+
 			if (gameInstance.goToNextPlayer()) {
 				Player currentPlayer = Utilities.getCurrentPlayer();
 				for (PlayerContainer container : paneInstance.getAllPlayerContainers()) {
@@ -172,14 +176,21 @@ public class Footer extends HBox {
 			this.endTurnButton.setDisable(true);
 			paneInstance.resetSelect();
 
-			if (gameInstance.getCurrentRound() == 3) {
+			Utilities.updateCard();
+			if (gameInstance.getCurrentRound() != prevRound && gameInstance.getMarketplace().getAmount() == 0) {
+				gameInstance.getMarketplace().reMarket();
+			}
+			if (gameInstance.getCurrentRound() == 5) {
 				GameResult gameResult = new GameResult();
+				gameResult.show(paneInstance.getStage());
 
 			}
 		});
 	}
 
 	private void initShowCardButton() {
+		this.cardPopup = new CardPopup();
+//		cardPopup.show(ControlPane.getInstance().getStage());
 		this.showCardButton = new FooterButton("Show Card");
 		this.endTurnButton
 				.setBackground(new Background(new BackgroundFill(Color.BLANCHEDALMOND, new CornerRadii(12), null)));
