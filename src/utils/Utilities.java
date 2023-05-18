@@ -63,7 +63,11 @@ public class Utilities {
 			}
 			return 0;
 		} else if (gameInstance.getCurrentRound() > 0) {
-			return node.canUpgrade() ? 2 : 0;
+			if(node.getOwner() == null && node.canUpgrade()) {
+				return 1;
+			}else if(node.getOwner() != null && node.getOwner().equals(currentPlayer) && node.canUpgrade()) {
+				return 2;
+			}
 		}
 		return 0;
 	}

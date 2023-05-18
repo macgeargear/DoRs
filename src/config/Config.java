@@ -54,6 +54,11 @@ public class Config {
 	public static final String P2 = "#E74C3C";
 	public static final String P3 = "#8E44AD";
 	public static final String P4 = "#3498DB";
+	public static final String WOOD = "#A4D77B"; // light green
+	public static final String WATER = "#7CD8EC"; // sky
+	public static final String ROCK = "#0E8468"; // green
+	public static final String SAND = "#E3A8A8"; // pink
+	public static final String GUNPOWDER = "#D9D9D9"; // grey
 	
 	public static final Paint BackGroundColor = Color.web("#C3FFFB");
 	public static final Paint GrassColor = Color.web("#A4D77B");

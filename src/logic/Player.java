@@ -38,10 +38,18 @@ public class Player {
 	
 	public void addEffect(EffectCard card) {}
 	
-	public void addMaterial(Material material, int amount) {
+	public void addMaterial(MaterialType material, int amount) {
 		for(MaterialPack pack: allMaterials) {
-			if(pack.getType().getType().equals(material.getType())) {
+			if(pack.getType().getType().equals(material)) {
 				pack.increase(amount);
+			}
+		}
+	}
+	
+	public void decreaseMaterial(MaterialType material, int amount) {
+		for(MaterialPack pack: allMaterials) {
+			if(pack.getType().getType().equals(material)) {
+				pack.decrease(amount);
 			}
 		}
 	}
@@ -50,9 +58,9 @@ public class Player {
 	public void removeMaterial(Material material) {}
 	public int countMaterial(Material material) {return 0;}
 
-	public MaterialPack getMaterialPack(Material material) {
+	public MaterialPack getMaterialPack(MaterialType material) {
 		for(MaterialPack pack: this.allMaterials) {
-			if(pack.getType().equals(material)) {
+			if(pack.getType().getType().equals(material)) {
 				return pack;
 			}
 		}

@@ -35,7 +35,7 @@ public class ControlPane {
 		this.stage = stage;
 		this.gameHeader = new HeaderGame();
 		this.allPlayerContainers = new ArrayList<PlayerContainer>();
-		GamePlay.getInstance(4);
+		GamePlay.getInstance(2);
 
 		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.HOMEPANE_HEIGHT);	
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
