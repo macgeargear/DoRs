@@ -26,8 +26,10 @@ public class MaterialCardPopup extends Popup {
 	private VBox popupContent;
 	private Button closeButton;
 	private ArrayList<MaterialPack> allMaterials;
-
+	private ArrayList<Label> allLabels;
+	
 	public MaterialCardPopup() {
+		this.allLabels = new ArrayList<Label>();
 		this.centerOnScreen();
 		this.initContent();
 
@@ -52,25 +54,35 @@ public class MaterialCardPopup extends Popup {
 		});
 		this.popupContent.getChildren().addAll(closeButton, messageLabel);
 		for (MaterialPack material : this.allMaterials) {
-			VBox card = initCard(material.getAmount(), material.getType());
-			System.out.println("" + material.getAmount() + " " + material.getType().getType());
+			Label newLabel = new Label("" + material.getAmount());
+			VBox card = initCard(newLabel, material.getType());
+			allLabels.add(newLabel);
+//			System.out.println("" + material.getAmount() + " " + material.getType().getType());
 			this.popupContent.getChildren().add(card);
 		}
 
 		VBox.setMargin(closeButton, new Insets(24));
 	}
 
-	private VBox initCard(int amount, Material type) {
+	private VBox initCard(Label amount, Material type) {
 		VBox card = new VBox();
 			card.setPrefSize(100, 100);
 			card.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(12), null)));
 		VBox.setMargin(card, new Insets(24));
 		HBox titleCard = new HBox();
-		Label _amount = new Label("" + amount);
 		Label typeLabel = new Label(type.getType().toString());
-		titleCard.getChildren().addAll(typeLabel, _amount);
+		titleCard.getChildren().addAll(typeLabel, amount);
 
 		card.getChildren().addAll(titleCard);
 		return card;
+	}
+	
+	public void updateLabel() {
+		int idx = 0;
+		this.allMaterials = Utilities.getCurrentPlayer().getAllMaterials();
+		for (MaterialPack material : this.allMaterials) {
+			allLabels.get(idx).setText("" + material.getAmount());
+			idx++;
+		}
 	}
 }

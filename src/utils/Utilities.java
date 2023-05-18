@@ -6,6 +6,7 @@ import java.util.function.BiFunction;
 import buildings.Building;
 import buildings.Edge;
 import buildings.Node;
+import components.PlayerContainer;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import logic.GamePlay;
@@ -137,5 +138,12 @@ public class Utilities {
 			}
 		}
 		return count;
+	}
+	
+	public static void updateCard() {
+		for(PlayerContainer container: ControlPane.getInstance().getAllPlayerContainers()) {
+			container.updateCount();
+		}
+		ControlPane.getInstance().getCardPopup().getShowMaterialCard().updateLabel();
 	}
 }
