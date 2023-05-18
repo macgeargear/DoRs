@@ -80,12 +80,10 @@ public class Footer extends HBox {
 				gameHeader.updateDiceNumber();
 				this.setRollDiceButton(instance.getRollNumber());
 				rollDiceButton.setDisable(true);
-				for(PlayerContainer container: ControlPane.getInstance().getAllPlayerContainers()) {
-					container.updateCount();
-				}
 				if(Utilities.canEndTurn()) {
 					this.endTurnButton.setDisable(false);
 				}
+				Utilities.updateCard();
 			}
 		});
 
@@ -104,9 +102,7 @@ public class Footer extends HBox {
 			if(Utilities.canEndTurn()) {
 				this.endTurnButton.setDisable(false);
 			}
-			for(PlayerContainer container: ControlPane.getInstance().getAllPlayerContainers()) {
-				container.updateCount();
-			}
+			Utilities.updateCard();
 		});
 	}
 	
@@ -122,9 +118,7 @@ public class Footer extends HBox {
 			if(Utilities.canEndTurn()) {
 				this.endTurnButton.setDisable(false);
 			}
-			for(PlayerContainer container: ControlPane.getInstance().getAllPlayerContainers()) {
-				container.updateCount();
-			}
+			Utilities.updateCard();
 		});
 	}
 	
@@ -156,20 +150,21 @@ public class Footer extends HBox {
 			}
 			this.endTurnButton.setDisable(true);
 			paneInstance.resetSelect();
-			
+			Utilities.updateCard();
 			if(gameInstance.getCurrentRound() == 3) {
 				GameResult gameResult = new GameResult();
-				
 			}
 		});
 	}
 	
 	private void initShowCardButton() {
+		this.cardPopup = new CardPopup();
+//		cardPopup.show(ControlPane.getInstance().getStage());
 		this.showCardButton = new FooterButton("Show Card");
 		this.endTurnButton.setBackground(new Background(new BackgroundFill(Color.BLANCHEDALMOND, new CornerRadii(12), null)));
 		this.showCardButton.setOnAction(e -> {
 		    if (cardPopup == null) {
-		        cardPopup = new CardPopup();
+		    	cardPopup = new CardPopup();		
 		        cardPopup.show(ControlPane.getInstance().getStage());
 		    } else {
 		        if (cardPopup.isShowing()) {
@@ -180,12 +175,10 @@ public class Footer extends HBox {
 		    }
 		});
 	}
-
-
+	
 	public Button getRollDiceButton() {
 		return rollDiceButton;
 	}
-
 
 	public void setRollDiceButton(int number) {
 		this.rollDiceButton.setText(String.valueOf(number));

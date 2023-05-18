@@ -33,13 +33,14 @@ public class CardPopup extends Popup {
 		this.getPopupContent().getChildren().addAll(this.showEffectCardButton, this.showMaterialCardButton);
 
 		this.getContent().add(popupContent);
+		ControlPane.getInstance().setCardPopup(this);
 	}
 
 	private void initShowMaterialButton() {
 		this.showMaterialCardButton = new FooterButton("Show MaterialCard");
+		this.showMaterialCard = new MaterialCardPopup();
 		this.showMaterialCardButton.setOnAction(e -> {
 			if (this.showMaterialCard == null) {
-				this.showMaterialCard = new MaterialCardPopup();
 				this.showMaterialCard.show(ControlPane.getInstance().getStage());
 			} else {
 				if (this.showMaterialCard.isShowing()) {
@@ -111,5 +112,10 @@ public class CardPopup extends Popup {
 	public VBox getPopupContent() {
 		return popupContent;
 	}
+
+	public MaterialCardPopup getShowMaterialCard() {
+		return showMaterialCard;
+	}
+	
 
 }
