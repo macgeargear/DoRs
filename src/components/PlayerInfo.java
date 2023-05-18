@@ -4,6 +4,7 @@ import config.Config;import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -23,7 +24,7 @@ public class PlayerInfo extends BorderPane {
 		this.isLeft = isLeft;
 		
 		setPrefSize(Config.SIDE_BOARD_WIDTH, Config.SIDE_BOARD_HEIGH);
-		setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
+		setBackground(new Background(new BackgroundFill(Config.BackGroundColor, null, null)));
 //		setFillWidth(true);
 		setPadding(new Insets(20));
 		initTop();

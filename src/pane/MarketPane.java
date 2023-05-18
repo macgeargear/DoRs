@@ -7,8 +7,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import components.MaterialExchange;
 import components.Button.CustomButton;
+import components.Material.MaterialExchange;
 import javafx.geometry.Insets;
 
 public class MarketPane extends BorderPane {
@@ -29,7 +29,7 @@ public class MarketPane extends BorderPane {
 
 	public MarketPane() {
 		this.setPadding(new Insets(20));
-	
+		
 			
 
 		this.initTitle();

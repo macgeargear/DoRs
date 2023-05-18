@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import buildings.Edge;
 import buildings.Node;
+import components.Button.EdgeButton;
+import components.Button.MapButton;
+import components.Button.NodeButton;
 import config.Config;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -30,7 +33,7 @@ public class GameBoard extends GridPane{
 		
 		setPrefSize(Config.BOARD_WIDTH, Config.BOARD_HEIGH);
 		setAlignment(Pos.CENTER);
-		setBackground(new Background(new BackgroundFill(Color.AQUA, null, null)));
+		setBackground(new Background(new BackgroundFill(Config.BackGroundColor, null, null)));
 //		setHgap(25); // Set horizontal gap between cells
 //        setVgap(25); // Set vertical gap between cells
 

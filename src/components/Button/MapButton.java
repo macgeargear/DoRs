@@ -1,4 +1,4 @@
-package components;
+package components.Button;
 
 import config.Config;
 import javafx.scene.control.Button;
@@ -41,14 +41,14 @@ public class MapButton extends Button {
 	private String getColor() {
 		MaterialType type = map.getType().getType();
 		if(type == MaterialType.WOOD) {
-			return "90ee90ff";
+			return "A4D77B";
 		}else if(type == MaterialType.WATER) {
-			return "0000ffff";
+			return "7CD8EC";
 		}else if(type == MaterialType.ROCK) {
-			return "808080ff";
+			return "0E8468";
 		}else if(type == MaterialType.SAND) {
-			return "ffffe0ff";
+			return "E3A8A8";
 		}
-		return "ffa500ff";
+		return "D9D9D9";
 	}
 }

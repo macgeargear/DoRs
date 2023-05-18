@@ -1,6 +1,7 @@
 package components;
 
 import components.Button.CustomButton;
+
 import components.Button.FooterButton;
 import components.Button.RollDice;
 import config.Config;
@@ -17,6 +18,7 @@ import javafx.stage.*;
 import logic.GamePlay;
 import logic.Player;
 import pane.ControlPane;
+import pane.popup.CardPopup;
 import utils.Utilities;
 
 public class Footer extends HBox {
@@ -27,6 +29,8 @@ public class Footer extends HBox {
 	private Button buyEdgeButton;
 	private Button showCardButton;
 	private Button endTurnButton;
+	
+	private CardPopup cardPopup;
 	
 	public Footer() {
 		this.setPrefHeight(Config.Footer_HEIGHT);
@@ -74,9 +78,11 @@ public class Footer extends HBox {
 			if(instance.rollDice()) {
 				HeaderGame gameHeader = ControlPane.getInstance().getGameHeader();
 				gameHeader.updateDiceNumber();
+				this.setRollDiceButton(number);
 				rollDiceButton.setDisable(true);
 			}
 		});
+
 
 	}
 	
@@ -142,7 +148,32 @@ public class Footer extends HBox {
 	private void initShowCardButton() {
 		this.showCardButton = new FooterButton("Show Card");
 		this.endTurnButton.setBackground(new Background(new BackgroundFill(Color.BLANCHEDALMOND, new CornerRadii(12), null)));
+		this.showCardButton.setOnAction(e -> {
+		    if (cardPopup == null) {
+		        cardPopup = new CardPopup();
+		        cardPopup.show(ControlPane.getInstance().getStage());
+		    } else {
+		        if (cardPopup.isShowing()) {
+		            cardPopup.hide();
+		        } else {
+		            cardPopup.show(ControlPane.getInstance().getStage());
+		        }
+		    }
+		});
 	}
+
+
+	public Button getRollDiceButton() {
+		return rollDiceButton;
+	}
+
+
+	public void setRollDiceButton(int number) {
+		this.rollDiceButton.setText(String.valueOf(number));
+	}
+	
+	
+	
 	
 	public void setBuyNodeDisable(boolean isDisable) {
 		this.buyNodeButton.setDisable(isDisable);

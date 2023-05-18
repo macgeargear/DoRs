@@ -1,4 +1,4 @@
-package components;
+package components.Button;
 
 import buildings.Node;
 import config.Config;

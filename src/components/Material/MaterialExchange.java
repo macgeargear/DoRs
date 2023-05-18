@@ -1,4 +1,4 @@
-package components;
+package components.Material;
 
 import components.Button.CustomButton;
 import javafx.geometry.Insets;
