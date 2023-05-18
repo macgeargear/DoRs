@@ -80,9 +80,10 @@ public class GamePlay {
 		Material sand = new Material(MaterialType.SAND);
 		Material gunpowder = new Material(MaterialType.GUNPOWDER);
 
-		ArrayList<Material> allMaterial = new ArrayList<Material>();
-		allMaterial.addAll(Arrays.asList(wood, water, rock, sand, gunpowder));
-
+//		ArrayList<Material> allMaterial = new ArrayList<Material>();
+//		allMaterial.addAll(Arrays.asList(wood, water, rock, sand, gunpowder));
+		ArrayList<Material> allMaterial = Utilities.getAllMaterials();
+		
 		for (Material material : allMaterial) {
 			for (int i = 0; i < 5; ++i) {
 				Map newMap = new Map(material);

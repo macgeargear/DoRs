@@ -54,7 +54,7 @@ public class MaterialCardPopup extends Popup {
 		});
 		this.popupContent.getChildren().addAll(closeButton, messageLabel);
 		for (MaterialPack material : this.allMaterials) {
-			Label newLabel = new Label("" + material.getAmount());
+			Label newLabel = new Label(" " + material.getAmount());
 			VBox card = initCard(newLabel, material.getType());
 			allLabels.add(newLabel);
 //			System.out.println("" + material.getAmount() + " " + material.getType().getType());
@@ -81,7 +81,7 @@ public class MaterialCardPopup extends Popup {
 		int idx = 0;
 		this.allMaterials = Utilities.getCurrentPlayer().getAllMaterials();
 		for (MaterialPack material : this.allMaterials) {
-			allLabels.get(idx).setText("" + material.getAmount());
+			allLabels.get(idx).setText(" " + material.getAmount());
 			idx++;
 		}
 	}

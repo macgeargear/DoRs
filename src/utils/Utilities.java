@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.BiFunction;
 
 import buildings.Building;
@@ -11,8 +12,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import logic.GamePlay;
 import logic.Player;
+import material.Material;
 import pane.ControlPane;
 import type.BuildingType;
+import type.MaterialType;
 
 public class Utilities {
 	public static void alertGenerate(Alert.AlertType alertType, String title, String content, Runnable methodYes) {
@@ -144,9 +147,24 @@ public class Utilities {
 	}
 	
 	public static void updateCard() {
-		for(PlayerContainer container: ControlPane.getInstance().getAllPlayerContainers()) {
+		ControlPane paneInstance = ControlPane.getInstance();
+		for(PlayerContainer container: paneInstance.getAllPlayerContainers()) {
 			container.updateCount();
 		}
-		ControlPane.getInstance().getCardPopup().getShowMaterialCard().updateLabel();
+		paneInstance.getCardPopup().getShowMaterialCard().updateLabel();
+		paneInstance.getMarketPane().updateExchange();
+	}
+	
+	public static ArrayList<Material> getAllMaterials() {
+		Material wood = new Material(MaterialType.WOOD);
+		Material water = new Material(MaterialType.WATER);
+		Material rock = new Material(MaterialType.ROCK);
+		Material sand = new Material(MaterialType.SAND);
+		Material gunpowder = new Material(MaterialType.GUNPOWDER);
+		
+		ArrayList<Material> allMaterial = new ArrayList<Material>();
+		allMaterial.addAll(Arrays.asList(wood, water, rock, sand, gunpowder));
+		
+		return allMaterial;
 	}
 }
