@@ -12,11 +12,14 @@ import type.MaterialType;
 
 public class Player {
 	private String name;
+	private int nodeCount, edgeCount;
 	private ArrayList<EffectCard> allEffectCards;
 	private ArrayList<MaterialPack> allMaterials;
 	
 	public Player(String name) {
 		this.name = name;
+		this.nodeCount = 0;
+		this.edgeCount = 0;
 		this.allMaterials = new ArrayList<MaterialPack>();
 		this.allEffectCards = new ArrayList<EffectCard>();
 		
@@ -56,6 +59,14 @@ public class Player {
 		return count;
 	}
 	
+	public void increaseNodeCount(int amount) {
+		this.nodeCount += amount;
+	}
+	
+	public void increaseEdgeCount(int amount) {
+		this.edgeCount += amount;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -72,5 +83,12 @@ public class Player {
 		return allMaterials;
 	}
 
-	
+	public int getNodeCount() {
+		return nodeCount;
+	}
+
+	public int getEdgeCount() {
+		return edgeCount;
+	}
+
 }

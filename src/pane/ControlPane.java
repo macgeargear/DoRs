@@ -2,10 +2,15 @@ package pane;
 
 import java.util.ArrayList;
 
+import components.EdgeButton;
+import components.Footer;
 import components.HeaderGame;
+import components.NodeButton;
 import components.PlayerContainer;
 import config.Config;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import logic.GamePlay;
 
@@ -14,6 +19,9 @@ public class ControlPane {
 	private static ControlPane instance = null;
 	private ArrayList<PlayerContainer> allPlayerContainers;
 	private HeaderGame gameHeader;
+	private Footer footer;
+	private NodeButton selectNode;
+	private EdgeButton selectEdge;
 	private Scene gameScene;
 	private Scene homeScene;
 	private Scene marketScene;
@@ -21,6 +29,8 @@ public class ControlPane {
 	
 	public ControlPane(Stage stage) {
 		if(instance == null) this.instance = this;
+		this.selectEdge = null;
+		this.selectNode = null;
 		this.stage = stage;
 		this.gameHeader = new HeaderGame();
 		this.allPlayerContainers = new ArrayList<PlayerContainer>();
@@ -88,4 +98,42 @@ public class ControlPane {
 	public void setGameHeader(HeaderGame gameHeader) {
 		this.gameHeader = gameHeader;
 	}
+
+	public Footer getFooter() {
+		return footer;
+	}
+
+	public void setFooter(Footer footer) {
+		this.footer = footer;
+	}
+
+	public NodeButton getSelectNode() {
+		return selectNode;
+	}
+
+	public void setSelectNode(NodeButton selectNode) {
+		this.selectNode = selectNode;
+	}
+
+	public EdgeButton getSelectEdge() {
+		return selectEdge;
+	}
+
+	public void setSelectEdge(EdgeButton selectEdge) {
+		this.selectEdge = selectEdge;
+	}
+	
+	public void resetSelect() {
+		if(selectEdge != null) {
+			selectEdge.resetSize();
+			selectEdge = null;
+		}
+		if(selectNode != null) {
+			selectNode.resetSize();
+			selectNode = null;
+		}
+		footer.setBuyNodeDisable(true);
+		footer.setBuyEdgeDisable(true);
+	}
+	
 }

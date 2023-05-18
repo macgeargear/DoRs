@@ -2,12 +2,12 @@ package components;
 
 import buildings.Edge;
 import config.Config;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import logic.GamePlay;
+import pane.ControlPane;
 import type.BuildingType;
+import utils.Utilities;
 
 public class EdgeButton extends Rectangle{
 	private Edge edge;
@@ -19,17 +19,54 @@ public class EdgeButton extends Rectangle{
 		this.setupSyle();
 		this.initShapeFx();
 		this.initOnHover();
+		this.initOnAction();
+	}
+	
+	private void initOnAction() {
+		EdgeButton thisEdge = this;
+		setOnMouseClicked(e->{
+			if(axis == 1) {
+				setScaleX(1.5);				
+			}else {
+				setScaleY(1.5);				
+			}
+			
+			ControlPane paneInstance = ControlPane.getInstance();
+			GamePlay gameInstance = GamePlay.getInstance();
+			
+			paneInstance.resetSelect();
+			paneInstance.setSelectEdge(thisEdge);
+			
+			if (Utilities.buyEdgeCondition(edge) == 1) {
+				paneInstance.getFooter().setBuyEdgeDisable(false);
+				paneInstance.getFooter().getBuyEdgeButton().setText("Buy Edge");
+			} else if (Utilities.buyEdgeCondition(edge) == 2) {
+				paneInstance.getFooter().setBuyEdgeDisable(false);
+				paneInstance.getFooter().getBuyNodeButton().setText("Upgrade Edge");
+			} else {
+				paneInstance.getFooter().setBuyEdgeDisable(true);
+				paneInstance.getFooter().getBuyNodeButton().setText("Buy Edge");
+			}
+		});
 	}
 	
 	private void initOnHover() {
+		ControlPane paneInstance = ControlPane.getInstance();
+		EdgeButton thisEdge = this;
+		
 		setOnMouseEntered(event -> {
-            setScaleX(1.5);
-            setScaleY(1.5);
+			if(axis == 1) {
+				setScaleX(1.5);				
+			}else {
+				setScaleY(1.5);				
+			}
         });
 		
 		setOnMouseExited(event -> {
-            setScaleX(1.0);
-            setScaleY(1.0);
+			if(paneInstance.getSelectEdge() == null || !paneInstance.getSelectEdge().equals(thisEdge)) {
+				setScaleX(1.0);
+				setScaleY(1.0);	
+			}
         });
 	}
 	
@@ -66,6 +103,15 @@ public class EdgeButton extends Rectangle{
 //			setPrefSize(5, Config.MAP_HEIGH);
 		}
 //		setShape(new Rectangle(Config.NODE_WIDTH, Config.NODE_HEIGH));
+	}
+	
+	public void resetSize() {
+		setScaleX(1.0);
+		setScaleY(1.0);	
+	}
+
+	public Edge getEdge() {
+		return edge;
 	}
 
 }
