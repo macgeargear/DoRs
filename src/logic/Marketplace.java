@@ -18,6 +18,7 @@ public class Marketplace {
 	
 	public void random() {
 		this.amount = 20;
+		
 //		random everything
 		return ;
 	}

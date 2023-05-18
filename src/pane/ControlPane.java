@@ -55,11 +55,11 @@ public class ControlPane {
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
 		marketScene = new Scene(new MarketPane(), Config.SCREEN_HEIGH , Config.SCREEN_HEIGH);
 		// TODO: showMaterialCardScene, showMaterialCardScene;
-		this.showHomeScene();
+//		this.showHomeScene();
 //		this.showMarketScene();
 		
 		
-//		this.showGameScene();
+		this.showGameScene();
 	}
 	
 	public void addPlayerContainer(PlayerContainer container) {

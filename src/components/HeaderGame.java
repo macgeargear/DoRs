@@ -20,7 +20,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.GamePlay;
+import logic.Player;
 import pane.ControlPane;
+import type.MaterialType;
 import utils.Utilities;
 
 public class HeaderGame extends HBox {
@@ -38,11 +40,28 @@ public class HeaderGame extends HBox {
 		setPrefSize(Config.SCREEN_WIDTH, 50);
 		setBackground(new Background(new BackgroundFill(Color.web("#777777"), CornerRadii.EMPTY, Insets.EMPTY)));
 		initRollText();
+		initAddAllMaterial();
 		initRoundText();
 		initExitButton();
 		ControlPane.getInstance().setGameHeader(this);
 	}
 
+	private void initAddAllMaterial() {
+		Button addAllBtn = new Button("+");
+		
+		addAllBtn.setOnAction(e->{
+			Player currentPlayer = Utilities.getCurrentPlayer();
+			currentPlayer.addMaterial(MaterialType.WOOD, 1);
+			currentPlayer.addMaterial(MaterialType.WATER, 1);
+			currentPlayer.addMaterial(MaterialType.ROCK, 1);
+			currentPlayer.addMaterial(MaterialType.SAND, 1);
+			currentPlayer.addMaterial(MaterialType.GUNPOWDER, 1);
+			Utilities.updateCard();
+		});
+		
+		getChildren().add(addAllBtn);
+	}
+	
 	private void initRollText() {
 		rollNumber = new Text(Integer.toString(GamePlay.getInstance().getRollNumber()));
 		rollNumber.setFont(new Font(16));
