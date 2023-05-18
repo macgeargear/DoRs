@@ -20,7 +20,7 @@ public class MaterialCard extends VBox {
 		this.setPadding(new Insets(16));
 		
 		this.initLabel(text);
-		this.initHover();
+//		this.initHover();
 		this.getChildren().add(label);
 	}
 	

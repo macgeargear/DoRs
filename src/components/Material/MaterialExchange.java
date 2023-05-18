@@ -39,7 +39,7 @@ public class MaterialExchange extends HBox {
 	}
 	
 	public void initExchangeButton() {
-		this.exchangeButton = new CustomButton("Exchange");
+		this.exchangeButton = new Button("Exchange");
 		this.exchangeButton.setFont(Font.font(18));
 		
 		this.exchangeButton.setOnAction(e->{
