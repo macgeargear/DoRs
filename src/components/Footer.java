@@ -15,7 +15,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.*;
 import logic.GamePlay;
+import logic.Player;
 import pane.ControlPane;
+import utils.Utilities;
 
 public class Footer extends HBox {
 	private Button buyCardButton;
@@ -86,6 +88,10 @@ public class Footer extends HBox {
 			ControlPane paneInstance = ControlPane.getInstance();
 			paneInstance.getSelectNode().getNode().upgrade();
 			paneInstance.getSelectNode().setupSyle();
+			this.buyNodeButton.setDisable(true);
+			if(Utilities.canEndTurn()) {
+				this.endTurnButton.setDisable(false);
+			}
 		});
 	}
 	
@@ -97,6 +103,10 @@ public class Footer extends HBox {
 			ControlPane paneInstance = ControlPane.getInstance();
 			paneInstance.getSelectEdge().getEdge().upgrade();
 			paneInstance.getSelectEdge().setupSyle();
+			this.buyEdgeButton.setDisable(true);
+			if(Utilities.canEndTurn()) {
+				this.endTurnButton.setDisable(false);
+			}
 		});
 	}
 	
@@ -105,6 +115,28 @@ public class Footer extends HBox {
 		this.endTurnButton = new FooterButton("End turn");
 		this.endTurnButton.setBackground(new Background(new BackgroundFill(Color.INDIANRED, new CornerRadii(12), null)));
 		this.endTurnButton.setDisable(true);
+		
+		this.endTurnButton.setOnAction(e->{
+			GamePlay gameInstance = GamePlay.getInstance();
+			ControlPane paneInstance = ControlPane.getInstance();
+			Player prevPlayer = Utilities.getCurrentPlayer();
+			if(gameInstance.goToNextPlayer()) {
+				Player currentPlayer = Utilities.getCurrentPlayer();
+				for(PlayerContainer container: paneInstance.getAllPlayerContainers()) {
+					if(container.getP().equals(prevPlayer) || container.getP().equals(currentPlayer)) {
+						if(!prevPlayer.equals(currentPlayer)) {
+							container.toggleColorNameContainer();							
+						}
+					}
+				}
+			}
+//			update round
+			paneInstance.getGameHeader().updateRoundCount();
+			if(gameInstance.getCurrentRound() > 0) {
+				this.rollDiceButton.setDisable(false);
+			}
+			this.endTurnButton.setDisable(true);
+		});
 	}
 	
 	private void initShowCardButton() {

@@ -81,9 +81,15 @@ public class HeaderGame extends HBox {
 		getChildren().add(exitButton);
 	}
 	
-	public void increaseRoundCount() {
+	public void updateRoundCount() {
 		roundCount = GamePlay.getInstance().getCurrentRound();
-		roundAmount.setText(Integer.toString(roundCount));
+		if(roundCount == -2) {
+			roundAmount.setText("Prepare 1");;
+		}else if(roundCount == -1) {
+			roundAmount.setText("Prepare 2");
+		}else {
+			roundAmount.setText(Integer.toString(roundCount));			
+		}
 	}
 	
 	public void updateDiceNumber() {

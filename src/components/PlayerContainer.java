@@ -113,6 +113,7 @@ public class PlayerContainer extends VBox{
 		}else {
 			nameContainer.setStyle("-fx-background-color: lightgreen; -fx-background-radius: 10px;");
 		}
+		toggle = !toggle;
 	}
 
 	public Player getP() {

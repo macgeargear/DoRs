@@ -95,4 +95,20 @@ public class Utilities {
 		}
 		return false;
 	}
+	
+	public static boolean canEndTurn() {
+		GamePlay gameInstance = GamePlay.getInstance();
+		Player currentPlayer = getCurrentPlayer();
+		int currentRound = gameInstance.getCurrentRound();
+		
+		if(currentRound == -2 && currentPlayer.getNodeCount() == 1 && currentPlayer.getEdgeCount() == 2) {
+			return true;
+		}else if(currentRound == -1 && currentPlayer.getNodeCount() == 2 && currentPlayer.getEdgeCount() == 4) {
+			return true;
+		}else if(currentRound > 0) {
+			return true;
+		}
+		
+		return false;
+	}
 }
