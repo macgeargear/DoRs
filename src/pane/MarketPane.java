@@ -2,6 +2,7 @@ package pane;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -21,13 +22,9 @@ import javafx.geometry.Insets;
 public class MarketPane extends BorderPane {
 
 	private Text title;
+	private Text amount;
 	private Button backButton;
 	private ArrayList<MaterialExchange> allExchanges;
-	private MaterialExchange exchange1;
-	private MaterialExchange exchange2;
-	private MaterialExchange exchange3;
-	private MaterialExchange exchange4;
-	private MaterialExchange exchange5;
 
 	private VBox exchangeContainer;
 
@@ -38,7 +35,6 @@ public class MarketPane extends BorderPane {
 	public MarketPane() {
 		allExchanges = new ArrayList<MaterialExchange>();
 		this.setPadding(new Insets(20));
-
 		this.initTitle();
 		this.initExchanges();
 		this.initBackButton();
@@ -46,10 +42,16 @@ public class MarketPane extends BorderPane {
 		for (MaterialExchange exchange : allExchanges) {
 			VBox.setMargin(exchange, new Insets(20));
 		}
-
+		
+		HBox top = new HBox();
+		top.getChildren().addAll(title, amount);
+		
 		this.setLeft(backButton);
-		this.setTop(title);
+		this.setTop(top);
 		this.setCenter(exchangeContainer);
+		this.updateExchange();
+		
+		ControlPane.getInstance().setMarketPane(this);
 	}
 
 	private void initExchanges() {
@@ -86,7 +88,7 @@ public class MarketPane extends BorderPane {
 				secondColor = Color.BEIGE;
 			}
 			allExchanges.add(new MaterialExchange("" + firstMaterial.getType(), exchangeRate.get(idx), firstColor,
-					"" + secondMaterial.getType(), secondColor));
+					"" + secondMaterial.getType(), secondColor, idx));
 			idx++;
 		}
 
@@ -108,8 +110,17 @@ public class MarketPane extends BorderPane {
 
 	private void initTitle() {
 		this.title = new Text("Exchange Material Market");
+		this.amount = new Text(" "+GamePlay.getInstance().getMarketplace().getAmount());
 		this.title.setFont(Font.font(40));
+		this.amount.setFont(Font.font(40));
 		this.title.setTextAlignment(TextAlignment.CENTER);
+	}
+	
+	public void updateExchange() {
+		this.amount.setText(" "+GamePlay.getInstance().getMarketplace().getAmount());
+		for(MaterialExchange exchange: allExchanges) {
+			exchange.updateExchangeStatus();
+		}
 	}
 
 }

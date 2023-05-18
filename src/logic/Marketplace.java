@@ -43,24 +43,27 @@ public class Marketplace {
 		return ;
 	}
 	
-	public ArrayList<Integer> canTrade(){
+	public boolean canTrade(int idx){
+		if(idx >= 5 || amount <= 0) return false;
+	
 		Player currentPlayer = Utilities.getCurrentPlayer();
-		ArrayList<Integer> canIndex =  new ArrayList<Integer>();
-		for(int i=0;i<5;++i) {
-			Material target = tradeList.get(i).get(0);
-			if(currentPlayer.countMaterial(target) > exchangeRate.get(i)) {
-				canIndex.add(i);
-			}
+		Material target = tradeList.get(idx).get(0);
+		if(currentPlayer.countMaterial(target) >= exchangeRate.get(idx)) {
+			return true;
 		}
-		return canTrade();
+		return false;
 	}
-
+	
 	public ArrayList<ArrayList<Material>> getTradeList() {
 		return tradeList;
 	}
 
 	public ArrayList<Integer> getExchangeRate() {
 		return exchangeRate;
+	}
+
+	public int getAmount() {
+		return amount;
 	}
 	
 	

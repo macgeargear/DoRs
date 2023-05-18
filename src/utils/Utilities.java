@@ -147,10 +147,12 @@ public class Utilities {
 	}
 	
 	public static void updateCard() {
-		for(PlayerContainer container: ControlPane.getInstance().getAllPlayerContainers()) {
+		ControlPane paneInstance = ControlPane.getInstance();
+		for(PlayerContainer container: paneInstance.getAllPlayerContainers()) {
 			container.updateCount();
 		}
-		ControlPane.getInstance().getCardPopup().getShowMaterialCard().updateLabel();
+		paneInstance.getCardPopup().getShowMaterialCard().updateLabel();
+		paneInstance.getMarketPane().updateExchange();
 	}
 	
 	public static ArrayList<Material> getAllMaterials() {

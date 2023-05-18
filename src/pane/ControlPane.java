@@ -166,5 +166,15 @@ public class ControlPane {
 		footer.setBuyNodeDisable(true);
 		footer.setBuyEdgeDisable(true);
 	}
+
+	public MarketPane getMarketPane() {
+		return marketPane;
+	}
+
+	public void setMarketPane(MarketPane marketPane) {
+		this.marketPane = marketPane;
+	}
+	
+	
 	
 }
