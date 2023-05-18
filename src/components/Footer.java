@@ -151,8 +151,9 @@ public class Footer extends HBox {
 			this.endTurnButton.setDisable(true);
 			paneInstance.resetSelect();
 			Utilities.updateCard();
-			if(gameInstance.getCurrentRound() == 3) {
+			if(gameInstance.getCurrentRound() == 5) {
 				GameResult gameResult = new GameResult();
+				gameResult.show(paneInstance.getStage());
 			}
 		});
 	}

@@ -126,17 +126,20 @@ public class Utilities {
 	
 	public static int countBuildingType(Player player, BuildingType type) {
 		GamePlay gameInstance = GamePlay.getInstance();
-		int count = 0;
+		int count = 0, all = 0;
 		for(Building building : gameInstance.getAllNodes()) {
 			if(building.getOwner() != null && building.getOwner().equals(player) && building.getType() == type) {
 				count++;
 			}
+			all++;
 		}
 		for(Building building : gameInstance.getAllEdges()) {
 			if(building.getOwner() != null && building.getOwner().equals(player) && building.getType() == type) {
 				count++;
 			}
+			all++;
 		}
+		System.out.println(all);
 		return count;
 	}
 	

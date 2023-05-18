@@ -226,7 +226,6 @@ public class GamePlay {
 	}
 
 	public ArrayList<Pair<String, Integer>> getResult() {
-		instance = null;
 		ArrayList<Pair<String, Integer>> result = new ArrayList<Pair<String, Integer>>();
 		ArrayList<BuildingType> allBuildingType = new ArrayList<BuildingType>();
 		allBuildingType.addAll(Arrays.asList(BuildingType.HOUSE, BuildingType.TOWER, BuildingType.CITY, BuildingType.ROAD, BuildingType.SUPERROAD));
@@ -242,11 +241,14 @@ public class GamePlay {
 				}else {
 					score += typeCount;
 				}
+				System.out.println(typeCount);
 			}
-			result.add(new Pair<String, Integer>(player.getName(), score));
+			System.out.println(score);
+			result.add(new Pair<String, Integer>(player.getName(), -score));
 		}
 		
 		Collections.sort(result, Comparator.comparingInt(Pair::getValue));
+		instance = null;
 		return result;
 	}
 
