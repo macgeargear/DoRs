@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.w3c.dom.Text;
 
 import components.Button.ExitButton;
+import config.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -15,11 +16,14 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
 import material.Material;
 import material.MaterialPack;
+import type.MaterialType;
 import utils.Utilities;
 
 public class MaterialCardPopup extends Popup {
@@ -27,7 +31,7 @@ public class MaterialCardPopup extends Popup {
 	private Button closeButton;
 	private ArrayList<MaterialPack> allMaterials;
 	private ArrayList<Label> allLabels;
-	
+
 	public MaterialCardPopup() {
 		this.allLabels = new ArrayList<Label>();
 		this.centerOnScreen();
@@ -43,7 +47,7 @@ public class MaterialCardPopup extends Popup {
 
 		this.popupContent = new VBox();
 		this.popupContent.setPrefHeight(768);
-		this.popupContent.setPrefWidth(600);
+		this.popupContent.setPrefWidth(400);
 		this.popupContent.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(14), null)));
 		this.popupContent.setAlignment(Pos.CENTER);
 
@@ -55,9 +59,9 @@ public class MaterialCardPopup extends Popup {
 		this.popupContent.getChildren().addAll(closeButton, messageLabel);
 		for (MaterialPack material : this.allMaterials) {
 			Label newLabel = new Label(" " + material.getAmount());
+			newLabel.setFont(Font.font(20));
 			VBox card = initCard(newLabel, material.getType());
 			allLabels.add(newLabel);
-//			System.out.println("" + material.getAmount() + " " + material.getType().getType());
 			this.popupContent.getChildren().add(card);
 		}
 
@@ -66,17 +70,41 @@ public class MaterialCardPopup extends Popup {
 
 	private VBox initCard(Label amount, Material type) {
 		VBox card = new VBox();
-			card.setPrefSize(100, 100);
-			card.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(12), null)));
-		VBox.setMargin(card, new Insets(24));
+		Paint bg;
+		if (type.getType() == MaterialType.GUNPOWDER) {
+			bg = Config.GunPowderColor;
+		} else if (type.getType() == MaterialType.ROCK) {
+			bg = Config.RockColor;
+		} else if (type.getType() == MaterialType.SAND) {
+			bg = Config.SandColor;
+		} else if (type.getType() == MaterialType.WATER) {
+			bg = Config.WaterColor;
+		} else if (type.getType() == MaterialType.WOOD) {
+			bg = Config.WoodColor;
+		} else {
+			bg = Color.BLACK;
+		}
+		
+		card.setBackground(new Background(new BackgroundFill(bg, new CornerRadii(12), null)));
+		card.setAlignment(Pos.CENTER);
+		card.setPrefWidth(60);
+		card.setPrefHeight(60);
+
 		HBox titleCard = new HBox();
 		Label typeLabel = new Label(type.getType().toString());
+
+		VBox.setMargin(card, new Insets(24));
+		VBox.setMargin(titleCard, new Insets(24));
+
+		typeLabel.setAlignment(Pos.CENTER);
+		typeLabel.setFont(Font.font(20));
+
 		titleCard.getChildren().addAll(typeLabel, amount);
 
 		card.getChildren().addAll(titleCard);
 		return card;
 	}
-	
+
 	public void updateLabel() {
 		int idx = 0;
 		this.allMaterials = Utilities.getCurrentPlayer().getAllMaterials();

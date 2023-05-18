@@ -4,6 +4,7 @@ import javafx.stage.Popup;
 import pane.ControlPane;
 import components.Button.ExitButton;
 import components.Button.FooterButton;
+import config.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -37,7 +38,7 @@ public class CardPopup extends Popup {
 	}
 
 	private void initShowMaterialButton() {
-		this.showMaterialCardButton = new FooterButton("Show MaterialCard");
+		this.showMaterialCardButton = new FooterButton("Show MaterialCard", Color.BROWN, Config.FooterColor);
 		this.showMaterialCard = new MaterialCardPopup();
 		this.showMaterialCardButton.setOnAction(e -> {
 			if (this.showMaterialCard == null) {
@@ -53,7 +54,7 @@ public class CardPopup extends Popup {
 	}
 
 	private void initShowEffectCardButton() {
-		this.showEffectCardButton = new FooterButton("Show EffectCard");
+		this.showEffectCardButton = new FooterButton("Show EffectCard", Color.GOLD, Config.FooterColor);
 		this.showEffectCardButton.setOnAction(e -> {
 			if (this.showEffectCard == null) {
 				this.showEffectCard = new EffectCardPopup();

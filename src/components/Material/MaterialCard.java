@@ -6,15 +6,15 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class MaterialCard extends VBox {
 	private Text label;
 
-	public MaterialCard(Color color, String text) {
-		this.setPrefHeight(120);
-		this.setPrefWidth(180);
+	public MaterialCard(Paint color, String text) {
+		
 		this.setBackground(new Background(new BackgroundFill(color,new CornerRadii(10),null)));
 //		this.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 8, 0, 0, 0);");
 		this.setPadding(new Insets(16));

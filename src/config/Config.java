@@ -49,6 +49,7 @@ public class Config {
 	public static final int Footer_HEIGHT = 80;
 
 	// Node color
+	// String
 	public static final String EMPTY = "#ABB2B9";
 	public static final String P1 = "#E67E22";
 	public static final String P2 = "#E74C3C";
@@ -60,12 +61,15 @@ public class Config {
 	public static final String SAND = "#E3A8A8"; // pink
 	public static final String GUNPOWDER = "#D9D9D9"; // grey
 	
+	// Paint
 	public static final Paint BackGroundColor = Color.web("#C3FFFB");
-	public static final Paint GrassColor = Color.web("#A4D77B");
-	public static final Paint RockColor = Color.web("#0E8468");
-	public static final Paint GunPowderColor = Color.web("#FA6767");
-	public static final Paint SandColor = Color.web("#E3A8A8");
-	public static final Paint WaterColor = Color.web("#7CD8EC");
+
+	public static final Paint WoodColor = Color.web(Config.WOOD);
+	public static final Paint RockColor = Color.web(Config.ROCK);
+	public static final Paint GunPowderColor = Color.web(Config.GUNPOWDER);
+	public static final Paint SandColor = Color.web(Config.SAND);
+	public static final Paint WaterColor = Color.web(Config.WATER);
+	
 	public static final Paint DiceColor = Color.web("#E28686");
 	public static final Paint FooterColor = Color.MISTYROSE;
 
