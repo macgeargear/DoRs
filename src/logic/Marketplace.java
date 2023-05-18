@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Random;
 
 import material.Material;
-import material.MaterialPack;
 import utils.Utilities;
 
 public class Marketplace {
@@ -36,9 +35,11 @@ public class Marketplace {
 	}
 	
 	public void trade(int target) {
+		if(amount == 0) return ;
 		Player currentPlayer = Utilities.getCurrentPlayer();
 		currentPlayer.decreaseMaterial(tradeList.get(target).get(0).getType(), exchangeRate.get(target));
 		currentPlayer.increaseMaterial(tradeList.get(target).get(1).getType(), 1);
+		amount--;
 		return ;
 	}
 	
@@ -53,4 +54,14 @@ public class Marketplace {
 		}
 		return canTrade();
 	}
+
+	public ArrayList<ArrayList<Material>> getTradeList() {
+		return tradeList;
+	}
+
+	public ArrayList<Integer> getExchangeRate() {
+		return exchangeRate;
+	}
+	
+	
 }
