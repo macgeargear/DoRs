@@ -1,7 +1,9 @@
 package utils;
 
+import java.util.ArrayList;
 import java.util.function.BiFunction;
 
+import buildings.Building;
 import buildings.Edge;
 import buildings.Node;
 import javafx.scene.control.Alert;
@@ -9,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import logic.GamePlay;
 import logic.Player;
 import pane.ControlPane;
+import type.BuildingType;
 
 public class Utilities {
 	public static void alertGenerate(Alert.AlertType alertType, String title, String content, Runnable methodYes) {
@@ -63,7 +66,11 @@ public class Utilities {
 			}
 			return 0;
 		} else if (gameInstance.getCurrentRound() > 0) {
-			return node.canUpgrade() ? 2 : 0;
+			if(node.getOwner() == null && node.canUpgrade()) {
+				return 1;
+			}else if(node.getOwner() != null && node.getOwner().equals(currentPlayer) && node.canUpgrade()) {
+				return 2;
+			}
 		}
 		return 0;
 	}
@@ -80,7 +87,11 @@ public class Utilities {
 			}
 			return 0;
 		} else if (gameInstance.getCurrentRound() > 0) {
-			return edge.canUpgrade() ? 2 : 0;
+			if(edge.getOwner() == null && edge.canUpgrade()) {
+				return 1;
+			}else if(edge.getOwner() != null && edge.getOwner().equals(currentPlayer) && edge.canUpgrade()) {
+				return 2;
+			}
 		}
 		return 0;
 	}
@@ -110,5 +121,21 @@ public class Utilities {
 		}
 		
 		return false;
+	}
+	
+	public static int countBuildingType(Player player, BuildingType type) {
+		GamePlay gameInstance = GamePlay.getInstance();
+		int count = 0;
+		for(Building building : gameInstance.getAllNodes()) {
+			if(building.getOwner() != null && building.getOwner().equals(player) && building.getType() == type) {
+				count++;
+			}
+		}
+		for(Building building : gameInstance.getAllEdges()) {
+			if(building.getOwner() != null && building.getOwner().equals(player) && building.getType() == type) {
+				count++;
+			}
+		}
+		return count;
 	}
 }

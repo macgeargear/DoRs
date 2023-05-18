@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import logic.GamePlay;
 import logic.Player;
 import type.BuildingType;
+import type.MaterialType;
 import utils.Utilities;
 import utils.getTotalOwners;
 
@@ -15,7 +16,7 @@ public class Node extends Building {
 	public Node(BuildingType type) {
 		super(type);
 		sideEdges = new ArrayList<Edge>();
-		for(int i=0;i<4;++i) {
+		for (int i = 0; i < 4; ++i) {
 			sideEdges.add(null);
 		}
 	}
@@ -41,21 +42,24 @@ public class Node extends Building {
 	public void upgrade() {
 		Player currentPlayer = Utilities.getCurrentPlayer();
 		
-		if(this.getOwner() == null) {
+		if(GamePlay.getInstance().getCurrentRound() > 0) {			
+			currentPlayer.decreaseMaterial(MaterialType.ROCK, 1);
+			currentPlayer.decreaseMaterial(MaterialType.WOOD, 1);
+			currentPlayer.decreaseMaterial(MaterialType.WATER, 1);
+		}
+		if (this.getOwner() == null) {
 			this.setType(BuildingType.HOUSE);
 			this.setOwner(currentPlayer);
 			currentPlayer.increaseNodeCount(1);
-		}else {
-			if(this.getType() == BuildingType.HOUSE) {
+		} else {
+			if (this.getType() == BuildingType.HOUSE) {
 				this.setType(BuildingType.TOWER);
-			}else {
+			} else {
 				this.setType(BuildingType.CITY);
 			}
 		}
 	}
 
-	
-	
 	public void destroySideEdge(int position) {
 		this.sideEdges.get(position).destroy();
 	}
@@ -74,22 +78,20 @@ public class Node extends Building {
 
 	@Override
 	public boolean canUpgrade() {
-		if ((this.getType().equals(BuildingType.EMPTYHOUSE) && this.checkSideEdges() == false)
-				|| (this.getType().equals(BuildingType.CITY))) {
-			return false;
-		}
-//		edit later
-		return true;
-	}
-	
-	public boolean checkSideEdges() {
-		GamePlay gameInstance = GamePlay.getInstance();
-		Player p = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
-		for(Edge edge: sideEdges) {
-			if(edge.getOwner().equals(p)) {
+		Player currentPlayer = Utilities.getCurrentPlayer();
+		if (currentPlayer.getMaterialPack(MaterialType.ROCK).getAmount() >= 1
+				&& currentPlayer.getMaterialPack(MaterialType.WOOD).getAmount() >= 1
+				&& currentPlayer.getMaterialPack(MaterialType.WATER).getAmount() >= 1) {
+			if (this.getOwner() == null && Utilities.haveSideEdge(this)) {
 				return true;
+			}else if(this.getOwner() != null && this.getOwner().equals(currentPlayer)) {
+				if(this.getType() != BuildingType.CITY) {
+					return true;
+				}
 			}
 		}
+
+		// edit later
 		return false;
 	}
 

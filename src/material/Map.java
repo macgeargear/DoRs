@@ -27,7 +27,9 @@ public class Map extends Place {
 		// TODO
 		if (this.isActive()) {
 			for (Node node : this.sideNodes) {
-				node.getOwner().addMaterial(this.type);
+				if(node.getOwner() != null) {
+					node.getOwner().addMaterial(this.type.getType(), 1);					
+				}
 			}
 		}
 	}
@@ -53,7 +55,5 @@ public class Map extends Place {
 	public Material getType() {
 		return type;
 	}
-	
-	
 
 }
