@@ -104,6 +104,9 @@ public class Footer extends HBox {
 			if(Utilities.canEndTurn()) {
 				this.endTurnButton.setDisable(false);
 			}
+			for(PlayerContainer container: ControlPane.getInstance().getAllPlayerContainers()) {
+				container.updateCount();
+			}
 		});
 	}
 	
@@ -118,6 +121,9 @@ public class Footer extends HBox {
 			this.buyEdgeButton.setDisable(true);
 			if(Utilities.canEndTurn()) {
 				this.endTurnButton.setDisable(false);
+			}
+			for(PlayerContainer container: ControlPane.getInstance().getAllPlayerContainers()) {
+				container.updateCount();
 			}
 		});
 	}
@@ -146,6 +152,7 @@ public class Footer extends HBox {
 			paneInstance.getGameHeader().updateRoundCount();
 			if(gameInstance.getCurrentRound() > 0) {
 				this.rollDiceButton.setDisable(false);
+				this.rollDiceButton.setText("Roll");
 			}
 			this.endTurnButton.setDisable(true);
 			paneInstance.resetSelect();
