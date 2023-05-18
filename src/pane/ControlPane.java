@@ -18,7 +18,9 @@ public class ControlPane {
 	private Scene gameScene;
 	private Scene homeScene;
 	private Scene marketScene;
+	
 	private Stage stage;
+	
 	
 	public ControlPane(Stage stage) {
 		if(instance == null) this.instance = this;
@@ -30,6 +32,7 @@ public class ControlPane {
 		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.HOMEPANE_HEIGHT);	
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
 		marketScene = new Scene(new MarketPane(), Config.SCREEN_HEIGH , Config.SCREEN_HEIGH);
+		// TODO: showMaterialCardScene, showMaterialCardScene;
 //		this.showHomeScene();
 //		this.showMarketScene();
 		this.showGameScene();
@@ -67,13 +70,10 @@ public class ControlPane {
 	
 	public void showMarketScene() {
 		marketScene = new Scene(new MarketPane(), Config.SCREEN_HEIGH, Config.SCREEN_HEIGH);
-//		stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("Swing in JavaFX");
 		stage.setScene(marketScene);
 		stage.centerOnScreen();
 	}
 	
-
 	public Scene getGameScene() {
 		return gameScene;
 	}
@@ -92,5 +92,9 @@ public class ControlPane {
 
 	public void setGameHeader(HeaderGame gameHeader) {
 		this.gameHeader = gameHeader;
+	}
+	
+	public Stage getStage() {
+		return this.stage;
 	}
 }

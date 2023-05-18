@@ -1,6 +1,7 @@
 package components;
 
 import components.Button.CustomButton;
+
 import components.Button.FooterButton;
 import components.Button.RollDice;
 import config.Config;
@@ -16,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.stage.*;
 import logic.GamePlay;
 import pane.ControlPane;
+import pane.popup.CardPopup;
 
 public class Footer extends HBox {
 	private Button buyCardButton;
@@ -25,6 +27,8 @@ public class Footer extends HBox {
 	private Button buyEdgeButton;
 	private Button showCardButton;
 	private Button endTurnButton;
+	
+	private CardPopup cardPopup;
 	
 	public Footer() {
 		this.setPrefHeight(Config.Footer_HEIGHT);
@@ -95,6 +99,18 @@ public class Footer extends HBox {
 	private void initShowCardButton() {
 		this.showCardButton = new FooterButton("Show Card");
 		this.endTurnButton.setBackground(new Background(new BackgroundFill(Color.BLANCHEDALMOND, new CornerRadii(12), null)));
+		this.showCardButton.setOnAction(e -> {
+		    if (cardPopup == null) {
+		        cardPopup = new CardPopup();
+		        cardPopup.show(ControlPane.getInstance().getStage());
+		    } else {
+		        if (cardPopup.isShowing()) {
+		            cardPopup.hide();
+		        } else {
+		            cardPopup.show(ControlPane.getInstance().getStage());
+		        }
+		    }
+		});
 	}
 
 

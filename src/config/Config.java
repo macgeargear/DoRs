@@ -64,5 +64,4 @@ public class Config {
 	public static final Paint DiceColor = Color.web("#E28686");
 	public static final Paint FooterColor = Color.MISTYROSE;
 
-
 }
