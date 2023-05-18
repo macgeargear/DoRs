@@ -33,6 +33,7 @@ public class PlayerContainer extends VBox{
 		this.isTop = isTop;
 		this.isLeft = isLeft;
 		this.toggle = false;
+		setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(12), null)));
 		setAlignment(Pos.CENTER);
 		setPadding(new Insets(20));
 		setSpacing(10);

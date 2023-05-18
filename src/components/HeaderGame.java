@@ -1,5 +1,6 @@
 package components;
 
+import components.Button.CustomButton;
 import config.Config;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -34,7 +35,7 @@ public class HeaderGame extends HBox {
 		setSpacing(20);
 		setPadding(new Insets(10));
 		setPrefSize(Config.SCREEN_WIDTH, 50);
-		setBackground(new Background(new BackgroundFill(Color.WHEAT, CornerRadii.EMPTY, Insets.EMPTY)));
+		setBackground(new Background(new BackgroundFill(Color.web("#777777"), CornerRadii.EMPTY, Insets.EMPTY)));
 		initRollText();
 		initRoundText();
 		initExitButton();
@@ -66,7 +67,10 @@ public class HeaderGame extends HBox {
 	}
 
 	private void initExitButton() {
-		Button exitButton = new Button();
+		Button exitButton = new Button("X");
+		exitButton.setPrefHeight(20);
+		exitButton.setPrefWidth(20);
+		exitButton.setBackground(new Background(new BackgroundFill(Config.BackGroundColor, new CornerRadii(12), null)));
 		exitButton.setText("X");
 		setAlignment(Pos.CENTER_RIGHT);
 		setHgrow(exitButton, Priority.ALWAYS);

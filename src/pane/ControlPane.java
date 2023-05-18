@@ -6,6 +6,7 @@ import components.HeaderGame;
 import components.PlayerContainer;
 import config.Config;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logic.GamePlay;
 
@@ -61,11 +62,15 @@ public class ControlPane {
 	
 	public void backToGameScene() {
 		stage.setScene(gameScene);
+		stage.centerOnScreen();
 	}
 	
 	public void showMarketScene() {
 		marketScene = new Scene(new MarketPane(), Config.SCREEN_HEIGH, Config.SCREEN_HEIGH);
+//		stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Swing in JavaFX");
 		stage.setScene(marketScene);
+		stage.centerOnScreen();
 	}
 	
 

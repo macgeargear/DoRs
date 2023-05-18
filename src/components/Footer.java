@@ -63,7 +63,6 @@ public class Footer extends HBox {
 	private void initRollDiceButton() {
 
 		this.rollDiceButton = new RollDice("Roll");
-		this.rollDiceButton.setBackground(new Background(new BackgroundFill(Color.MISTYROSE,null,null)));
 
 		this.rollDiceButton.setOnAction(e->{
 			GamePlay instance = GamePlay.getInstance();
@@ -71,9 +70,11 @@ public class Footer extends HBox {
 				int number = instance.getRollNumber();
 				HeaderGame gameHeader = ControlPane.getInstance().getGameHeader();
 				gameHeader.updateDiceNumber();
+				this.setRollDiceButton(number);
 			}
 			
 		});
+
 
 	}
 	
@@ -95,4 +96,17 @@ public class Footer extends HBox {
 		this.showCardButton = new FooterButton("Show Card");
 		this.endTurnButton.setBackground(new Background(new BackgroundFill(Color.BLANCHEDALMOND, new CornerRadii(12), null)));
 	}
+
+
+	public Button getRollDiceButton() {
+		return rollDiceButton;
+	}
+
+
+	public void setRollDiceButton(int number) {
+		this.rollDiceButton.setText(String.valueOf(number));
+	}
+	
+	
+	
 }
