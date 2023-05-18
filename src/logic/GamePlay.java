@@ -148,12 +148,20 @@ public class GamePlay {
 	public void draw() {}
 	
 	public boolean goToNextPlayer() {
-		if(!isRoll) return false;
-		isRoll = false;
-		currentPlayer++;
-		if(currentPlayer == 4) {
+		if(!isRoll && currentRound > 0) return false;
+		if(currentRound > 0) isRoll = false;
+		if(currentRound != -1) currentPlayer++;
+		else currentPlayer--;
+		if(currentPlayer == 4 && currentRound != -2) {
 			currentPlayer = 0;
 			currentRound++;
+		}else if(currentRound == -2 && currentPlayer == 4) {
+			currentRound++;
+			currentPlayer--;
+		}else if(currentPlayer == -1 && currentRound == -1) {
+			currentPlayer++;
+			currentRound = 1;
+			isRoll = false;
 		}
 		return true;
 	}

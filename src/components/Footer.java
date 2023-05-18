@@ -16,8 +16,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.*;
 import logic.GamePlay;
+import logic.Player;
 import pane.ControlPane;
 import pane.popup.CardPopup;
+import utils.Utilities;
 
 public class Footer extends HBox {
 	private Button buyCardButton;
@@ -49,6 +51,8 @@ public class Footer extends HBox {
 		HBox.setMargin(this.marketButton, new Insets(8));
 		
 		this.getChildren().addAll(showCardButton, marketButton, buyCardButton, rollDiceButton, buyEdgeButton, buyNodeButton, endTurnButton);
+		
+		ControlPane.getInstance().setFooter(this);
 	}
 	
 	
@@ -67,16 +71,16 @@ public class Footer extends HBox {
 	private void initRollDiceButton() {
 
 		this.rollDiceButton = new RollDice("Roll");
-
+		this.rollDiceButton.setBackground(new Background(new BackgroundFill(Color.MISTYROSE,null,null)));
+		this.rollDiceButton.setDisable(true);
 		this.rollDiceButton.setOnAction(e->{
 			GamePlay instance = GamePlay.getInstance();
 			if(instance.rollDice()) {
-				int number = instance.getRollNumber();
 				HeaderGame gameHeader = ControlPane.getInstance().getGameHeader();
 				gameHeader.updateDiceNumber();
 				this.setRollDiceButton(number);
+				rollDiceButton.setDisable(true);
 			}
-			
 		});
 
 
@@ -84,16 +88,61 @@ public class Footer extends HBox {
 	
 	private void initBuyNodeButton() {
 		this.buyNodeButton = new FooterButton("Buy Node");
+		this.buyNodeButton.setDisable(true);
+		
+		this.buyNodeButton.setOnAction(e->{
+			ControlPane paneInstance = ControlPane.getInstance();
+			paneInstance.getSelectNode().getNode().upgrade();
+			paneInstance.getSelectNode().setupSyle();
+			this.buyNodeButton.setDisable(true);
+			if(Utilities.canEndTurn()) {
+				this.endTurnButton.setDisable(false);
+			}
+		});
 	}
 	
 	private void initBuyEdgeButton() {
 		this.buyEdgeButton = new FooterButton("Buy Edge");
+		this.buyEdgeButton.setDisable(true);
+		
+		this.buyEdgeButton.setOnAction(e->{
+			ControlPane paneInstance = ControlPane.getInstance();
+			paneInstance.getSelectEdge().getEdge().upgrade();
+			paneInstance.getSelectEdge().setupSyle();
+			this.buyEdgeButton.setDisable(true);
+			if(Utilities.canEndTurn()) {
+				this.endTurnButton.setDisable(false);
+			}
+		});
 	}
 	
 	
 	private void initEndTurnButton() {
 		this.endTurnButton = new FooterButton("End turn");
 		this.endTurnButton.setBackground(new Background(new BackgroundFill(Color.INDIANRED, new CornerRadii(12), null)));
+		this.endTurnButton.setDisable(true);
+		
+		this.endTurnButton.setOnAction(e->{
+			GamePlay gameInstance = GamePlay.getInstance();
+			ControlPane paneInstance = ControlPane.getInstance();
+			Player prevPlayer = Utilities.getCurrentPlayer();
+			if(gameInstance.goToNextPlayer()) {
+				Player currentPlayer = Utilities.getCurrentPlayer();
+				for(PlayerContainer container: paneInstance.getAllPlayerContainers()) {
+					if(container.getP().equals(prevPlayer) || container.getP().equals(currentPlayer)) {
+						if(!prevPlayer.equals(currentPlayer)) {
+							container.toggleColorNameContainer();							
+						}
+					}
+				}
+			}
+//			update round
+			paneInstance.getGameHeader().updateRoundCount();
+			if(gameInstance.getCurrentRound() > 0) {
+				this.rollDiceButton.setDisable(false);
+			}
+			this.endTurnButton.setDisable(true);
+		});
 	}
 	
 	private void initShowCardButton() {
@@ -124,5 +173,26 @@ public class Footer extends HBox {
 	}
 	
 	
+	
+	
+	public void setBuyNodeDisable(boolean isDisable) {
+		this.buyNodeButton.setDisable(isDisable);
+	}
+	
+	public void setBuyEdgeDisable(boolean isDisable) {
+		this.buyEdgeButton.setDisable(isDisable);
+	}
+
+	public Button getBuyCardButton() {
+		return buyCardButton;
+	}
+
+	public Button getBuyEdgeButton() {
+		return buyEdgeButton;
+	}
+
+	public Button getBuyNodeButton() {
+		return buyNodeButton;
+	}
 	
 }

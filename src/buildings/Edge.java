@@ -1,5 +1,6 @@
 package buildings;
 
+import utils.Utilities;
 import utils.getTotalOwners;
 import logic.GamePlay;
 import logic.Player;
@@ -23,11 +24,13 @@ public class Edge extends Building {
 	}
 
 	public void upgrade() {
-		if (this.getType().equals(BuildingType.EMPTYROAD)) {
+		Player currentPlayer = Utilities.getCurrentPlayer();
+		
+		if(this.getOwner() == null) {
 			this.setType(BuildingType.ROAD);
-			GamePlay gameInstance = GamePlay.getInstance();
-			this.setOwner(gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer()));
-		} else if (this.getType().equals(BuildingType.ROAD)) {
+			this.setOwner(currentPlayer);
+			currentPlayer.increaseEdgeCount(1);
+		}else {
 			this.setType(BuildingType.SUPERROAD);
 		}
 	}

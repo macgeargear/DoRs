@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import logic.GamePlay;
 import logic.Player;
 import type.BuildingType;
+import utils.Utilities;
 import utils.getTotalOwners;
 
 public class Node extends Building {
@@ -38,20 +39,17 @@ public class Node extends Building {
 	}
 
 	public void upgrade() {
-		if (!this.getType().equals(BuildingType.CITY)) {
-			if (this.getType().equals(BuildingType.EMPTYHOUSE)) {
-				int owners = utils.getTotalOwners.fromSideEdges(this.getSideEdges());
-				if (owners == 1) {
-					this.setType(BuildingType.HOUSE);
-				}
-				if (this.getType().equals(BuildingType.HOUSE)) {
-					this.setType(BuildingType.TOWER);
-				}
-				if (this.getType().equals(BuildingType.TOWER)) {
-					this.setType(BuildingType.CITY);
-				}
-
-
+		Player currentPlayer = Utilities.getCurrentPlayer();
+		
+		if(this.getOwner() == null) {
+			this.setType(BuildingType.HOUSE);
+			this.setOwner(currentPlayer);
+			currentPlayer.increaseNodeCount(1);
+		}else {
+			if(this.getType() == BuildingType.HOUSE) {
+				this.setType(BuildingType.TOWER);
+			}else {
+				this.setType(BuildingType.CITY);
 			}
 		}
 	}

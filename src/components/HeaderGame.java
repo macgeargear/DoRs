@@ -60,7 +60,7 @@ public class HeaderGame extends HBox {
 		roundDisplay.setAlignment(Pos.CENTER);
 		Text roundText = new Text("Round : ");
 		roundText.setFont(new Font(16));
-		roundAmount = new Text(Integer.toString(roundCount));
+		roundAmount = new Text("Prepare 1");
 		roundAmount.setFont(new Font(16));
 		roundDisplay.getChildren().addAll(roundText, roundAmount);
 		setHgrow(roundDisplay, Priority.ALWAYS);
@@ -86,9 +86,15 @@ public class HeaderGame extends HBox {
 		getChildren().add(exitButton);
 	}
 	
-	public void increaseRoundCount() {
+	public void updateRoundCount() {
 		roundCount = GamePlay.getInstance().getCurrentRound();
-		roundAmount.setText(Integer.toString(roundCount));
+		if(roundCount == -2) {
+			roundAmount.setText("Prepare 1");;
+		}else if(roundCount == -1) {
+			roundAmount.setText("Prepare 2");
+		}else {
+			roundAmount.setText(Integer.toString(roundCount));			
+		}
 	}
 	
 	public void updateDiceNumber() {
