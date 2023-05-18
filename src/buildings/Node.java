@@ -41,16 +41,18 @@ public class Node extends Building {
 
 	public void upgrade() {
 		Player currentPlayer = Utilities.getCurrentPlayer();
-
+		
+		if(GamePlay.getInstance().getCurrentRound() > 0) {			
+			currentPlayer.decreaseMaterial(MaterialType.ROCK, 1);
+			currentPlayer.decreaseMaterial(MaterialType.WOOD, 1);
+			currentPlayer.decreaseMaterial(MaterialType.WATER, 1);
+		}
 		if (this.getOwner() == null) {
 			this.setType(BuildingType.HOUSE);
 			this.setOwner(currentPlayer);
 			currentPlayer.increaseNodeCount(1);
 		} else {
 			if (this.getType() == BuildingType.HOUSE) {
-				currentPlayer.decreaseMaterial(MaterialType.ROCK, 1);
-				currentPlayer.decreaseMaterial(MaterialType.WOOD, 1);
-				currentPlayer.decreaseMaterial(MaterialType.WATER, 1);
 				this.setType(BuildingType.TOWER);
 			} else {
 				this.setType(BuildingType.CITY);
@@ -77,11 +79,15 @@ public class Node extends Building {
 	@Override
 	public boolean canUpgrade() {
 		Player currentPlayer = Utilities.getCurrentPlayer();
-		if (this.getOwner() == null && Utilities.haveSideEdge(this)) {
-			if (currentPlayer.getMaterialPack(MaterialType.ROCK).getAmount() >= 1
-					&& currentPlayer.getMaterialPack(MaterialType.WOOD).getAmount() >= 1
-					&& currentPlayer.getMaterialPack(MaterialType.WATER).getAmount() >= 1) {
+		if (currentPlayer.getMaterialPack(MaterialType.ROCK).getAmount() >= 1
+				&& currentPlayer.getMaterialPack(MaterialType.WOOD).getAmount() >= 1
+				&& currentPlayer.getMaterialPack(MaterialType.WATER).getAmount() >= 1) {
+			if (this.getOwner() == null && Utilities.haveSideEdge(this)) {
 				return true;
+			}else if(this.getOwner() != null && this.getOwner().equals(currentPlayer)) {
+				if(this.getType() != BuildingType.CITY) {
+					return true;
+				}
 			}
 		}
 
