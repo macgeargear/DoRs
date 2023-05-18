@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.GamePlay;
@@ -22,25 +23,25 @@ public class MaterialExchange extends HBox {
 	private MaterialCard targetCard;
 	
 	
-	public MaterialExchange(String source, int amount, Color sourceColor, String target, Color targetColor, int idx) {
+	public MaterialExchange(String source, int amount, Paint sourceColor, String target, Paint targetColor, int idx) {
 		this.initAmountText(amount);
 		this.initExchangeButton();
 		this.idx = idx;
 		this.sourceCard = new MaterialCard(sourceColor, source);
 		this.targetCard = new MaterialCard(targetColor, target);
 
-		HBox.setMargin(sourceCard, new Insets(8));
-		HBox.setMargin(targetCard, new Insets(8));
-		HBox.setMargin(this.amount, new Insets(8));
-		HBox.setMargin(exchangeButton, new Insets(8));
+		HBox.setMargin(sourceCard, new Insets(6));
+		HBox.setMargin(targetCard, new Insets(6));
+		HBox.setMargin(this.amount, new Insets(6));
+		HBox.setMargin(exchangeButton, new Insets(6));
 
-		this.setAlignment(Pos.CENTER);
+		this.setAlignment(Pos.CENTER_LEFT);
 		this.getChildren().addAll(sourceCard, this.amount, targetCard, exchangeButton);
 	}
 	
 	public void initExchangeButton() {
-		this.exchangeButton = new Button("Exchange");
-		this.exchangeButton.setFont(Font.font(18));
+		this.exchangeButton = new CustomButton("Exchange");
+		this.exchangeButton.setFont(Font.font(12));
 		
 		this.exchangeButton.setOnAction(e->{
 			Marketplace marketplace = GamePlay.getInstance().getMarketplace();
@@ -51,7 +52,7 @@ public class MaterialExchange extends HBox {
 	
 	public void initAmountText(int amount) {
 		this.amount = new Text("X "+String.valueOf(amount));
-		this.amount.setFont(Font.font(40));
+		this.amount.setFont(Font.font(32));
 	}
 	
 	public void updateExchangeStatus() {
