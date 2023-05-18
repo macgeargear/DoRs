@@ -153,7 +153,7 @@ public class Utilities {
 		ControlPane.getInstance().getCardPopup().getShowMaterialCard().updateLabel();
 	}
 	
-	public static ArrayList<Material> getAllMaterialType() {
+	public static ArrayList<Material> getAllMaterials() {
 		Material wood = new Material(MaterialType.WOOD);
 		Material water = new Material(MaterialType.WATER);
 		Material rock = new Material(MaterialType.ROCK);

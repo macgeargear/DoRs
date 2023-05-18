@@ -51,11 +51,11 @@ public class HeaderGame extends HBox {
 		
 		addAllBtn.setOnAction(e->{
 			Player currentPlayer = Utilities.getCurrentPlayer();
-			currentPlayer.addMaterial(MaterialType.WOOD, 1);
-			currentPlayer.addMaterial(MaterialType.WATER, 1);
-			currentPlayer.addMaterial(MaterialType.ROCK, 1);
-			currentPlayer.addMaterial(MaterialType.SAND, 1);
-			currentPlayer.addMaterial(MaterialType.GUNPOWDER, 1);
+			currentPlayer.increaseMaterial(MaterialType.WOOD, 1);
+			currentPlayer.increaseMaterial(MaterialType.WATER, 1);
+			currentPlayer.increaseMaterial(MaterialType.ROCK, 1);
+			currentPlayer.increaseMaterial(MaterialType.SAND, 1);
+			currentPlayer.increaseMaterial(MaterialType.GUNPOWDER, 1);
 			Utilities.updateCard();
 		});
 		
