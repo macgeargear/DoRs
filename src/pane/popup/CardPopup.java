@@ -120,6 +120,7 @@ public class CardPopup extends Popup {
 	public void setShowMaterialCard(MaterialCardPopup showMaterialCard) {
 		this.showMaterialCard = showMaterialCard;
 	}
-
+	
+	
 
 }

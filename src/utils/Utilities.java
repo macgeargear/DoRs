@@ -159,9 +159,8 @@ public class Utilities {
 			container.updateCount();
 		}
 		paneInstance.getCardPopup().getShowMaterialCard().updateLabel();
-
+		paneInstance.getBuyCardPopup().updateAmount();
 		paneInstance.getMarketPopup().updateExchange();
-		paneInstance.getEffectCardPopup().updateAmount();
 		
 	}
 

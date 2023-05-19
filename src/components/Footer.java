@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import logic.GamePlay;
 import logic.Player;
 import pane.ControlPane;
+import pane.popup.BuyCardPopup;
 import pane.popup.CardPopup;
 import pane.popup.MarketPopup;
 import utils.Utilities;
@@ -30,6 +31,7 @@ public class Footer extends HBox {
 	private CardPopup cardPopup;
 
 	private MarketPopup marketPopup;
+	private BuyCardPopup buyCardPopup;
 
 	public Footer() {
 		this.setPrefHeight(Config.Footer_HEIGHT);
@@ -57,12 +59,25 @@ public class Footer extends HBox {
 
 	private void initBuyCardButton() {
 		this.buyCardButton = new FooterButton("Buy Card");
+		buyCardPopup = new BuyCardPopup();
+		
+		this.buyCardButton.setOnAction(e -> {
+			if (buyCardPopup == null) {
+				buyCardPopup.show(ControlPane.getInstance().getStage());
+			} else {
+				if (buyCardPopup.isShowing()) {
+					buyCardPopup.hide();
+				} else {
+					buyCardPopup.show(ControlPane.getInstance().getStage());
+				}
+			}
+		});
 	}
 
 	private void initMarketButton() {
 		this.marketButton = new FooterButton("Market");
-
 		this.marketPopup = new MarketPopup();
+
 		this.marketButton.setOnAction(e -> {
 			if (this.marketPopup == null) {
 				this.marketPopup.show(ControlPane.getInstance().getStage());
@@ -73,7 +88,6 @@ public class Footer extends HBox {
 					this.marketPopup.show(ControlPane.getInstance().getStage());
 				}
 			}
-
 		});
 
 	}
@@ -184,7 +198,6 @@ public class Footer extends HBox {
 				.setBackground(new Background(new BackgroundFill(Color.BLANCHEDALMOND, new CornerRadii(12), null)));
 		this.showCardButton.setOnAction(e -> {
 			if (cardPopup == null) {
-				cardPopup = new CardPopup();
 				cardPopup.show(ControlPane.getInstance().getStage());
 			} else {
 				if (cardPopup.isShowing()) {

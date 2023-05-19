@@ -16,7 +16,7 @@ import material.MaterialPack;
 import type.MaterialType;
 import utils.Utilities;
 
-public class BuyCardCardContainer extends BorderPane {
+public class BuyCardContainer extends BorderPane {
 	private MaterialType type;
 	private int amount;
 	private int number;
@@ -30,7 +30,7 @@ public class BuyCardCardContainer extends BorderPane {
 	
 	private VBox titleContainer;
 
-	public BuyCardCardContainer(MaterialType type, int amount) {
+	public BuyCardContainer(MaterialType type, int amount) {
 		this.type = type;
 		this.amount = amount;
 		this.setPrefHeight(100);
@@ -44,6 +44,7 @@ public class BuyCardCardContainer extends BorderPane {
 		
 		this.setTop(titleContainer);
 		this.setBottom(footer);
+		this.updateAmount();
 //		this.getChildren().addAll(this.titleText, this.amountText, this.footer);
 	}
 	
@@ -67,8 +68,9 @@ public class BuyCardCardContainer extends BorderPane {
 		this.decreaseButton.setOnAction(e -> {
 //			Utilities.updateCard();
 			Utilities.getCurrentPlayer().increaseMaterial(type, 1);
-			this.numberText.setText(""+this.number--);
-			this.updateAmount();
+			number--;
+			this.numberText.setText(""+this.number);
+			Utilities.updateCard();
 		});
 		this.increaseButton = new FooterButton("+");
 		this.increaseButton.setFont(Font.font(12));
@@ -76,8 +78,10 @@ public class BuyCardCardContainer extends BorderPane {
 		this.increaseButton.setOnAction(e -> {
 //			Utilities.updateCard();
 			Utilities.getCurrentPlayer().decreaseMaterial(type,1);
-			this.numberText.setText(""+this.number++);
-			this.updateAmount();
+			number++;
+			this.numberText.setText(""+this.number);
+			Utilities.updateCard();
+			
 		});
 		
 		this.footer.setAlignment(Pos.BOTTOM_CENTER);
@@ -85,11 +89,39 @@ public class BuyCardCardContainer extends BorderPane {
 	}
 	
 	
-	private void updateAmount() {
-		int amount = Utilities.getCurrentPlayer().getMaterialPack(this.getType()).getAmount();
+	public void updateAmount() {
+		amount = Utilities.getCurrentPlayer().getMaterialPack(this.getType()).getAmount();
 		this.amountText.setText(""+amount);
+		if(amount == 0) {
+			this.increaseButton.setDisable(true);
+		}else {
+			this.increaseButton.setDisable(false);
+		}
+		
+		if(number == 0) {
+			this.decreaseButton.setDisable(true);
+		}else {
+			this.decreaseButton.setDisable(false);
+		}
 	}
-
+	
+	public void setDisableIncrease() {
+		this.increaseButton.setDisable(true);
+	}
+	
+	public void resetValue() {
+		while(number > 0) {
+			Utilities.getCurrentPlayer().increaseMaterial(type, 1);
+			number--;
+		}
+		this.numberText.setText("0");
+	}
+	
+	public void confirm() {
+		this.number = 0;
+		this.numberText.setText("0");
+	}
+	
 	public MaterialType getType() {
 		return type;
 	}
