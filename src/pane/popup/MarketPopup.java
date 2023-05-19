@@ -62,45 +62,55 @@ public class MarketPopup extends Popup {
 	private void initExchanges() {
 		GamePlay gameInstance = GamePlay.getInstance();
 		Marketplace marketplace = gameInstance.getMarketplace();
-		ArrayList<ArrayList<Material>> tradeList = marketplace.getTradeList();
-		ArrayList<Integer> exchangeRate = marketplace.getExchangeRate();
-		int idx = 0;
-
-		for (ArrayList<Material> trade : tradeList) {
-			Paint firstColor = Color.BLACK, secondColor = Color.BLACK;
-			Material firstMaterial = trade.get(0), secondMaterial = trade.get(1);
-			if (firstMaterial.getType() == MaterialType.WOOD) {
-				firstColor = Config.WoodColor;
-			} else if (firstMaterial.getType() == MaterialType.WATER) {
-				firstColor = Config.WaterColor;
-			} else if (firstMaterial.getType() == MaterialType.ROCK) {
-				firstColor = Config.RockColor;
-			} else if (firstMaterial.getType() == MaterialType.SAND) {
-				firstColor = Config.SandColor;
-			} else if (firstMaterial.getType() == MaterialType.GUNPOWDER) {
-				firstColor = Config.GunPowderColor;
-			}
-
-			if (secondMaterial.getType() == MaterialType.WOOD) {
-				secondColor = Config.WoodColor;
-			} else if (secondMaterial.getType() == MaterialType.WATER) {
-				secondColor = Config.WaterColor;
-			} else if (secondMaterial.getType() == MaterialType.ROCK) {
-				secondColor = Config.RockColor;
-			} else if (secondMaterial.getType() == MaterialType.SAND) {
-				secondColor = Config.SandColor;
-			} else if (secondMaterial.getType() == MaterialType.GUNPOWDER) {
-				secondColor = Config.GunPowderColor;
-			}
-			allExchanges.add(new MaterialExchange("" + firstMaterial.getType(), exchangeRate.get(idx), firstColor,
-					"" + secondMaterial.getType(), secondColor, idx));
-			idx++;
-		}
+//		ArrayList<ArrayList<Material>> tradeList = marketplace.getTradeList();
+//		ArrayList<Integer> exchangeRate = marketplace.getExchangeRate();
+//		int idx = 0;
+//
+//		for (ArrayList<Material> trade : tradeList) {
+//			Paint firstColor = Color.BLACK, secondColor = Color.BLACK;
+//			Material firstMaterial = trade.get(0), secondMaterial = trade.get(1);
+//			if (firstMaterial.getType() == MaterialType.WOOD) {
+//				firstColor = Config.WoodColor;
+//			} else if (firstMaterial.getType() == MaterialType.WATER) {
+//				firstColor = Config.WaterColor;
+//			} else if (firstMaterial.getType() == MaterialType.ROCK) {
+//				firstColor = Config.RockColor;
+//			} else if (firstMaterial.getType() == MaterialType.SAND) {
+//				firstColor = Config.SandColor;
+//			} else if (firstMaterial.getType() == MaterialType.GUNPOWDER) {
+//				firstColor = Config.GunPowderColor;
+//			}
+//
+//			if (secondMaterial.getType() == MaterialType.WOOD) {
+//				secondColor = Config.WoodColor;
+//			} else if (secondMaterial.getType() == MaterialType.WATER) {
+//				secondColor = Config.WaterColor;
+//			} else if (secondMaterial.getType() == MaterialType.ROCK) {
+//				secondColor = Config.RockColor;
+//			} else if (secondMaterial.getType() == MaterialType.SAND) {
+//				secondColor = Config.SandColor;
+//			} else if (secondMaterial.getType() == MaterialType.GUNPOWDER) {
+//				secondColor = Config.GunPowderColor;
+//			}
+//			allExchanges.add(new MaterialExchange("" + firstMaterial.getType(), exchangeRate.get(idx), firstColor,
+//					"" + secondMaterial.getType(), secondColor, idx));
+//			idx++;
+//		}
+//
+//		this.exchangeContainer = new VBox();
+//		for (MaterialExchange exchange : allExchanges) {
+//			exchangeContainer.getChildren().add(exchange);
+//		}
 
 		this.exchangeContainer = new VBox();
-		for (MaterialExchange exchange : allExchanges) {
-			exchangeContainer.getChildren().add(exchange);
+		
+		for(int i=0;i<5;++i) {
+			MaterialExchange newExchange = new MaterialExchange(i);
+			allExchanges.add(newExchange);
+			exchangeContainer.getChildren().add(newExchange);
 		}
+		
+		
 	}
 
 	private void initBackButton() {
