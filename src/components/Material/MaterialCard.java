@@ -1,5 +1,6 @@
 package components.Material;
 
+import config.Config;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -14,8 +15,8 @@ public class MaterialCard extends VBox {
 	private Text label;
 	
 	public MaterialCard(MaterialType material) {
-		this.setBackground(new Background(new BackgroundFill(Utilities.getColor(material),new CornerRadii(10),null)));
-		this.setPadding(new Insets(16));
+		this.setBackground(new Background(new BackgroundFill(Utilities.getColor(material),new CornerRadii(Config.BORDER_RADIUS),null)));
+		this.setPadding(new Insets(Config.SMALL_PADDING));
 		
 		this.initLabel(""+material);
 		this.initHover();
@@ -36,11 +37,11 @@ public class MaterialCard extends VBox {
 	
 	private void initLabel(String text) {
 		this.label = new Text(text);
-		this.label.setFont(Font.font(20));
+		this.label.setFont(Font.font(Config.MEDIUM_FONT));
 	}
 
 	public void setMaterial(MaterialType material) {
-		this.setBackground(new Background(new BackgroundFill(Utilities.getColor(material),new CornerRadii(10),null)));
+		this.setBackground(new Background(new BackgroundFill(Utilities.getColor(material),new CornerRadii(Config.BORDER_RADIUS),null)));
 		this.label.setText(""+material);
 	}
 	

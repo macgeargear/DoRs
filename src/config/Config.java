@@ -18,25 +18,52 @@ public class Config {
 	public static String onMouseMoveButtonStyle = "-fx-background-radius: 12px; " + "-fx-background-color: #E3A8A8;";
 	public static String onMouseExitedButtonStyle = "-fx-background-radius: 12px; " + "-fx-background-color: #D9D9D9;";
 	
-	/**
-	 * TODO: 
-	 * 1.Create Player Selected Button
-	 * 2.Create Start Game Button
-	 */
-
 	public static final int HOMEPANE_HEIGHT = 678;
 
 	
-//	Layout
+	/**
+	 * This is Layout Config for any Screen
+	 */
 
+	// Entire Screen
 	public static final int SCREEN_WIDTH = 1200;
 	public static final int SCREEN_HEIGH = 750;
+
+	// EffectCard Popup Width
+	public static final int EFFECTCARD_POPUP_WIDTH = 400;
+	public static final int BUYCARD_POPUP_HEIGHT = 500;
+	public static final int BUYCARD_POPUP_WIDTH = 360;
+	
+	
+	// Size
+	public static final int BUTTON_HEIGHT = 30;
+	public static final int BORDER_RADIUS = 12;
+	
+	public static final int DICE_SIZE = 100;
+
+	public static final int TINY_MARGIN = 8;
+	public static final int SMALL_MARGIN = 12;
+	public static final int MEDIUM_MARGIN = 24;
+	public static final int LARGE_MARGIN = 40;
+	public static final int HOME_MARGIN = 80;
+
+	public static final int SMALL_PADDING = 12;
+	public static final int MEDIUM_PADDING = 40;
+	public static final int LARGE_PADDING = 40;
+	
+	public static final int WELCOME_FONT = 60;
+	public static final int LARGE_FONT = 32;
+	public static final int MEDIUM_FONT = 20;
+	public static final int SMALL_FONT = 12;
+	
+	public static final int CARD_SIZE = 20;
 	
 	// Board
 	public static final int BOARD_WIDTH = 800;
 	public static final int BOARD_HEIGH = 500;
 	public static final int SIDE_BOARD_WIDTH = 200;
 	public static final int SIDE_BOARD_HEIGH = 700;
+	
 	
 	// Map
 	public static final int MAP_WIDTH = 70;

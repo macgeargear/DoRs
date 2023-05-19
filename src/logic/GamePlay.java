@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
-import buildings.Building;
 import buildings.Edge;
 import buildings.Node;
 import card.BombCard;
@@ -17,9 +16,7 @@ import entities.Entity;
 import javafx.util.Pair;
 import material.Map;
 import material.Material;
-import pane.ControlPane;
 import type.BuildingType;
-import type.CardType;
 import type.MaterialType;
 import utils.Utilities;
 
