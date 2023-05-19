@@ -185,7 +185,6 @@ public class Utilities {
 				cnt++;
 			}
 		}
-		System.out.println(cnt);
 		return cnt;
 	}
 	

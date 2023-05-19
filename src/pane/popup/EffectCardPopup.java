@@ -29,8 +29,10 @@ public class EffectCardPopup extends Popup {
 	private Button closeButton;
 	private ArrayList<CardType> allEffects;
 	private ArrayList<Label> allLabels;
+	private ArrayList<Button> allUseEffectButton;
 
 	public EffectCardPopup() {
+		this.allUseEffectButton = new ArrayList<Button>();
 		this.allLabels = new ArrayList<Label>();
 		this.centerOnScreen();
 		this.initContent();
@@ -58,34 +60,37 @@ public class EffectCardPopup extends Popup {
 		this.popupContent.getChildren().addAll(closeButton, messageLabel);
 		for (CardType effect : this.allEffects) {
 			Label newLabel = new Label(" " + effect);
+			Button useEffectButton = new Button("Use");
 			newLabel.setFont(Font.font(20));
-			VBox card = initCard(newLabel, effect);
+			VBox card = initCard(newLabel, effect, useEffectButton);
 			allLabels.add(newLabel);
+			allUseEffectButton.add(useEffectButton);
 			this.popupContent.getChildren().add(card);
 		}
 
 		VBox.setMargin(closeButton, new Insets(24));
 	}
 
-	private VBox initCard(Label amount, CardType type) {
+	private VBox initCard(Label amount, CardType type, Button button) {
 		VBox card = new VBox();
 		
 		card.setBackground(new Background(new BackgroundFill(Color.BEIGE, new CornerRadii(12), null)));
 		card.setAlignment(Pos.CENTER);
 		card.setPrefWidth(60);
 		card.setPrefHeight(60);
-
+		
 		HBox titleCard = new HBox();
 		Label typeLabel = new Label(type.toString());
 
 		VBox.setMargin(card, new Insets(24));
 		VBox.setMargin(titleCard, new Insets(24));
-
+		
+		button.setDisable(true);
 		typeLabel.setAlignment(Pos.CENTER);
 		typeLabel.setFont(Font.font(20));
 
-		titleCard.getChildren().addAll(typeLabel, amount);
-
+		titleCard.getChildren().addAll(typeLabel, amount, button);
+			
 		card.getChildren().addAll(titleCard);
 		return card;
 	}
