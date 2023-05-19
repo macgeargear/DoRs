@@ -1,7 +1,5 @@
 package components;
 
-import components.Button.CustomButton;
-
 import components.Button.FooterButton;
 import components.Button.RollDice;
 import config.Config;
@@ -64,12 +62,8 @@ public class Footer extends HBox {
 
 	private void initMarketButton() {
 		this.marketButton = new FooterButton("Market");
-//		this.marketButton.setFont(Font.font(16));
-//		this.marketButton.setOnAction(e -> {
-//			ControlPane.getInstance().showMarketScene();
-//		});
+		this.marketPopup = new MarketPopup();
 		this.marketButton.setOnAction(e -> {
-			this.marketPopup = new MarketPopup();
 			if (this.marketPopup == null) {
 				this.marketPopup.show(ControlPane.getInstance().getStage());
 			} else {
@@ -153,8 +147,6 @@ public class Footer extends HBox {
 			ControlPane paneInstance = ControlPane.getInstance();
 			Player prevPlayer = Utilities.getCurrentPlayer();
 
-			int prevRound = gameInstance.getCurrentRound();
-
 			if (gameInstance.goToNextPlayer()) {
 				Player currentPlayer = Utilities.getCurrentPlayer();
 				for (PlayerContainer container : paneInstance.getAllPlayerContainers()) {
@@ -174,10 +166,8 @@ public class Footer extends HBox {
 			this.endTurnButton.setDisable(true);
 			paneInstance.resetSelect();
 
+			gameInstance.getMarketplace().reMarket();
 			Utilities.updateCard();
-			if (gameInstance.getCurrentRound() != prevRound && gameInstance.getMarketplace().getAmount() == 0) {
-				gameInstance.getMarketplace().reMarket();
-			}
 			if (gameInstance.getCurrentRound() == 5) {
 				GameResult gameResult = new GameResult();
 				gameResult.show(paneInstance.getStage());

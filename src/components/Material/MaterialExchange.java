@@ -5,13 +5,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.GamePlay;
 import logic.Marketplace;
-import pane.ControlPane;
+import type.MaterialType;
 import utils.Utilities;
 
 public class MaterialExchange extends HBox {
@@ -23,12 +21,18 @@ public class MaterialExchange extends HBox {
 	private MaterialCard targetCard;
 	
 	
-	public MaterialExchange(String source, int amount, Paint sourceColor, String target, Paint targetColor, int idx) {
-		this.initAmountText(amount);
-		this.initExchangeButton();
+	public MaterialExchange(int idx) {
+		Marketplace marketplace = GamePlay.getInstance().getMarketplace();
 		this.idx = idx;
-		this.sourceCard = new MaterialCard(sourceColor, source);
-		this.targetCard = new MaterialCard(targetColor, target);
+		
+		this.initAmountText(marketplace.getExchangeRate().get(idx));
+		this.initExchangeButton();
+		
+		MaterialType firstMaterial = marketplace.getTradeListByIdx(idx).get(0).getType();
+		MaterialType secondMaterial = marketplace.getTradeListByIdx(idx).get(1).getType();
+		
+		this.sourceCard = new MaterialCard(firstMaterial);
+		this.targetCard = new MaterialCard(secondMaterial);
 
 		HBox.setMargin(sourceCard, new Insets(6));
 		HBox.setMargin(targetCard, new Insets(6));
@@ -56,7 +60,14 @@ public class MaterialExchange extends HBox {
 	}
 	
 	public void updateExchangeStatus() {
-		GamePlay gameInstance = GamePlay.getInstance();
-		this.exchangeButton.setDisable(!gameInstance.getMarketplace().canTrade(idx));
+		Marketplace marketplace = GamePlay.getInstance().getMarketplace();
+		MaterialType firstMaterial = marketplace.getTradeListByIdx(idx).get(0).getType();
+		MaterialType secondMaterial = marketplace.getTradeListByIdx(idx).get(1).getType();
+		
+		this.sourceCard.setMaterial(firstMaterial);
+		this.targetCard.setMaterial(secondMaterial);
+		this.amount.setText("X "+marketplace.getExchangeRate().get(idx));
+		this.exchangeButton.setDisable(!marketplace.canTrade(idx));
+		
 	}
 }

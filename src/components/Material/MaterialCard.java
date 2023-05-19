@@ -5,22 +5,20 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import type.MaterialType;
+import utils.Utilities;
 
 public class MaterialCard extends VBox {
 	private Text label;
-
-	public MaterialCard(Paint color, String text) {
-		
-		this.setBackground(new Background(new BackgroundFill(color,new CornerRadii(10),null)));
-//		this.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 8, 0, 0, 0);");
+	
+	public MaterialCard(MaterialType material) {
+		this.setBackground(new Background(new BackgroundFill(Utilities.getColor(material),new CornerRadii(10),null)));
 		this.setPadding(new Insets(16));
 		
-		this.initLabel(text);
-//		this.initHover();
+		this.initLabel(""+material);
+		this.initHover();
 		this.getChildren().add(label);
 	}
 	
@@ -40,5 +38,11 @@ public class MaterialCard extends VBox {
 		this.label = new Text(text);
 		this.label.setFont(Font.font(20));
 	}
+
+	public void setMaterial(MaterialType material) {
+		this.setBackground(new Background(new BackgroundFill(Utilities.getColor(material),new CornerRadii(10),null)));
+		this.label.setText(""+material);
+	}
+	
 	
 }
