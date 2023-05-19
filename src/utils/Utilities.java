@@ -153,6 +153,7 @@ public class Utilities {
 		}
 		paneInstance.getCardPopup().getShowMaterialCard().updateLabel();
 		paneInstance.getMarketPane().updateExchange();
+		paneInstance.getMarketPopup().updateExchange();
 	}
 	
 	public static ArrayList<Material> getAllMaterials() {

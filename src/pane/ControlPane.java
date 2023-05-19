@@ -13,6 +13,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import logic.GamePlay;
 import pane.popup.CardPopup;
+import pane.popup.MarketPopup;
 
 public class ControlPane {
 	
@@ -26,7 +27,7 @@ public class ControlPane {
 	private Scene homeScene;
 	private Scene marketScene;
 	private CardPopup cardPopup;
-	
+	private MarketPopup marketPopup;
 	private GamePane gamePane;
 	private HomePane homePane;
 	private MarketPane marketPane;
@@ -173,6 +174,14 @@ public class ControlPane {
 
 	public void setMarketPane(MarketPane marketPane) {
 		this.marketPane = marketPane;
+	}
+
+	public MarketPopup getMarketPopup() {
+		return marketPopup;
+	}
+
+	public void setMarketPopup(MarketPopup marketPopup) {
+		this.marketPopup = marketPopup;
 	}
 	
 	
