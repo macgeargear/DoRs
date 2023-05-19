@@ -9,13 +9,17 @@ import java.util.Random;
 import buildings.Building;
 import buildings.Edge;
 import buildings.Node;
+import card.BombCard;
 import card.EffectCard;
+import card.NuclearCard;
+import card.StrongerCard;
 import entities.Entity;
 import javafx.util.Pair;
 import material.Map;
 import material.Material;
 import pane.ControlPane;
 import type.BuildingType;
+import type.CardType;
 import type.MaterialType;
 import utils.Utilities;
 
@@ -151,6 +155,16 @@ public class GamePlay {
 	}
 
 	public void draw() {
+		Random random = new Random();
+		int target = random.nextInt(3);
+		Player currentPlayer = Utilities.getCurrentPlayer();
+		if(target == 0) {
+			currentPlayer.addEffect(new BombCard());
+		}else if(target == 1) {
+			currentPlayer.addEffect(new NuclearCard());
+		}else {
+			currentPlayer.addEffect(new StrongerCard());
+		}
 	}
 
 	public boolean goToNextPlayer() {

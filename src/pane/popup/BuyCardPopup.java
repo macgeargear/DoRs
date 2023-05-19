@@ -18,6 +18,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
+import logic.GamePlay;
 import material.Material;
 import material.MaterialPack;
 import pane.ControlPane;
@@ -64,6 +65,8 @@ public class BuyCardPopup extends Popup {
 			this.confirm();
 			Utilities.updateCard();
 			confirm.setDisable(true);
+			
+			GamePlay.getInstance().draw();
 		});
 		
 		footer.getChildren().addAll(reset, confirm);
