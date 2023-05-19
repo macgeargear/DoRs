@@ -12,4 +12,13 @@ public abstract class EffectCard {
 	
 	public abstract boolean canPlay(Place place);
 	public abstract void play(Place place);
+
+	public CardType getType() {
+		return type;
+	}
+
+	public void setType(CardType type) {
+		this.type = type;
+	}
+	
 }
