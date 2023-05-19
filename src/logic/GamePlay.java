@@ -230,6 +230,7 @@ public class GamePlay {
 		ArrayList<Pair<String, Integer>> result = new ArrayList<Pair<String, Integer>>();
 		ArrayList<BuildingType> allBuildingType = new ArrayList<BuildingType>();
 		allBuildingType.addAll(Arrays.asList(BuildingType.HOUSE, BuildingType.TOWER, BuildingType.CITY, BuildingType.ROAD, BuildingType.SUPERROAD));
+		Player longestRoadPlayer = Utilities.getLongestRoadPlayer();
 		
 		for (Player player : allPlayers) {
 			int score = 0;
@@ -244,7 +245,10 @@ public class GamePlay {
 				}
 				System.out.println(typeCount);
 			}
-			System.out.println(score);
+			if(longestRoadPlayer != null && longestRoadPlayer.equals(player)) {
+				score += 7;
+			}
+//			System.out.println(score);
 			result.add(new Pair<String, Integer>(player.getName(), -score));
 		}
 		

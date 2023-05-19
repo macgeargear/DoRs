@@ -35,9 +35,9 @@ public class StrongerCard extends EffectCard {
 	public void play(Place place) {
 		GamePlay gameInstance = GamePlay.getInstance();
 		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
-		currentPlayer.addMaterial(new Material(MaterialType.ROCK));
-		currentPlayer.addMaterial(new Material(MaterialType.SAND));
-		currentPlayer.addMaterial(new Material(MaterialType.WATER));
+		currentPlayer.increaseMaterial(MaterialType.ROCK, 1);
+		currentPlayer.increaseMaterial(MaterialType.SAND, 1);
+		currentPlayer.increaseMaterial(MaterialType.WATER, 1);
 		((Building)place).upgrade();
 	}
 
