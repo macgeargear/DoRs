@@ -26,7 +26,7 @@ public class PlayerInfo extends BorderPane {
 		setPrefSize(Config.SIDE_BOARD_WIDTH, Config.SIDE_BOARD_HEIGH);
 		setBackground(new Background(new BackgroundFill(Config.BackGroundColor, null, null)));
 //		setFillWidth(true);
-		setPadding(new Insets(20));
+		setPadding(new Insets(Config.SMALL_PADDING));
 		initTop();
 		initBottom();
 	}

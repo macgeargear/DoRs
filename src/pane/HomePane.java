@@ -45,7 +45,7 @@ public class HomePane extends VBox {
 
 		// setup text
 		Text welcomeText = new Text("DoR project");
-		welcomeText.setFont(new Font(60));
+		welcomeText.setFont(new Font(Config.WELCOME_FONT));
 
 		this.initPlayButton();
 		this.initStartButton();

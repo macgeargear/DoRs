@@ -11,14 +11,14 @@ import javafx.scene.text.Font;
 
 public class RollDice extends Button {
 
-	private Background bg = new Background(new BackgroundFill(Config.DiceColor, new CornerRadii(16), null));
-	private Background bg_hover = new Background(new BackgroundFill(Color.DARKRED, new CornerRadii(16), null));
+	private Background bg = new Background(new BackgroundFill(Config.DiceColor, new CornerRadii(Config.BORDER_RADIUS), null));
+	private Background bg_hover = new Background(new BackgroundFill(Color.DARKRED, new CornerRadii(Config.BORDER_RADIUS), null));
 
 	public RollDice(String text) {
 		super(text);
-		this.setPadding(new Insets(30));
-		this.setMinHeight(100);
-		this.setMinWidth(100);
+		this.setPadding(new Insets(Config.MEDIUM_PADDING));
+		this.setMinHeight(Config.DICE_SIZE);
+		this.setMinWidth(Config.DICE_SIZE);
 		this.setFont(Font.font(30));
 		this.setBackground(bg);
 		
