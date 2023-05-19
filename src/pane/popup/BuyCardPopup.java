@@ -1,7 +1,7 @@
 package pane.popup;
 
 import java.util.ArrayList;
-import components.BuyCardCardContainer;
+import components.BuyCardContainer;
 
 import components.Button.ExitButton;
 import javafx.geometry.Insets;
@@ -28,14 +28,16 @@ public class BuyCardPopup extends Popup {
 	private Button closeButton;
 	private ArrayList<MaterialPack> allMaterials;
 	private ArrayList<Integer> allAmounts;
+	private ArrayList<BuyCardContainer> allBuyCardContainers;
 
 	public BuyCardPopup() {
+		allBuyCardContainers = new ArrayList<BuyCardContainer>();
 		this.centerOnScreen();
 		this.initContent();
 		
-		
 		this.getContent().add(popupContent);
-		ControlPane.getInstance().setEffectCardPopup(this);
+//		this.updateAmount();
+		ControlPane.getInstance().setBuyCardPopup(this);
 	}
 	
 	private void initContent() {
@@ -59,27 +61,19 @@ public class BuyCardPopup extends Popup {
 		});
 //		Utilities.updateCard();
 		for (MaterialPack material : this.allMaterials) {
-			BuyCardCardContainer card = new BuyCardCardContainer(material.getType().getType(), material.getAmount());
+			BuyCardContainer card = new BuyCardContainer(material.getType().getType(), material.getAmount());
+			this.allBuyCardContainers.add(card);
 			HBox.setMargin(card, new Insets(20));
 			this.popupContent.getChildren().add(card);
 		}
 		
 
 		this.popupContent.getChildren().addAll(closeButton, messageLabel);	
-	}
-	
-	
-
-	
-
-	
+	}	
 	
 	public void updateAmount() {
-		int idx = 0;
-		this.allMaterials = Utilities.getCurrentPlayer().getAllMaterials();
-		for (MaterialPack material : this.allMaterials) {
-			this.allAmounts.set(idx, material.getAmount());
-			idx++;
+		for(BuyCardContainer card: allBuyCardContainers) {
+			card.updateAmount();
 		}
 	}	
 	

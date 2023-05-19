@@ -28,7 +28,7 @@ public class ControlPane {
 	private Scene marketScene;
 	private CardPopup cardPopup;
 	private MarketPopup marketPopup;
-	private BuyCardPopup effectCardPopup;
+	private BuyCardPopup buyCardPopup;
 	private GamePane gamePane;
 	private HomePane homePane;
 	private MarketPane marketPane;
@@ -199,16 +199,14 @@ public class ControlPane {
 		this.marketPopup = marketPopup;
 	}
 
-	public BuyCardPopup getEffectCardPopup() {
-		return effectCardPopup;
+	public BuyCardPopup getBuyCardPopup() {
+		return buyCardPopup;
 	}
 
-
-
-	public void setEffectCardPopup(BuyCardPopup effectCardPopup) {
-		// TODO Auto-generated method stub
-		this.effectCardPopup = effectCardPopup;
+	public void setBuyCardPopup(BuyCardPopup buyCardPopup) {
+		this.buyCardPopup = buyCardPopup;
 	}
+	
 	
 	
 	

@@ -55,9 +55,9 @@ public class CardPopup extends Popup {
 
 	private void initShowEffectCardButton() {
 		this.showEffectCardButton = new FooterButton("Show EffectCard", Color.GOLD, Config.FooterColor);
-		this.showEffectCard = new BuyCardPopup();
 		this.showEffectCardButton.setOnAction(e -> {
 			if (this.showEffectCard == null) {
+				this.showEffectCard = new BuyCardPopup();
 				this.showEffectCard.show(ControlPane.getInstance().getStage());
 			} else {
 				if (this.showEffectCard.isShowing()) {
@@ -120,6 +120,7 @@ public class CardPopup extends Popup {
 	public void setShowMaterialCard(MaterialCardPopup showMaterialCard) {
 		this.showMaterialCard = showMaterialCard;
 	}
-
+	
+	
 
 }

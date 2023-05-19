@@ -16,7 +16,7 @@ import material.MaterialPack;
 import type.MaterialType;
 import utils.Utilities;
 
-public class BuyCardCardContainer extends BorderPane {
+public class BuyCardContainer extends BorderPane {
 	private MaterialType type;
 	private int amount;
 	private int number;
@@ -30,7 +30,7 @@ public class BuyCardCardContainer extends BorderPane {
 	
 	private VBox titleContainer;
 
-	public BuyCardCardContainer(MaterialType type, int amount) {
+	public BuyCardContainer(MaterialType type, int amount) {
 		this.type = type;
 		this.amount = amount;
 		this.setPrefHeight(100);
@@ -85,8 +85,9 @@ public class BuyCardCardContainer extends BorderPane {
 	}
 	
 	
-	private void updateAmount() {
-		int amount = Utilities.getCurrentPlayer().getMaterialPack(this.getType()).getAmount();
+	public void updateAmount() {
+		amount = Utilities.getCurrentPlayer().getMaterialPack(this.getType()).getAmount();
+		System.out.println(amount);
 		this.amountText.setText(""+amount);
 	}
 
