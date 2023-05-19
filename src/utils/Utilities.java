@@ -1,16 +1,15 @@
 package utils;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.function.BiFunction;
 
 import buildings.Building;
 import buildings.Edge;
 import buildings.Node;
+import card.EffectCard;
 import components.PlayerContainer;
 import config.Config;
 import javafx.scene.control.Alert;
@@ -22,6 +21,7 @@ import logic.Player;
 import material.Material;
 import pane.ControlPane;
 import type.BuildingType;
+import type.CardType;
 import type.MaterialType;
 
 public class Utilities {
@@ -177,6 +177,15 @@ public class Utilities {
 		return allMaterial;
 	}
 	
+	public static int getEffectCard(CardType type) {
+		int cnt=0;
+		for (EffectCard card : Utilities.getCurrentPlayer().getAllEffectCards()) {
+			if (card.getType() == type) {
+				cnt++;
+			}
+		}
+		return cnt;
+	}
 	
 	
 
@@ -194,6 +203,7 @@ public class Utilities {
 		}
 		return Color.BLACK;
 	}
+	
 
 	public static int longestPathByEdge(Edge edge) {
 		GamePlay gameInstance = GamePlay.getInstance();
