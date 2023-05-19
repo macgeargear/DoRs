@@ -101,6 +101,10 @@ public class Config {
 	
 	public static final Paint DiceColor = Color.web("#E28686");
 	public static final Paint FooterColor = Color.MISTYROSE;
+	
+	// Video path
+	public static final String ATOMIC = "res/video/atomic.mp4";
+	public static final String EXPLOSION = "res/video/explosion.mp4";
 
 	
 }

@@ -62,7 +62,6 @@ public class HomePane extends VBox {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-				new VideoPathPopup("res/video/conan.mp4");
 				playButton.setVisible(false);
 				amountSelector.setVisible(true);
 				startButton.setVisible(true);
