@@ -9,6 +9,7 @@ import java.util.Queue;
 import buildings.Building;
 import buildings.Edge;
 import buildings.Node;
+import buildings.Place;
 import card.EffectCard;
 import components.PlayerContainer;
 import config.Config;
@@ -306,5 +307,17 @@ public class Utilities {
 			return null;
 		}
 		return longestRoadPlayer;
+	}
+	
+	public static Place getSelectPlace() {
+		ControlPane paneInstance = ControlPane.getInstance();
+		if(paneInstance.getSelectEdge() != null) {
+			return paneInstance.getSelectEdge().getEdge();
+		}else if(paneInstance.getSelectNode() != null) {
+			return paneInstance.getSelectNode().getNode();
+		}else if(paneInstance.getSelectMap() != null) {
+			return paneInstance.getSelectMap().getMap();
+		}
+		return null;
 	}
 }

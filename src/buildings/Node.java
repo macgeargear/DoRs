@@ -34,9 +34,11 @@ public class Node extends Building {
 	}
 
 	public void destroy() {
-		this.setType(BuildingType.EMPTYHOUSE);
-		this.setOwner(null);
-		this.setScore(0);
+		if(this.getType() != BuildingType.CITY) {			
+			this.setType(BuildingType.EMPTYHOUSE);
+			this.setOwner(null);
+			this.setScore(0);
+		}
 	}
 
 	public void upgrade() {

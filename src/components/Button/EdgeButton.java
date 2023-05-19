@@ -76,6 +76,9 @@ public class EdgeButton extends Rectangle{
 	
 	private String getColor() {
 		BuildingType type = edge.getType();
+		if(!edge.isActive()) {
+			return "black";
+		}
 		if(type == BuildingType.EMPTYROAD) {
 			return Config.EMPTY;
 		}

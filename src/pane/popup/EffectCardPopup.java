@@ -3,6 +3,7 @@ package pane.popup;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import card.EffectCard;
 import components.Button.ExitButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
+import logic.GamePlay;
+import pane.ControlPane;
 import type.CardType;
 import utils.Utilities;
 
@@ -63,9 +66,35 @@ public class EffectCardPopup extends Popup {
 			
 			
 			useEffectButton.setOnAction(e->{
-				if(effect == CardType.BOMB) {
-					
+				GamePlay gameInstance = GamePlay.getInstance();
+				ControlPane paneInstance = ControlPane.getInstance();
+				for(EffectCard effectCard: Utilities.getCurrentPlayer().getAllEffectCards()) {
+					if(effectCard.getType() == effect) {		
+						Utilities.getCurrentPlayer().getAllEffectCards().remove(effectCard);
+						effectCard.play(Utilities.getSelectPlace());
+						break;
+					}
 				}
+				if(effect != CardType.STRONGER) {
+					if(paneInstance.getSelectEdge() != null) {
+						paneInstance.getSelectEdge().setDisable(true);
+						paneInstance.getSelectEdge().setupSyle();
+					}else if(paneInstance.getSelectNode() != null) {
+						paneInstance.getSelectNode().setDisable(true);
+						paneInstance.getSelectNode().setupSyle();
+					}else if(paneInstance.getSelectMap() != null) {
+						paneInstance.getSelectMap().setDisable(true);
+					}
+				}else {
+					if(paneInstance.getSelectEdge() != null) {
+						paneInstance.getSelectEdge().setupSyle();
+					}else if(paneInstance.getSelectNode() != null) {
+						paneInstance.getSelectNode().setupSyle();
+					}
+				}
+				useEffectButton.setDisable(true);
+				paneInstance.resetSelect();
+				Utilities.updateCard();
 			});
 			
 			this.popupContent.getChildren().add(card);

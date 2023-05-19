@@ -9,6 +9,7 @@ import logic.Player;
 import type.BuildingType;
 import type.CardType;
 import type.MaterialType;
+import utils.Utilities;
 
 public class BombCard extends EffectCard {
 	public BombCard() {
@@ -31,11 +32,10 @@ public class BombCard extends EffectCard {
 	@Override
 	public void play(Place place) {
 		((Building)place).destroy();
-		
-		GamePlay gameInstance = GamePlay.getInstance();
-		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
+		Player currentPlayer = Utilities.getCurrentPlayer();
 		currentPlayer.getMaterialPack(MaterialType.SAND).decrease(1);
 		currentPlayer.getMaterialPack(MaterialType.GUNPOWDER).decrease(2);
+		place.setActive(false);
 	}
 
 }

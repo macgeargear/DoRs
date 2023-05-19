@@ -7,7 +7,6 @@ import java.util.Arrays;
 import card.EffectCard;
 import material.Material;
 import material.MaterialPack;
-import type.CardType;
 import type.MaterialType;
 
 public class Player {

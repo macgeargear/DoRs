@@ -27,12 +27,12 @@ public class NuclearCard extends EffectCard {
 
 	@Override
 	public void play(Place place) {
-		place.handleIsActive();
-
 		GamePlay gameInstance = GamePlay.getInstance();
 		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
 		currentPlayer.getMaterialPack(MaterialType.SAND).decrease(3);
 		currentPlayer.getMaterialPack(MaterialType.GUNPOWDER).decrease(5);
+		
+		place.setActive(false);
 	}
 
 }
