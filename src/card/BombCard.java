@@ -22,7 +22,7 @@ public class BombCard extends EffectCard {
 		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
 		if ((place instanceof Node || place instanceof Edge) && ((Building) (place)).getOwner().equals(currentPlayer)
 				&& currentPlayer.countMaterial(MaterialType.SAND) >= 1
-				&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 2
+				&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 1
 				&& !(((Building)place).getType().equals(BuildingType.EMPTYHOUSE) || ((Building)place).getType().equals(BuildingType.EMPTYROAD))) {
 			return true;
 		}

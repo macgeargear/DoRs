@@ -183,8 +183,8 @@ public class GamePlay {
 			currentRound++;
 			currentPlayer--;
 
-			currentRound = 1;
-			currentPlayer = 0;
+//			currentRound = 1;
+//			currentPlayer = 0;
 		} else if (currentPlayer == -1 && currentRound == -1) {
 			currentPlayer++;
 			currentRound = 1;

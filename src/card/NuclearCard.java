@@ -18,8 +18,8 @@ public class NuclearCard extends EffectCard {
 		GamePlay gameInstance = GamePlay.getInstance();
 		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
 		if (place instanceof Map && place.isActive() == true
-				&& currentPlayer.countMaterial(MaterialType.SAND) >= 3
-				&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 5) {
+				&& currentPlayer.countMaterial(MaterialType.SAND) >= 1
+				&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 2) {
 			return true;
 		}
 		return false;

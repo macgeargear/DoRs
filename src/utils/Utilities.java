@@ -212,14 +212,14 @@ public class Utilities {
 					return paneInstance.getSelectEdge().getEdge().getOwner() != null;
 				}
 				return paneInstance.getSelectNode().getNode().getOwner() != null
-						&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 2
+						&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 1
 						&& currentPlayer.countMaterial(MaterialType.SAND) >= 1;
 			}
 			return false;
 		}
 		return paneInstance.getSelectMap() != null && paneInstance.getSelectMap().getMap().isActive()
-				&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 5
-				&& currentPlayer.countMaterial(MaterialType.SAND) >= 3;
+				&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 2
+				&& currentPlayer.countMaterial(MaterialType.SAND) >= 1;
 	}
 
 	public static Paint getColor(MaterialType type) {

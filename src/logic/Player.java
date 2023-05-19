@@ -28,11 +28,11 @@ public class Player {
 		Material sand = new Material(MaterialType.SAND);
 		Material gunpowder = new Material(MaterialType.GUNPOWDER);
 
-		EffectCard bombCard = new BombCard();
-		EffectCard nuclearCard = new NuclearCard();
-		EffectCard strongerCard = new StrongerCard();
-
-		this.allEffectCards.addAll(Arrays.asList(bombCard, nuclearCard, strongerCard));
+//		EffectCard bombCard = new BombCard();
+//		EffectCard nuclearCard = new NuclearCard();
+//		EffectCard strongerCard = new StrongerCard();
+//
+//		this.allEffectCards.addAll(Arrays.asList(bombCard, nuclearCard, strongerCard));
 
 		ArrayList<Material> allMaterial = new ArrayList<Material>();
 		allMaterial.addAll(Arrays.asList(wood, water, rock, sand, gunpowder));

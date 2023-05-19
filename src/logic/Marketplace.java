@@ -29,7 +29,7 @@ public class Marketplace {
 				num2 = random.nextInt(5);
 			}
 			tradeList.add(new ArrayList<Material>(Arrays.asList(allMaterials.get(num1), allMaterials.get(num2))));
-			exchangeRate.add(random.nextInt(5)+1);
+			exchangeRate.add(random.nextInt(3)+1);
 		}
 //		random everything
 		return ;
