@@ -1,13 +1,13 @@
 package logic;
 
 import java.util.ArrayList;
+import card.*;
 import java.util.Arrays;
 
-import buildings.Building;
 import card.EffectCard;
-import entities.Entity;
 import material.Material;
 import material.MaterialPack;
+import type.CardType;
 import type.MaterialType;
 
 public class Player {
@@ -29,11 +29,19 @@ public class Player {
 		Material sand = new Material(MaterialType.SAND);
 		Material gunpowder = new Material(MaterialType.GUNPOWDER);
 		
+		EffectCard bombCard = new BombCard();
+		EffectCard nuclearCard = new NuclearCard();
+		EffectCard strongerCard = new StrongerCard();
+
+		this.allEffectCards.addAll(Arrays.asList(bombCard, nuclearCard, strongerCard));
+		
 		ArrayList<Material> allMaterial = new ArrayList<Material>();
 		allMaterial.addAll(Arrays.asList(wood, water, rock, sand, gunpowder));
 		for (Material material : allMaterial) {
 			allMaterials.add(new MaterialPack(material));
 		}
+		
+		
 	}
 	
 	public void addEffect(EffectCard card) {}
