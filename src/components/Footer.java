@@ -1,7 +1,5 @@
 package components;
 
-import components.Button.CustomButton;
-
 import components.Button.FooterButton;
 import components.Button.RollDice;
 import config.Config;
@@ -148,8 +146,6 @@ public class Footer extends HBox {
 			GamePlay gameInstance = GamePlay.getInstance();
 			ControlPane paneInstance = ControlPane.getInstance();
 			Player prevPlayer = Utilities.getCurrentPlayer();
-
-			int prevRound = gameInstance.getCurrentRound();
 
 			if (gameInstance.goToNextPlayer()) {
 				Player currentPlayer = Utilities.getCurrentPlayer();

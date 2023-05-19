@@ -5,13 +5,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.GamePlay;
 import logic.Marketplace;
-import pane.ControlPane;
 import type.MaterialType;
 import utils.Utilities;
 

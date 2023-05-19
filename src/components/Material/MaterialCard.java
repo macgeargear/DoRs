@@ -12,10 +12,8 @@ import utils.Utilities;
 
 public class MaterialCard extends VBox {
 	private Text label;
-	private MaterialType material;
 	
 	public MaterialCard(MaterialType material) {
-		this.material = material;
 		this.setBackground(new Background(new BackgroundFill(Utilities.getColor(material),new CornerRadii(10),null)));
 		this.setPadding(new Insets(16));
 		
@@ -42,7 +40,6 @@ public class MaterialCard extends VBox {
 	}
 
 	public void setMaterial(MaterialType material) {
-		this.material = material;
 		this.setBackground(new Background(new BackgroundFill(Utilities.getColor(material),new CornerRadii(10),null)));
 		this.label.setText(""+material);
 	}
