@@ -45,11 +45,11 @@ public class Footer extends HBox {
 		this.initShowCardButton();
 
 		this.setAlignment(Pos.CENTER);
-		HBox.setMargin(this.rollDiceButton, new Insets(20));
-		HBox.setMargin(this.buyCardButton, new Insets(8));
-		HBox.setMargin(this.buyEdgeButton, new Insets(8));
-		HBox.setMargin(this.buyNodeButton, new Insets(8));
-		HBox.setMargin(this.marketButton, new Insets(8));
+		HBox.setMargin(this.rollDiceButton, new Insets(Config.MEDIUM_MARGIN));
+		HBox.setMargin(this.buyCardButton, new Insets(Config.SMALL_MARGIN));
+		HBox.setMargin(this.buyEdgeButton, new Insets(Config.SMALL_MARGIN));
+		HBox.setMargin(this.buyNodeButton, new Insets(Config.SMALL_MARGIN));
+		HBox.setMargin(this.marketButton, new Insets(Config.SMALL_MARGIN));
 
 		this.getChildren().addAll(showCardButton, marketButton, buyCardButton, rollDiceButton, buyEdgeButton,
 				buyNodeButton, endTurnButton);
