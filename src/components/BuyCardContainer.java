@@ -44,6 +44,7 @@ public class BuyCardContainer extends BorderPane {
 		
 		this.setTop(titleContainer);
 		this.setBottom(footer);
+		this.updateAmount();
 //		this.getChildren().addAll(this.titleText, this.amountText, this.footer);
 	}
 	
@@ -67,7 +68,8 @@ public class BuyCardContainer extends BorderPane {
 		this.decreaseButton.setOnAction(e -> {
 //			Utilities.updateCard();
 			Utilities.getCurrentPlayer().increaseMaterial(type, 1);
-			this.numberText.setText(""+this.number--);
+			number--;
+			this.numberText.setText(""+this.number);
 			this.updateAmount();
 		});
 		this.increaseButton = new FooterButton("+");
@@ -76,7 +78,8 @@ public class BuyCardContainer extends BorderPane {
 		this.increaseButton.setOnAction(e -> {
 //			Utilities.updateCard();
 			Utilities.getCurrentPlayer().decreaseMaterial(type,1);
-			this.numberText.setText(""+this.number++);
+			number++;
+			this.numberText.setText(""+this.number);
 			this.updateAmount();
 		});
 		
@@ -87,8 +90,18 @@ public class BuyCardContainer extends BorderPane {
 	
 	public void updateAmount() {
 		amount = Utilities.getCurrentPlayer().getMaterialPack(this.getType()).getAmount();
-		System.out.println(amount);
 		this.amountText.setText(""+amount);
+		if(amount == 0) {
+			this.increaseButton.setDisable(true);
+		}else {
+			this.increaseButton.setDisable(false);
+		}
+		
+		if(number == 0) {
+			this.decreaseButton.setDisable(true);
+		}else {
+			this.decreaseButton.setDisable(false);
+		}
 	}
 
 	public MaterialType getType() {
