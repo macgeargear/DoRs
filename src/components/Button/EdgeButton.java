@@ -32,7 +32,6 @@ public class EdgeButton extends Rectangle{
 			}
 			
 			ControlPane paneInstance = ControlPane.getInstance();
-			GamePlay gameInstance = GamePlay.getInstance();
 			
 			paneInstance.resetSelect();
 			paneInstance.setSelectEdge(thisEdge);
@@ -47,6 +46,7 @@ public class EdgeButton extends Rectangle{
 				paneInstance.getFooter().setBuyEdgeDisable(true);
 				paneInstance.getFooter().getBuyEdgeButton().setText("Buy Edge");
 			}
+			Utilities.updateCard();
 		});
 	}
 	

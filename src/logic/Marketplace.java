@@ -49,7 +49,7 @@ public class Marketplace {
 	
 		Player currentPlayer = Utilities.getCurrentPlayer();
 		Material target = tradeList.get(idx).get(0);
-		if(currentPlayer.countMaterial(target) >= exchangeRate.get(idx)) {
+		if(currentPlayer.countMaterial(target.getType()) >= exchangeRate.get(idx)) {
 			return true;
 		}
 		return false;

@@ -6,7 +6,6 @@ import buildings.Node;
 import buildings.Place;
 import logic.GamePlay;
 import logic.Player;
-import material.Material;
 import type.BuildingType;
 import type.CardType;
 import type.MaterialType;
@@ -21,8 +20,8 @@ public class BombCard extends EffectCard {
 		GamePlay gameInstance = GamePlay.getInstance();
 		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
 		if ((place instanceof Node || place instanceof Edge) && ((Building) (place)).getOwner().equals(currentPlayer)
-				&& currentPlayer.countMaterial(new Material(MaterialType.SAND)) >= 1
-				&& currentPlayer.countMaterial(new Material(MaterialType.GUNPOWDER)) >= 2
+				&& currentPlayer.countMaterial(MaterialType.SAND) >= 1
+				&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 2
 				&& !(((Building)place).getType().equals(BuildingType.EMPTYHOUSE) || ((Building)place).getType().equals(BuildingType.EMPTYROAD))) {
 			return true;
 		}

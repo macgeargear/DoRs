@@ -3,7 +3,6 @@ package pane.popup;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import card.EffectCard;
 import components.Button.ExitButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,12 +14,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
-import material.Material;
-import material.MaterialPack;
-import pane.ControlPane;
 import type.CardType;
 import utils.Utilities;
 
@@ -65,6 +60,14 @@ public class EffectCardPopup extends Popup {
 			VBox card = initCard(newLabel, effect, useEffectButton);
 			allLabels.add(newLabel);
 			allUseEffectButton.add(useEffectButton);
+			
+			
+			useEffectButton.setOnAction(e->{
+				if(effect == CardType.BOMB) {
+					
+				}
+			});
+			
 			this.popupContent.getChildren().add(card);
 		}
 
@@ -99,6 +102,7 @@ public class EffectCardPopup extends Popup {
 		int idx = 0;
 		for (CardType effect : this.allEffects) {
 			allLabels.get(idx).setText(" " + Utilities.countEffectCard(effect));
+			allUseEffectButton.get(idx).setDisable(!Utilities.canUseEffect(effect));
 			idx++;
 		}
 	}

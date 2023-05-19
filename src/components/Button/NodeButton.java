@@ -44,6 +44,7 @@ public class NodeButton extends Button {
 				paneInstance.getFooter().setBuyNodeDisable(true);
 				paneInstance.getFooter().getBuyNodeButton().setText("Buy Node");
 			}
+			Utilities.updateCard();
 		});
 	}
 

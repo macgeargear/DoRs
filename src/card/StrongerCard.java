@@ -1,17 +1,13 @@
 package card;
 
-import java.util.ArrayList;
 
 import buildings.Building;
 import buildings.Edge;
 import buildings.Node;
 import buildings.Place;
-import entities.Entity;
 import logic.GamePlay;
 import logic.Player;
-import material.Material;
 import type.CardType;
-import type.EntityType;
 import type.MaterialType;
 
 public class StrongerCard extends EffectCard {
