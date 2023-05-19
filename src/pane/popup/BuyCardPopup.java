@@ -24,20 +24,50 @@ import pane.ControlPane;
 import utils.Utilities;
 
 public class BuyCardPopup extends Popup {
-	private HBox popupContent;
+	private VBox popupContent;
+	private HBox controlRate;
 	private Button closeButton;
 	private ArrayList<MaterialPack> allMaterials;
 	private ArrayList<Integer> allAmounts;
 	private ArrayList<BuyCardContainer> allBuyCardContainers;
+	private Button reset;
+	private Button confirm;
 
 	public BuyCardPopup() {
 		allBuyCardContainers = new ArrayList<BuyCardContainer>();
 		this.centerOnScreen();
 		this.initContent();
+		this.initFooter();
+		
 		
 		this.getContent().add(popupContent);
 //		this.updateAmount();
 		ControlPane.getInstance().setBuyCardPopup(this);
+	}
+	
+	private void initFooter() {
+		HBox footer = new HBox();
+		footer.setAlignment(Pos.CENTER);
+		footer.setSpacing(20);
+		
+		reset = new Button("Reset");
+		confirm = new Button("Confirm");
+		confirm.setDisable(true);
+		reset.setDisable(true);
+		
+		reset.setOnAction(e->{
+			this.resetValue();
+			Utilities.updateCard();
+		});
+		
+		confirm.setOnAction(e->{
+			this.confirm();
+			Utilities.updateCard();
+			confirm.setDisable(true);
+		});
+		
+		footer.getChildren().addAll(reset, confirm);
+		popupContent.getChildren().add(footer);
 	}
 	
 	private void initContent() {
@@ -46,17 +76,27 @@ public class BuyCardPopup extends Popup {
 		this.allMaterials = Utilities.getCurrentPlayer().getAllMaterials();
 		this.allAmounts = new ArrayList<Integer>();
 		
-		this.popupContent = new HBox();
-		this.popupContent.setPrefHeight(500);
+		this.popupContent = new VBox();
+		this.popupContent.setAlignment(Pos.CENTER);
+		this.popupContent.setPrefHeight(600);
 		this.popupContent.setPrefWidth(360);
 		this.popupContent.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(14), null)));
-		this.popupContent.setAlignment(Pos.CENTER);
+		Text header = new Text("Buy Effect Card");
+		header.setFont(Font.font(32));
+		popupContent.getChildren().add(header);
 		
-		HBox.setMargin(this.popupContent, new Insets(20));
-		this.popupContent.setPadding(new Insets(40));
+		this.controlRate = new HBox();
+		this.controlRate.setPrefHeight(500);
+		this.controlRate.setPrefWidth(360);
+		this.controlRate.setAlignment(Pos.CENTER);
+		
+		HBox.setMargin(this.controlRate, new Insets(20));
+		this.controlRate.setPadding(new Insets(40));
 		
 		this.closeButton = new ExitButton("X");
 		this.closeButton.setOnAction(e -> {
+			this.resetValue();
+			Utilities.updateCard();
 			this.hide();
 		});
 //		Utilities.updateCard();
@@ -64,19 +104,43 @@ public class BuyCardPopup extends Popup {
 			BuyCardContainer card = new BuyCardContainer(material.getType().getType(), material.getAmount());
 			this.allBuyCardContainers.add(card);
 			HBox.setMargin(card, new Insets(20));
-			this.popupContent.getChildren().add(card);
+			this.controlRate.getChildren().add(card);
 		}
 		
 
-		this.popupContent.getChildren().addAll(closeButton, messageLabel);	
+		this.controlRate.getChildren().addAll(closeButton, messageLabel);	
+		popupContent.getChildren().add(controlRate);
 	}	
 	
 	public void updateAmount() {
+		int sum = 0;
 		for(BuyCardContainer card: allBuyCardContainers) {
 			card.updateAmount();
+			sum += card.getNumber();
+		}
+		if(sum == 0) {
+			reset.setDisable(true);
+		}else {
+			reset.setDisable(false);
+		}
+		if(sum == 3) {
+			confirm.setDisable(false);
+			for(BuyCardContainer card: allBuyCardContainers) {
+				card.setDisableIncrease();
+			}
 		}
 	}	
 	
+	private void resetValue() {
+		for(BuyCardContainer card: allBuyCardContainers) {
+			card.resetValue();
+		}
+	}
 	
+	private void confirm() {
+		for(BuyCardContainer card: allBuyCardContainers) {
+			card.confirm();
+		}
+	}
 
 }

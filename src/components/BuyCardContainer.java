@@ -70,7 +70,7 @@ public class BuyCardContainer extends BorderPane {
 			Utilities.getCurrentPlayer().increaseMaterial(type, 1);
 			number--;
 			this.numberText.setText(""+this.number);
-			this.updateAmount();
+			Utilities.updateCard();
 		});
 		this.increaseButton = new FooterButton("+");
 		this.increaseButton.setFont(Font.font(12));
@@ -80,7 +80,8 @@ public class BuyCardContainer extends BorderPane {
 			Utilities.getCurrentPlayer().decreaseMaterial(type,1);
 			number++;
 			this.numberText.setText(""+this.number);
-			this.updateAmount();
+			Utilities.updateCard();
+			
 		});
 		
 		this.footer.setAlignment(Pos.BOTTOM_CENTER);
@@ -103,7 +104,24 @@ public class BuyCardContainer extends BorderPane {
 			this.decreaseButton.setDisable(false);
 		}
 	}
-
+	
+	public void setDisableIncrease() {
+		this.increaseButton.setDisable(true);
+	}
+	
+	public void resetValue() {
+		while(number > 0) {
+			Utilities.getCurrentPlayer().increaseMaterial(type, 1);
+			number--;
+		}
+		this.numberText.setText("0");
+	}
+	
+	public void confirm() {
+		this.number = 0;
+		this.numberText.setText("0");
+	}
+	
 	public MaterialType getType() {
 		return type;
 	}
