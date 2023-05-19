@@ -23,7 +23,7 @@ public class CardPopup extends Popup {
 	private Button showEffectCardButton;
 	private VBox popupContent;
 	private MaterialCardPopup showMaterialCard;
-	private EffectCardPopup showEffectCard;
+	private BuyCardPopup showEffectCard;
 	private Button closeButton;
 
 	public CardPopup() {
@@ -55,9 +55,9 @@ public class CardPopup extends Popup {
 
 	private void initShowEffectCardButton() {
 		this.showEffectCardButton = new FooterButton("Show EffectCard", Color.GOLD, Config.FooterColor);
+		this.showEffectCard = new BuyCardPopup();
 		this.showEffectCardButton.setOnAction(e -> {
 			if (this.showEffectCard == null) {
-				this.showEffectCard = new EffectCardPopup();
 				this.showEffectCard.show(ControlPane.getInstance().getStage());
 			} else {
 				if (this.showEffectCard.isShowing()) {
@@ -87,8 +87,7 @@ public class CardPopup extends Popup {
 		HBox title = new HBox();
 		this.closeButton.setAlignment(Pos.TOP_CENTER);
 
-		HBox.setMargin(messageLabel,
-				new Insets(0, 0, 0, this.popupContent.getPrefWidth()/6));
+		HBox.setMargin(messageLabel, new Insets(0, 0, 0, this.popupContent.getPrefWidth() / 6));
 		VBox.setMargin(title, new Insets(12));
 		VBox.setMargin(closeButton, new Insets(12));
 		VBox.setMargin(this.showEffectCardButton, new Insets(12));
@@ -117,6 +116,10 @@ public class CardPopup extends Popup {
 	public MaterialCardPopup getShowMaterialCard() {
 		return showMaterialCard;
 	}
-	
+
+	public void setShowMaterialCard(MaterialCardPopup showMaterialCard) {
+		this.showMaterialCard = showMaterialCard;
+	}
+
 
 }

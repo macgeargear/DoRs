@@ -5,6 +5,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -12,6 +13,7 @@ import logic.GamePlay;
 import logic.Marketplace;
 import material.Material;
 import type.MaterialType;
+import utils.Utilities;
 
 import java.util.ArrayList;
 
@@ -53,6 +55,7 @@ public class MarketPane extends BorderPane {
 		
 		ControlPane.getInstance().setMarketPane(this);
 	}
+
 //
 //	private void initExchanges() {
 //		GamePlay gameInstance = GamePlay.getInstance();
@@ -64,6 +67,7 @@ public class MarketPane extends BorderPane {
 //		for (ArrayList<Material> trade : tradeList) {
 //			Color firstColor = Color.BLACK, secondColor = Color.BLACK;
 //			Material firstMaterial = trade.get(0), secondMaterial = trade.get(1);
+
 //			if (firstMaterial.getType() == MaterialType.WOOD) {
 //				firstColor = Color.GREENYELLOW;
 //			} else if (firstMaterial.getType() == MaterialType.WATER) {
@@ -87,6 +91,7 @@ public class MarketPane extends BorderPane {
 //			} else if (secondMaterial.getType() == MaterialType.GUNPOWDER) {
 //				secondColor = Color.BEIGE;
 //			}
+
 //			allExchanges.add(new MaterialExchange("" + firstMaterial.getType(), exchangeRate.get(idx), firstColor,
 //					"" + secondMaterial.getType(), secondColor, idx));
 //			idx++;
@@ -122,5 +127,6 @@ public class MarketPane extends BorderPane {
 //			exchange.updateExchangeStatus();
 //		}
 //	}
+
 
 }

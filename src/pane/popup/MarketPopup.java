@@ -20,6 +20,7 @@ import javafx.stage.Popup;
 import logic.GamePlay;
 import pane.ControlPane;
 
+
 public class MarketPopup extends Popup {
 	private VBox popupContent;
 	private HBox header;
@@ -54,6 +55,7 @@ public class MarketPopup extends Popup {
 	}
 
 	private void initExchanges() {
+
 		this.exchangeContainer = new VBox();
 		
 		for(int i=0;i<5;++i) {

@@ -159,7 +159,10 @@ public class Utilities {
 			container.updateCount();
 		}
 		paneInstance.getCardPopup().getShowMaterialCard().updateLabel();
+
 		paneInstance.getMarketPopup().updateExchange();
+		paneInstance.getEffectCardPopup().updateAmount();
+		
 	}
 
 	public static ArrayList<Material> getAllMaterials() {
@@ -174,6 +177,9 @@ public class Utilities {
 
 		return allMaterial;
 	}
+	
+	
+	
 
 	public static Paint getColor(MaterialType type) {
 		if (type == MaterialType.WOOD) {

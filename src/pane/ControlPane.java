@@ -8,11 +8,10 @@ import components.HeaderGame;
 import components.PlayerContainer;
 import config.Config;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import logic.GamePlay;
 import pane.popup.CardPopup;
+import pane.popup.BuyCardPopup;
 import pane.popup.MarketPopup;
 
 public class ControlPane {
@@ -29,6 +28,7 @@ public class ControlPane {
 	private Scene marketScene;
 	private CardPopup cardPopup;
 	private MarketPopup marketPopup;
+	private BuyCardPopup effectCardPopup;
 	private GamePane gamePane;
 	private HomePane homePane;
 	private MarketPane marketPane;
@@ -56,7 +56,7 @@ public class ControlPane {
 
 		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.HOMEPANE_HEIGHT);	
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
-		marketScene = new Scene(new MarketPane(), Config.SCREEN_HEIGH , Config.SCREEN_HEIGH);
+//		marketScene = new Scene(new MarketPane(), Config.SCREEN_HEIGH , Config.SCREEN_HEIGH);
 		// TODO: showMaterialCardScene, showMaterialCardScene;
 //		this.showHomeScene();
 //		this.showMarketScene();
@@ -197,6 +197,17 @@ public class ControlPane {
 
 	public void setMarketPopup(MarketPopup marketPopup) {
 		this.marketPopup = marketPopup;
+	}
+
+	public BuyCardPopup getEffectCardPopup() {
+		return effectCardPopup;
+	}
+
+
+
+	public void setEffectCardPopup(BuyCardPopup effectCardPopup) {
+		// TODO Auto-generated method stub
+		this.effectCardPopup = effectCardPopup;
 	}
 	
 	

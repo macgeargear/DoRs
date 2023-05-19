@@ -70,22 +70,9 @@ public class MaterialCardPopup extends Popup {
 
 	private VBox initCard(Label amount, Material type) {
 		VBox card = new VBox();
-		Paint bg;
-		if (type.getType() == MaterialType.GUNPOWDER) {
-			bg = Config.GunPowderColor;
-		} else if (type.getType() == MaterialType.ROCK) {
-			bg = Config.RockColor;
-		} else if (type.getType() == MaterialType.SAND) {
-			bg = Config.SandColor;
-		} else if (type.getType() == MaterialType.WATER) {
-			bg = Config.WaterColor;
-		} else if (type.getType() == MaterialType.WOOD) {
-			bg = Config.WoodColor;
-		} else {
-			bg = Color.BLACK;
-		}
+		Paint color = Utilities.getColor(type.getType());
 		
-		card.setBackground(new Background(new BackgroundFill(bg, new CornerRadii(12), null)));
+		card.setBackground(new Background(new BackgroundFill(color, new CornerRadii(12), null)));
 		card.setAlignment(Pos.CENTER);
 		card.setPrefWidth(60);
 		card.setPrefHeight(60);

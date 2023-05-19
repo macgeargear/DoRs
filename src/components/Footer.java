@@ -31,7 +31,6 @@ public class Footer extends HBox {
 
 	private MarketPopup marketPopup;
 
-
 	public Footer() {
 		this.setPrefHeight(Config.Footer_HEIGHT);
 
@@ -62,6 +61,7 @@ public class Footer extends HBox {
 
 	private void initMarketButton() {
 		this.marketButton = new FooterButton("Market");
+
 		this.marketPopup = new MarketPopup();
 		this.marketButton.setOnAction(e -> {
 			if (this.marketPopup == null) {
