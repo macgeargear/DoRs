@@ -1,6 +1,7 @@
 package pane.popup;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import card.EffectCard;
 import components.Button.ExitButton;
@@ -19,28 +20,30 @@ import javafx.scene.text.Font;
 import javafx.stage.Popup;
 import material.Material;
 import material.MaterialPack;
+import pane.ControlPane;
 import type.CardType;
 import utils.Utilities;
 
 public class EffectCardPopup extends Popup {
 	private VBox popupContent;
 	private Button closeButton;
-	private ArrayList<EffectCard> allEffects;
+	private ArrayList<CardType> allEffects;
 	private ArrayList<Label> allLabels;
 
 	public EffectCardPopup() {
 		this.allLabels = new ArrayList<Label>();
 		this.centerOnScreen();
 		this.initContent();
-
+		this.updateLabel();
+		
 		this.getContent().add(popupContent);
 	}
 
 	private void initContent() {
 		Label messageLabel = new Label("This is Yout Effect Cards");
 		messageLabel.setFont(Font.font(32));
-		this.allEffects = Utilities.getCurrentPlayer().getAllEffectCards();
-
+		this.allEffects = new ArrayList<CardType>(Arrays.asList(CardType.BOMB, CardType.NUCLEAR, CardType.STRONGER));
+		
 		this.popupContent = new VBox();
 		this.popupContent.setPrefHeight(768);
 		this.popupContent.setPrefWidth(400);
@@ -53,10 +56,10 @@ public class EffectCardPopup extends Popup {
 			this.hide();
 		});
 		this.popupContent.getChildren().addAll(closeButton, messageLabel);
-		for (EffectCard effect : this.allEffects) {
-			Label newLabel = new Label(" " + effect.getType());
+		for (CardType effect : this.allEffects) {
+			Label newLabel = new Label(" " + effect);
 			newLabel.setFont(Font.font(20));
-			VBox card = initCard(newLabel, effect.getType());
+			VBox card = initCard(newLabel, effect);
 			allLabels.add(newLabel);
 			this.popupContent.getChildren().add(card);
 		}
@@ -89,9 +92,8 @@ public class EffectCardPopup extends Popup {
 
 	public void updateLabel() {
 		int idx = 0;
-		this.allEffects = Utilities.getCurrentPlayer().getAllEffectCards();
-		for (EffectCard effect : this.allEffects) {
-			allLabels.get(idx).setText(" " + Utilities.getEffectCard(effect.getType()));
+		for (CardType effect : this.allEffects) {
+			allLabels.get(idx).setText(" " + Utilities.countEffectCard(effect));
 			idx++;
 		}
 	}

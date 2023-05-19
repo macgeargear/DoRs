@@ -65,8 +65,8 @@ public class BuyCardPopup extends Popup {
 			this.confirm();
 			Utilities.updateCard();
 			confirm.setDisable(true);
-			
 			GamePlay.getInstance().draw();
+			System.out.println(Utilities.getCurrentPlayer().getAllEffectCards().size());
 		});
 		
 		footer.getChildren().addAll(reset, confirm);

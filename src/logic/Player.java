@@ -44,7 +44,9 @@ public class Player {
 		
 	}
 	
-	public void addEffect(EffectCard card) {}
+	public void addEffect(EffectCard card) {
+		allEffectCards.add(card);
+	}
 	
 	public void increaseMaterial(MaterialType material, int amount) {
 		for(MaterialPack pack: allMaterials) {

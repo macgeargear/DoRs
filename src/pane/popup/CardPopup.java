@@ -120,7 +120,18 @@ public class CardPopup extends Popup {
 	public void setShowMaterialCard(MaterialCardPopup showMaterialCard) {
 		this.showMaterialCard = showMaterialCard;
 	}
-	
+
+	public EffectCardPopup getShowEffectCard() {
+		return showEffectCard;
+	}
+
+	public void setShowEffectCard(EffectCardPopup showEffectCard) {
+		this.showEffectCard = showEffectCard;
+	}
+
+	public void setShowEffectCardButton(Button showEffectCardButton) {
+		this.showEffectCardButton = showEffectCardButton;
+	}
 	
 
 }

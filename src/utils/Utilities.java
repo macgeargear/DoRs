@@ -159,6 +159,7 @@ public class Utilities {
 			container.updateCount();
 		}
 		paneInstance.getCardPopup().getShowMaterialCard().updateLabel();
+		paneInstance.getCardPopup().getShowEffectCard().updateLabel();
 		paneInstance.getBuyCardPopup().updateAmount();
 		paneInstance.getMarketPopup().updateExchange();
 		
@@ -177,13 +178,14 @@ public class Utilities {
 		return allMaterial;
 	}
 	
-	public static int getEffectCard(CardType type) {
+	public static int countEffectCard(CardType type) {
 		int cnt=0;
 		for (EffectCard card : Utilities.getCurrentPlayer().getAllEffectCards()) {
 			if (card.getType() == type) {
 				cnt++;
 			}
 		}
+		System.out.println(cnt);
 		return cnt;
 	}
 	
