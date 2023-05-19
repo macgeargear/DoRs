@@ -4,28 +4,22 @@ import java.util.ArrayList;
 
 import components.Button.CustomButton;
 import components.Material.MaterialExchange;
-import config.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
 import logic.GamePlay;
-import logic.Marketplace;
-import material.Material;
 import pane.ControlPane;
-import type.MaterialType;
-import utils.Utilities;
+
 
 public class MarketPopup extends Popup {
 	private VBox popupContent;
@@ -61,26 +55,13 @@ public class MarketPopup extends Popup {
 	}
 
 	private void initExchanges() {
-		GamePlay gameInstance = GamePlay.getInstance();
-		Marketplace marketplace = gameInstance.getMarketplace();
-		ArrayList<ArrayList<Material>> tradeList = marketplace.getTradeList();
-		ArrayList<Integer> exchangeRate = marketplace.getExchangeRate();
-		int idx = 0;
-
-		for (ArrayList<Material> trade : tradeList) {
-//			Paint firstColor = Color.BLACK, secondColor = Color.BLACK;
-			Material firstMaterial = trade.get(0), secondMaterial = trade.get(1);
-			Paint firstColor = Utilities.getColor(firstMaterial.getType());
-			Paint secondColor = Utilities.getColor(secondMaterial.getType());
-
-			allExchanges.add(new MaterialExchange("" + firstMaterial.getType(), exchangeRate.get(idx), firstColor,
-					"" + secondMaterial.getType(), secondColor, idx));
-			idx++;
-		}
 
 		this.exchangeContainer = new VBox();
-		for (MaterialExchange exchange : allExchanges) {
-			exchangeContainer.getChildren().add(exchange);
+		
+		for(int i=0;i<5;++i) {
+			MaterialExchange newExchange = new MaterialExchange(i);
+			allExchanges.add(newExchange);
+			exchangeContainer.getChildren().add(newExchange);
 		}
 	}
 

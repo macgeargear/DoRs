@@ -22,6 +22,7 @@ public class ControlPane {
 	private Footer footer;
 	private NodeButton selectNode;
 	private EdgeButton selectEdge;
+	private MapButton selectMap;
 	private Scene gameScene;
 	private Scene homeScene;
 	private Scene marketScene;
@@ -39,6 +40,7 @@ public class ControlPane {
 		if(instance == null) this.instance = this;
 		this.selectEdge = null;
 		this.selectNode = null;
+		this.selectMap = null;
 		this.stage = stage;
 		this.gameHeader = new HeaderGame();
 		this.allPlayerContainers = new ArrayList<PlayerContainer>();
@@ -147,6 +149,14 @@ public class ControlPane {
 		this.selectEdge = selectEdge;
 	}
 	
+	public MapButton getSelectMap() {
+		return selectMap;
+	}
+
+	public void setSelectMap(MapButton selectMap) {
+		this.selectMap = selectMap;
+	}
+
 	public CardPopup getCardPopup() {
 		return cardPopup;
 	}
@@ -164,6 +174,11 @@ public class ControlPane {
 			selectNode.resetSize();
 			selectNode = null;
 		}
+		if(selectMap != null) {
+			selectMap.resetSize();
+			selectMap = null;
+		}
+		
 		footer.setBuyNodeDisable(true);
 		footer.setBuyEdgeDisable(true);
 	}

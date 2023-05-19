@@ -36,8 +36,8 @@ public class NuclearCard extends EffectCard {
 
 		GamePlay gameInstance = GamePlay.getInstance();
 		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
-		currentPlayer.getMaterialPack(new Material(MaterialType.SAND)).decrease(3);
-		currentPlayer.getMaterialPack(new Material(MaterialType.GUNPOWDER)).decrease(5);
+		currentPlayer.getMaterialPack(MaterialType.SAND).decrease(3);
+		currentPlayer.getMaterialPack(MaterialType.GUNPOWDER).decrease(5);
 	}
 
 }

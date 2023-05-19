@@ -1,7 +1,11 @@
 package utils;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.function.BiFunction;
 
 import buildings.Building;
@@ -155,7 +159,7 @@ public class Utilities {
 			container.updateCount();
 		}
 		paneInstance.getCardPopup().getShowMaterialCard().updateLabel();
-//		paneInstance.getMarketPane().updateExchange();
+
 		paneInstance.getMarketPopup().updateExchange();
 		paneInstance.getEffectCardPopup().updateAmount();
 		
@@ -190,6 +194,77 @@ public class Utilities {
 			return Config.GunPowderColor;
 		}
 		return Color.BLACK;
+	}
 
+	public static int longestPathByEdge(Edge edge) {
+		GamePlay gameInstance = GamePlay.getInstance();
+
+//		BFS
+//		init
+		ArrayList<Edge> allEdges = gameInstance.getAllEdges();
+		ArrayList<Boolean> visit = new ArrayList<Boolean>(
+				Collections.nCopies(gameInstance.getAllEdges().size(), false));
+		Queue<Edge> queue = new LinkedList<>();
+		queue.offer(edge);
+		int cnt = 0;
+
+		while (!queue.isEmpty()) {
+			cnt++;
+			Queue<Edge> newQueue = new LinkedList<>();
+			while (!queue.isEmpty()) {
+				Edge currentEdge = queue.poll();
+				int currentIndex = allEdges.indexOf(currentEdge);
+
+				if (visit.get(currentIndex)) {
+					continue;
+				}
+				visit.set(currentIndex, true);
+
+				Node startNode = currentEdge.getStartNode();
+				Node endNode = currentEdge.getEndNode();
+				ArrayList<Node> nodes = new ArrayList<Node>(Arrays.asList(startNode, endNode));
+
+				for (Node node : nodes) {
+					if (node == null)
+						continue;
+					for (Edge nextEdge : node.getSideEdges()) {
+						int nextEdgeIndex = allEdges.indexOf(nextEdge);
+						if (!visit.get(nextEdgeIndex) && nextEdge.getOwner() != null
+								&& nextEdge.getOwner().equals(currentEdge.getOwner())) {
+							newQueue.offer(nextEdge);
+						}
+					}
+				}
+			}
+			queue = newQueue;
+		}
+
+		return cnt;
+	}
+
+	public static Player getLongestRoadPlayer() {
+		GamePlay gameInstance = GamePlay.getInstance();
+		int maxPath = 0, amountPlayer = 0;
+		Player longestRoadPlayer = new Player("NONAME");
+		for (Player player : gameInstance.getAllPlayers()) {
+			int maxPathByPlayer = 0;
+			for (Edge edge : gameInstance.getAllEdges()) {
+				if (edge.getOwner() != null && edge.getOwner().equals(player)) {
+					int maxPathByThisEdge = longestPathByEdge(edge);
+					maxPathByPlayer = Math.max(maxPathByThisEdge, maxPathByPlayer);
+				}
+			}
+			if(maxPathByPlayer > maxPath) {
+				maxPath = maxPathByPlayer;
+				longestRoadPlayer = player;
+				amountPlayer = 1;
+			}else if(maxPathByPlayer == maxPath) {
+				amountPlayer++;
+			}
+		}
+		if(amountPlayer > 1) {
+			return null;
+		}
+		return longestRoadPlayer;
 	}
 }

@@ -2,11 +2,8 @@ package components.Button;
 
 import config.Config;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import material.Map;
+import pane.ControlPane;
 import type.MaterialType;
 
 public class MapButton extends Button {
@@ -19,18 +16,37 @@ public class MapButton extends Button {
 		setPrefSize(Config.MAP_WIDTH, Config.MAP_HEIGH);
 		this.setupSyle();
 //		setBackground(new Background(new BackgroundFill(this.getColor(), null, null)));
-//		this.initOnHover();
+		this.initOnHover();
+		this.initOnAction();
+	}
+	
+	private void initOnAction() {
+		MapButton thisMap = this;
+		setOnAction(e -> {
+			setScaleX(1.2);
+			setScaleY(1.2);
+			ControlPane paneInstance = ControlPane.getInstance();
+			
+			paneInstance.resetSelect();
+			paneInstance.setSelectMap(thisMap);
+			
+		});
 	}
 	
 	private void initOnHover() {
+		ControlPane paneInstance = ControlPane.getInstance();
+		MapButton thisButton = this;
+		
 		setOnMouseEntered(event -> {
             setScaleX(1.2);
             setScaleY(1.2);
         });
 		
 		setOnMouseExited(event -> {
-            setScaleX(1.0);
-            setScaleY(1.0);
+			if(paneInstance.getSelectMap() == null || !paneInstance.getSelectMap().equals(thisButton)) {
+				setScaleX(1.0);
+				setScaleY(1.0);	
+			}
         });
 	}
 	
@@ -50,5 +66,10 @@ public class MapButton extends Button {
 			return Config.SAND;
 		}
 		return Config.GUNPOWDER;
+	}
+	
+	public void resetSize() {
+		setScaleX(1.0);
+        setScaleY(1.0);
 	}
 }

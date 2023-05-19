@@ -13,15 +13,16 @@ public class Marketplace {
 	private ArrayList<Integer> exchangeRate;
 	
 	public Marketplace() {
-		this.tradeList = new ArrayList<ArrayList<Material>>();
-		this.exchangeRate = new ArrayList<Integer>();
 		this.reMarket();
 	}
 	
 	public void reMarket() {
+		this.tradeList = new ArrayList<ArrayList<Material>>();
+		this.exchangeRate = new ArrayList<Integer>();
 		this.amount = 20;
 		Random random = new Random();
 		ArrayList<Material> allMaterials = Utilities.getAllMaterials();
+		
 		for(int i=0;i<5;++i) {
 			int num1 = random.nextInt(5), num2 = random.nextInt(5);
 			while(num1 == num2) {
@@ -52,6 +53,10 @@ public class Marketplace {
 			return true;
 		}
 		return false;
+	}
+	
+	public ArrayList<Material> getTradeListByIdx(int idx){
+		return tradeList.get(idx);
 	}
 	
 	public ArrayList<ArrayList<Material>> getTradeList() {

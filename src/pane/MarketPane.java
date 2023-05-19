@@ -35,39 +35,39 @@ public class MarketPane extends BorderPane {
 	 */
 
 	public MarketPane() {
-		allExchanges = new ArrayList<MaterialExchange>();
-		this.setPadding(new Insets(20));
-		this.initTitle();
-		this.initExchanges();
-		this.initBackButton();
-
-		for (MaterialExchange exchange : allExchanges) {
-			VBox.setMargin(exchange, new Insets(20));
-		}
-		
-		HBox top = new HBox();
-		top.getChildren().addAll(title, amount);
-		
-		this.setLeft(backButton);
-		this.setTop(top);
-		this.setCenter(exchangeContainer);
-		this.updateExchange();
+//		allExchanges = new ArrayList<MaterialExchange>();
+//		this.setPadding(new Insets(20));
+//		this.initTitle();
+//		this.initExchanges();
+//		this.initBackButton();
+//
+//		for (MaterialExchange exchange : allExchanges) {
+//			VBox.setMargin(exchange, new Insets(20));
+//		}
+//		
+//		HBox top = new HBox();
+//		top.getChildren().addAll(title, amount);
+//		
+//		this.setLeft(backButton);
+//		this.setTop(top);
+//		this.setCenter(exchangeContainer);
+//		this.updateExchange();
 		
 		ControlPane.getInstance().setMarketPane(this);
 	}
 
-	private void initExchanges() {
-		GamePlay gameInstance = GamePlay.getInstance();
-		Marketplace marketplace = gameInstance.getMarketplace();
-		ArrayList<ArrayList<Material>> tradeList = marketplace.getTradeList();
-		ArrayList<Integer> exchangeRate = marketplace.getExchangeRate();
-		int idx = 0;
-
-		for (ArrayList<Material> trade : tradeList) {
+//
+//	private void initExchanges() {
+//		GamePlay gameInstance = GamePlay.getInstance();
+//		Marketplace marketplace = gameInstance.getMarketplace();
+//		ArrayList<ArrayList<Material>> tradeList = marketplace.getTradeList();
+//		ArrayList<Integer> exchangeRate = marketplace.getExchangeRate();
+//		int idx = 0;
+//
+//		for (ArrayList<Material> trade : tradeList) {
 //			Color firstColor = Color.BLACK, secondColor = Color.BLACK;
-			Material firstMaterial = trade.get(0), secondMaterial = trade.get(1);
-			Paint firstColor = Utilities.getColor(firstMaterial.getType());
-			Paint secondColor = Utilities.getColor(firstMaterial.getType());
+//			Material firstMaterial = trade.get(0), secondMaterial = trade.get(1);
+
 //			if (firstMaterial.getType() == MaterialType.WOOD) {
 //				firstColor = Color.GREENYELLOW;
 //			} else if (firstMaterial.getType() == MaterialType.WATER) {
@@ -91,40 +91,42 @@ public class MarketPane extends BorderPane {
 //			} else if (secondMaterial.getType() == MaterialType.GUNPOWDER) {
 //				secondColor = Color.BEIGE;
 //			}
-			allExchanges.add(new MaterialExchange("" + firstMaterial.getType(), exchangeRate.get(idx), firstColor,
-					"" + secondMaterial.getType(), secondColor, idx));
-			idx++;
-		}
 
-		this.exchangeContainer = new VBox();
-		for (MaterialExchange exchange : allExchanges) {
-			exchangeContainer.getChildren().add(exchange);
-		}
-	}
+//			allExchanges.add(new MaterialExchange("" + firstMaterial.getType(), exchangeRate.get(idx), firstColor,
+//					"" + secondMaterial.getType(), secondColor, idx));
+//			idx++;
+//		}
+//
+//		this.exchangeContainer = new VBox();
+//		for (MaterialExchange exchange : allExchanges) {
+//			exchangeContainer.getChildren().add(exchange);
+//		}
+//	}
+//
+//	private void initBackButton() {
+//		this.backButton = new CustomButton("back");
+//		this.backButton.setFont(Font.font(18));
+//		this.backButton.setLineSpacing(20);
+//
+//		this.backButton.setOnAction(e -> {
+//			ControlPane.getInstance().backToGameScene();
+//		});
+//	}
+//
+//	private void initTitle() {
+//		this.title = new Text("Exchange Material Market");
+//		this.amount = new Text(" "+GamePlay.getInstance().getMarketplace().getAmount());
+//		this.title.setFont(Font.font(40));
+//		this.amount.setFont(Font.font(40));
+//		this.title.setTextAlignment(TextAlignment.CENTER);
+//	}
+//	
+//	public void updateExchange() {
+//		this.amount.setText(" "+GamePlay.getInstance().getMarketplace().getAmount());
+//		for(MaterialExchange exchange: allExchanges) {
+//			exchange.updateExchangeStatus();
+//		}
+//	}
 
-	private void initBackButton() {
-		this.backButton = new CustomButton("back");
-		this.backButton.setFont(Font.font(18));
-		this.backButton.setLineSpacing(20);
-
-		this.backButton.setOnAction(e -> {
-			ControlPane.getInstance().backToGameScene();
-		});
-	}
-
-	private void initTitle() {
-		this.title = new Text("Exchange Material Market");
-		this.amount = new Text(" "+GamePlay.getInstance().getMarketplace().getAmount());
-		this.title.setFont(Font.font(40));
-		this.amount.setFont(Font.font(40));
-		this.title.setTextAlignment(TextAlignment.CENTER);
-	}
-	
-	public void updateExchange() {
-		this.amount.setText(" "+GamePlay.getInstance().getMarketplace().getAmount());
-		for(MaterialExchange exchange: allExchanges) {
-			exchange.updateExchangeStatus();
-		}
-	}
 
 }
