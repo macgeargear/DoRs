@@ -30,7 +30,6 @@ public class NodeButton extends Button {
 			setScaleX(1.5);
 			setScaleY(1.5);
 			ControlPane paneInstance = ControlPane.getInstance();
-			GamePlay gameInstance = GamePlay.getInstance();
 			
 			paneInstance.resetSelect();
 			paneInstance.setSelectNode(thisNode);
