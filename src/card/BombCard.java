@@ -35,8 +35,8 @@ public class BombCard extends EffectCard {
 		
 		GamePlay gameInstance = GamePlay.getInstance();
 		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
-		currentPlayer.getMaterialPack(new Material(MaterialType.SAND)).decrease(1);
-		currentPlayer.getMaterialPack(new Material(MaterialType.GUNPOWDER)).decrease(2);
+		currentPlayer.getMaterialPack(MaterialType.SAND).decrease(1);
+		currentPlayer.getMaterialPack(MaterialType.GUNPOWDER).decrease(2);
 	}
 
 }
