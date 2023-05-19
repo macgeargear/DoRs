@@ -155,8 +155,10 @@ public class Utilities {
 			container.updateCount();
 		}
 		paneInstance.getCardPopup().getShowMaterialCard().updateLabel();
-		paneInstance.getMarketPane().updateExchange();
+//		paneInstance.getMarketPane().updateExchange();
 		paneInstance.getMarketPopup().updateExchange();
+		paneInstance.getEffectCardPopup().updateAmount();
+		
 	}
 
 	public static ArrayList<Material> getAllMaterials() {
@@ -171,10 +173,13 @@ public class Utilities {
 
 		return allMaterial;
 	}
+	
+	
+	
 
 	public static Paint getColor(MaterialType type) {
 		if (type == MaterialType.WOOD) {
-			return Config.RockColor;
+			return Config.WoodColor;
 		} else if (type == MaterialType.WATER) {
 			return Config.WaterColor;
 		} else if (type == MaterialType.ROCK) {

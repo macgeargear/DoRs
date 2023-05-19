@@ -5,6 +5,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -12,6 +13,7 @@ import logic.GamePlay;
 import logic.Marketplace;
 import material.Material;
 import type.MaterialType;
+import utils.Utilities;
 
 import java.util.ArrayList;
 
@@ -62,31 +64,33 @@ public class MarketPane extends BorderPane {
 		int idx = 0;
 
 		for (ArrayList<Material> trade : tradeList) {
-			Color firstColor = Color.BLACK, secondColor = Color.BLACK;
+//			Color firstColor = Color.BLACK, secondColor = Color.BLACK;
 			Material firstMaterial = trade.get(0), secondMaterial = trade.get(1);
-			if (firstMaterial.getType() == MaterialType.WOOD) {
-				firstColor = Color.GREENYELLOW;
-			} else if (firstMaterial.getType() == MaterialType.WATER) {
-				firstColor = Color.SKYBLUE;
-			} else if (firstMaterial.getType() == MaterialType.ROCK) {
-				firstColor = Color.GRAY;
-			} else if (firstMaterial.getType() == MaterialType.SAND) {
-				firstColor = Color.SANDYBROWN;
-			} else if (firstMaterial.getType() == MaterialType.GUNPOWDER) {
-				firstColor = Color.BEIGE;
-			}
-
-			if (secondMaterial.getType() == MaterialType.WOOD) {
-				secondColor = Color.GREENYELLOW;
-			} else if (secondMaterial.getType() == MaterialType.WATER) {
-				secondColor = Color.SKYBLUE;
-			} else if (secondMaterial.getType() == MaterialType.ROCK) {
-				secondColor = Color.GRAY;
-			} else if (secondMaterial.getType() == MaterialType.SAND) {
-				secondColor = Color.SANDYBROWN;
-			} else if (secondMaterial.getType() == MaterialType.GUNPOWDER) {
-				secondColor = Color.BEIGE;
-			}
+			Paint firstColor = Utilities.getColor(firstMaterial.getType());
+			Paint secondColor = Utilities.getColor(firstMaterial.getType());
+//			if (firstMaterial.getType() == MaterialType.WOOD) {
+//				firstColor = Color.GREENYELLOW;
+//			} else if (firstMaterial.getType() == MaterialType.WATER) {
+//				firstColor = Color.SKYBLUE;
+//			} else if (firstMaterial.getType() == MaterialType.ROCK) {
+//				firstColor = Color.GRAY;
+//			} else if (firstMaterial.getType() == MaterialType.SAND) {
+//				firstColor = Color.SANDYBROWN;
+//			} else if (firstMaterial.getType() == MaterialType.GUNPOWDER) {
+//				firstColor = Color.BEIGE;
+//			}
+//
+//			if (secondMaterial.getType() == MaterialType.WOOD) {
+//				secondColor = Color.GREENYELLOW;
+//			} else if (secondMaterial.getType() == MaterialType.WATER) {
+//				secondColor = Color.SKYBLUE;
+//			} else if (secondMaterial.getType() == MaterialType.ROCK) {
+//				secondColor = Color.GRAY;
+//			} else if (secondMaterial.getType() == MaterialType.SAND) {
+//				secondColor = Color.SANDYBROWN;
+//			} else if (secondMaterial.getType() == MaterialType.GUNPOWDER) {
+//				secondColor = Color.BEIGE;
+//			}
 			allExchanges.add(new MaterialExchange("" + firstMaterial.getType(), exchangeRate.get(idx), firstColor,
 					"" + secondMaterial.getType(), secondColor, idx));
 			idx++;

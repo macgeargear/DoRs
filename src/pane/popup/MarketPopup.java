@@ -25,6 +25,7 @@ import logic.Marketplace;
 import material.Material;
 import pane.ControlPane;
 import type.MaterialType;
+import utils.Utilities;
 
 public class MarketPopup extends Popup {
 	private VBox popupContent;
@@ -67,31 +68,11 @@ public class MarketPopup extends Popup {
 		int idx = 0;
 
 		for (ArrayList<Material> trade : tradeList) {
-			Paint firstColor = Color.BLACK, secondColor = Color.BLACK;
+//			Paint firstColor = Color.BLACK, secondColor = Color.BLACK;
 			Material firstMaterial = trade.get(0), secondMaterial = trade.get(1);
-			if (firstMaterial.getType() == MaterialType.WOOD) {
-				firstColor = Config.WoodColor;
-			} else if (firstMaterial.getType() == MaterialType.WATER) {
-				firstColor = Config.WaterColor;
-			} else if (firstMaterial.getType() == MaterialType.ROCK) {
-				firstColor = Config.RockColor;
-			} else if (firstMaterial.getType() == MaterialType.SAND) {
-				firstColor = Config.SandColor;
-			} else if (firstMaterial.getType() == MaterialType.GUNPOWDER) {
-				firstColor = Config.GunPowderColor;
-			}
+			Paint firstColor = Utilities.getColor(firstMaterial.getType());
+			Paint secondColor = Utilities.getColor(secondMaterial.getType());
 
-			if (secondMaterial.getType() == MaterialType.WOOD) {
-				secondColor = Config.WoodColor;
-			} else if (secondMaterial.getType() == MaterialType.WATER) {
-				secondColor = Config.WaterColor;
-			} else if (secondMaterial.getType() == MaterialType.ROCK) {
-				secondColor = Config.RockColor;
-			} else if (secondMaterial.getType() == MaterialType.SAND) {
-				secondColor = Config.SandColor;
-			} else if (secondMaterial.getType() == MaterialType.GUNPOWDER) {
-				secondColor = Config.GunPowderColor;
-			}
 			allExchanges.add(new MaterialExchange("" + firstMaterial.getType(), exchangeRate.get(idx), firstColor,
 					"" + secondMaterial.getType(), secondColor, idx));
 			idx++;

@@ -33,7 +33,6 @@ public class Footer extends HBox {
 
 	private MarketPopup marketPopup;
 
-
 	public Footer() {
 		this.setPrefHeight(Config.Footer_HEIGHT);
 
@@ -68,8 +67,8 @@ public class Footer extends HBox {
 //		this.marketButton.setOnAction(e -> {
 //			ControlPane.getInstance().showMarketScene();
 //		});
+		this.marketPopup = new MarketPopup();
 		this.marketButton.setOnAction(e -> {
-			this.marketPopup = new MarketPopup();
 			if (this.marketPopup == null) {
 				this.marketPopup.show(ControlPane.getInstance().getStage());
 			} else {
