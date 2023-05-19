@@ -6,10 +6,10 @@ import buildings.Node;
 import buildings.Place;
 import logic.GamePlay;
 import logic.Player;
-import material.Material;
 import type.BuildingType;
 import type.CardType;
 import type.MaterialType;
+import utils.Utilities;
 
 public class BombCard extends EffectCard {
 	public BombCard() {
@@ -21,8 +21,8 @@ public class BombCard extends EffectCard {
 		GamePlay gameInstance = GamePlay.getInstance();
 		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
 		if ((place instanceof Node || place instanceof Edge) && ((Building) (place)).getOwner().equals(currentPlayer)
-				&& currentPlayer.countMaterial(new Material(MaterialType.SAND)) >= 1
-				&& currentPlayer.countMaterial(new Material(MaterialType.GUNPOWDER)) >= 2
+				&& currentPlayer.countMaterial(MaterialType.SAND) >= 1
+				&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 1
 				&& !(((Building)place).getType().equals(BuildingType.EMPTYHOUSE) || ((Building)place).getType().equals(BuildingType.EMPTYROAD))) {
 			return true;
 		}
@@ -32,11 +32,10 @@ public class BombCard extends EffectCard {
 	@Override
 	public void play(Place place) {
 		((Building)place).destroy();
-		
-		GamePlay gameInstance = GamePlay.getInstance();
-		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
+		Player currentPlayer = Utilities.getCurrentPlayer();
 		currentPlayer.getMaterialPack(MaterialType.SAND).decrease(1);
 		currentPlayer.getMaterialPack(MaterialType.GUNPOWDER).decrease(2);
+		place.setActive(false);
 	}
 
 }

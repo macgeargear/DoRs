@@ -9,6 +9,7 @@ import java.util.Queue;
 import buildings.Building;
 import buildings.Edge;
 import buildings.Node;
+import buildings.Place;
 import card.EffectCard;
 import components.PlayerContainer;
 import config.Config;
@@ -162,7 +163,7 @@ public class Utilities {
 		paneInstance.getCardPopup().getShowEffectCard().updateLabel();
 		paneInstance.getBuyCardPopup().updateAmount();
 		paneInstance.getMarketPopup().updateExchange();
-		
+
 	}
 
 	public static ArrayList<Material> getAllMaterials() {
@@ -177,19 +178,49 @@ public class Utilities {
 
 		return allMaterial;
 	}
-	
+
 	public static int countEffectCard(CardType type) {
-		int cnt=0;
+		int cnt = 0;
 		for (EffectCard card : Utilities.getCurrentPlayer().getAllEffectCards()) {
 			if (card.getType() == type) {
 				cnt++;
 			}
 		}
-		System.out.println(cnt);
 		return cnt;
 	}
-	
-	
+
+	public static boolean canUseEffect(CardType type) {
+		ControlPane paneInstance = ControlPane.getInstance();
+		Player currentPlayer = getCurrentPlayer();
+		if (countEffectCard(type) == 0) {
+			return false;
+		}
+		if (type == CardType.STRONGER || type == CardType.BOMB) {
+			if (paneInstance.getSelectEdge() != null || paneInstance.getSelectNode() != null) {
+				if (type == CardType.STRONGER) {
+					if (paneInstance.getSelectEdge() != null) {
+						Edge edge = paneInstance.getSelectEdge().getEdge();
+						return edge.getOwner() == null
+								|| (edge.getOwner().equals(currentPlayer) && edge.getType() != BuildingType.SUPERROAD);
+					}
+					Node node = paneInstance.getSelectNode().getNode();
+					return node.getOwner() == null
+							|| (node.getOwner().equals(currentPlayer) && node.getType() != BuildingType.CITY);
+
+				}
+				if (paneInstance.getSelectEdge() != null) {
+					return paneInstance.getSelectEdge().getEdge().getOwner() != null;
+				}
+				return paneInstance.getSelectNode().getNode().getOwner() != null
+						&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 1
+						&& currentPlayer.countMaterial(MaterialType.SAND) >= 1;
+			}
+			return false;
+		}
+		return paneInstance.getSelectMap() != null && paneInstance.getSelectMap().getMap().isActive()
+				&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 2
+				&& currentPlayer.countMaterial(MaterialType.SAND) >= 1;
+	}
 
 	public static Paint getColor(MaterialType type) {
 		if (type == MaterialType.WOOD) {
@@ -205,7 +236,6 @@ public class Utilities {
 		}
 		return Color.BLACK;
 	}
-	
 
 	public static int longestPathByEdge(Edge edge) {
 		GamePlay gameInstance = GamePlay.getInstance();
@@ -265,17 +295,29 @@ public class Utilities {
 					maxPathByPlayer = Math.max(maxPathByThisEdge, maxPathByPlayer);
 				}
 			}
-			if(maxPathByPlayer > maxPath) {
+			if (maxPathByPlayer > maxPath) {
 				maxPath = maxPathByPlayer;
 				longestRoadPlayer = player;
 				amountPlayer = 1;
-			}else if(maxPathByPlayer == maxPath) {
+			} else if (maxPathByPlayer == maxPath) {
 				amountPlayer++;
 			}
 		}
-		if(amountPlayer > 1) {
+		if (amountPlayer > 1) {
 			return null;
 		}
 		return longestRoadPlayer;
+	}
+	
+	public static Place getSelectPlace() {
+		ControlPane paneInstance = ControlPane.getInstance();
+		if(paneInstance.getSelectEdge() != null) {
+			return paneInstance.getSelectEdge().getEdge();
+		}else if(paneInstance.getSelectNode() != null) {
+			return paneInstance.getSelectNode().getNode();
+		}else if(paneInstance.getSelectMap() != null) {
+			return paneInstance.getSelectMap().getMap();
+		}
+		return null;
 	}
 }

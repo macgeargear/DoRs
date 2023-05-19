@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import material.Map;
 import pane.ControlPane;
 import type.MaterialType;
+import utils.Utilities;
 
 public class MapButton extends Button {
 	private Map map;
@@ -29,7 +30,7 @@ public class MapButton extends Button {
 			
 			paneInstance.resetSelect();
 			paneInstance.setSelectMap(thisMap);
-			
+			Utilities.updateCard();
 		});
 	}
 	
@@ -68,6 +69,10 @@ public class MapButton extends Button {
 		return Config.GUNPOWDER;
 	}
 	
+	public Map getMap() {
+		return map;
+	}
+
 	public void resetSize() {
 		setScaleX(1.0);
         setScaleY(1.0);

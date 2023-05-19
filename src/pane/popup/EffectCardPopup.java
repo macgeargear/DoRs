@@ -17,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
+import logic.GamePlay;
+import pane.ControlPane;
 import type.CardType;
 import utils.Utilities;
 
@@ -25,8 +27,10 @@ public class EffectCardPopup extends Popup {
 	private Button closeButton;
 	private ArrayList<CardType> allEffects;
 	private ArrayList<Label> allLabels;
+	private ArrayList<Button> allUseEffectButton;
 
 	public EffectCardPopup() {
+		this.allUseEffectButton = new ArrayList<Button>();
 		this.allLabels = new ArrayList<Label>();
 		this.centerOnScreen();
 		this.initContent();
@@ -54,20 +58,57 @@ public class EffectCardPopup extends Popup {
 		this.popupContent.getChildren().addAll(closeButton, messageLabel);
 		for (CardType effect : this.allEffects) {
 			Label newLabel = new Label(" " + effect);
+			Button useEffectButton = new Button("Use");
+			VBox card = initCard(newLabel, effect, useEffectButton);
 			newLabel.setFont(Font.font(Config.MEDIUM_FONT));
-			VBox card = initCard(newLabel, effect);
 			allLabels.add(newLabel);
+			allUseEffectButton.add(useEffectButton);
+			
+			
+			useEffectButton.setOnAction(e->{
+				GamePlay gameInstance = GamePlay.getInstance();
+				ControlPane paneInstance = ControlPane.getInstance();
+				for(EffectCard effectCard: Utilities.getCurrentPlayer().getAllEffectCards()) {
+					if(effectCard.getType() == effect) {		
+						Utilities.getCurrentPlayer().getAllEffectCards().remove(effectCard);
+						effectCard.play(Utilities.getSelectPlace());
+						break;
+					}
+				}
+				if(effect != CardType.STRONGER) {
+					if(paneInstance.getSelectEdge() != null) {
+						paneInstance.getSelectEdge().setDisable(true);
+						paneInstance.getSelectEdge().setupSyle();
+					}else if(paneInstance.getSelectNode() != null) {
+						paneInstance.getSelectNode().setDisable(true);
+						paneInstance.getSelectNode().setupSyle();
+					}else if(paneInstance.getSelectMap() != null) {
+						paneInstance.getSelectMap().setDisable(true);
+					}
+				}else {
+					if(paneInstance.getSelectEdge() != null) {
+						paneInstance.getSelectEdge().setupSyle();
+					}else if(paneInstance.getSelectNode() != null) {
+						paneInstance.getSelectNode().setupSyle();
+					}
+				}
+				useEffectButton.setDisable(true);
+				paneInstance.resetSelect();
+				Utilities.updateCard();
+			});
+			
 			this.popupContent.getChildren().add(card);
 		}
 
 		VBox.setMargin(closeButton, new Insets(Config.MEDIUM_MARGIN));
 	}
 
-	private VBox initCard(Label amount, CardType type) {
+	private VBox initCard(Label amount, CardType type, Button button) {
 		VBox card = new VBox();
 		
 		card.setBackground(new Background(new BackgroundFill(Color.BEIGE, new CornerRadii(Config.BORDER_RADIUS), null)));
 		card.setAlignment(Pos.CENTER);
+		button.setDisable(true);
 		card.setPrefWidth(Config.CARD_SIZE);
 		card.setPrefHeight(Config.CARD_SIZE);
 
@@ -76,12 +117,11 @@ public class EffectCardPopup extends Popup {
 
 		VBox.setMargin(card, new Insets(Config.MEDIUM_MARGIN));
 		VBox.setMargin(titleCard, new Insets(Config.MEDIUM_MARGIN));
-
 		typeLabel.setAlignment(Pos.CENTER);
 		typeLabel.setFont(Font.font(Config.MEDIUM_FONT));
 
-		titleCard.getChildren().addAll(typeLabel, amount);
-
+		titleCard.getChildren().addAll(typeLabel, amount, button);
+			
 		card.getChildren().addAll(titleCard);
 		return card;
 	}
@@ -90,6 +130,7 @@ public class EffectCardPopup extends Popup {
 		int idx = 0;
 		for (CardType effect : this.allEffects) {
 			allLabels.get(idx).setText(" " + Utilities.countEffectCard(effect));
+			allUseEffectButton.get(idx).setDisable(!Utilities.canUseEffect(effect));
 			idx++;
 		}
 	}

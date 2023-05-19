@@ -29,7 +29,7 @@ public class Marketplace {
 				num2 = random.nextInt(5);
 			}
 			tradeList.add(new ArrayList<Material>(Arrays.asList(allMaterials.get(num1), allMaterials.get(num2))));
-			exchangeRate.add(random.nextInt(5)+1);
+			exchangeRate.add(random.nextInt(3)+1);
 		}
 //		random everything
 		return ;
@@ -49,7 +49,7 @@ public class Marketplace {
 	
 		Player currentPlayer = Utilities.getCurrentPlayer();
 		Material target = tradeList.get(idx).get(0);
-		if(currentPlayer.countMaterial(target) >= exchangeRate.get(idx)) {
+		if(currentPlayer.countMaterial(target.getType()) >= exchangeRate.get(idx)) {
 			return true;
 		}
 		return false;
