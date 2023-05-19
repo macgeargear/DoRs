@@ -3,6 +3,7 @@ package pane.popup;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import card.EffectCard;
 import components.Button.ExitButton;
 import config.Config;
 import javafx.geometry.Insets;

@@ -33,6 +33,8 @@ public class Config {
 	public static final int EFFECTCARD_POPUP_WIDTH = 400;
 	public static final int BUYCARD_POPUP_HEIGHT = 500;
 	public static final int BUYCARD_POPUP_WIDTH = 360;
+	public static final int VIDEO_POPUP_HEIGHT = 600;
+	public static final int VIDEO_POPUP_WIDTH = 1000;
 	
 	
 	// Size
