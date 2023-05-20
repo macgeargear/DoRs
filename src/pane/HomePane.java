@@ -20,6 +20,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import pane.popup.VideoPathPopup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -68,7 +69,6 @@ public class HomePane extends VBox {
 			}
 		});
 	}
-	
 
 	private void initStartButton() {
 		amountSelector = new AmountSelector();

@@ -3,6 +3,7 @@ package pane.popup;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import card.EffectCard;
 import components.Button.ExitButton;
 import config.Config;
 import javafx.geometry.Insets;
@@ -66,7 +67,6 @@ public class EffectCardPopup extends Popup {
 			
 			
 			useEffectButton.setOnAction(e->{
-				GamePlay gameInstance = GamePlay.getInstance();
 				ControlPane paneInstance = ControlPane.getInstance();
 				for(EffectCard effectCard: Utilities.getCurrentPlayer().getAllEffectCards()) {
 					if(effectCard.getType() == effect) {		
@@ -95,6 +95,11 @@ public class EffectCardPopup extends Popup {
 				useEffectButton.setDisable(true);
 				paneInstance.resetSelect();
 				Utilities.updateCard();
+				if(effect == CardType.NUCLEAR) {
+					new VideoPathPopup(Config.ATOMIC);
+				}else if(effect == CardType.BOMB) {
+					new VideoPathPopup(Config.EXPLOSION);
+				}
 			});
 			
 			this.popupContent.getChildren().add(card);
