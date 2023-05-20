@@ -37,7 +37,7 @@ public class VideoPathPopup extends Popup {
 	}
 	
 	private void initMedia() {
-		Media media = new Media(new File(path).toURI().toString());
+		Media media = new Media(path);
 		mediaPlayer = new MediaPlayer(media);
 		mediaView = new MediaView(mediaPlayer);
 		

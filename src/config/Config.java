@@ -1,5 +1,7 @@
 package config;
 
+import java.io.File;
+
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -103,8 +105,8 @@ public class Config {
 	public static final Paint FooterColor = Color.MISTYROSE;
 	
 	// Video path
-	public static final String ATOMIC = "res/video/atomic.mp4";
-	public static final String EXPLOSION = "res/video/explosion.mp4";
+	public static final String ATOMIC = new File("res/video/atomic.mp4").toURI().toString();
+	public static final String EXPLOSION = new File("res/video/explosion.mp4").toURI().toString();
 
 	
 }
