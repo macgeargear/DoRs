@@ -46,7 +46,6 @@ public class GameResult extends Popup{
 		int cnt = 1;
 		GamePlay gameInstance = GamePlay.getInstance();
 		ArrayList<Pair<String, Integer>> result = gameInstance.getResult();
-		System.out.println(result);
 		for(Pair<String, Integer> player: result) {
 			HBox rank = new HBox();
 			rank.setAlignment(Pos.CENTER);

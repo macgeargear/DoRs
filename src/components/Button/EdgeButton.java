@@ -35,7 +35,7 @@ public class EdgeButton extends Rectangle{
 			
 			paneInstance.resetSelect();
 			paneInstance.setSelectEdge(thisEdge);
-			
+//			System.out.println(edge.getStartNode() +  " " + edge.getEndNode());
 			if (Utilities.buyEdgeCondition(edge) == 1) {
 				paneInstance.getFooter().setBuyEdgeDisable(false);
 				paneInstance.getFooter().getBuyEdgeButton().setText("Buy Edge");

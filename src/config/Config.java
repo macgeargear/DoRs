@@ -131,7 +131,7 @@ public class Config {
 	public static final int SCORE_3 = 5;
 	public static final int SCORE_LONGEST_PATH = 7;
 	
-	public static final int MAX_ROUND = 3;
+	public static final int MAX_ROUND = 1;
 	
 //	Marketplace
 	public static final int TRADE_AMOUNT = 20;

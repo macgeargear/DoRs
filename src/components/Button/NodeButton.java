@@ -33,7 +33,7 @@ public class NodeButton extends Button {
 			
 			paneInstance.resetSelect();
 			paneInstance.setSelectNode(thisNode);
-			
+//			System.out.println(node.getSideEdges());
 			if (Utilities.buyNodeCondition(node) == 1) {
 				paneInstance.getFooter().setBuyNodeDisable(false);
 				paneInstance.getFooter().getBuyNodeButton().setText("Buy Node");

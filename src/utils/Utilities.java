@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 import buildings.Building;
 import buildings.Edge;
@@ -17,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.util.Pair;
 import logic.GamePlay;
 import logic.Player;
 import pane.ControlPane;
@@ -229,61 +231,63 @@ public class Utilities {
 		return Color.BLACK;
 	}
 
-	public static int longestPathByEdge(Edge edge) {
-		GamePlay gameInstance = GamePlay.getInstance();
-
-//		BFS
-//		init
-		ArrayList<Edge> allEdges = gameInstance.getAllEdges();
-		ArrayList<Boolean> visit = new ArrayList<Boolean>(
-				Collections.nCopies(gameInstance.getAllEdges().size(), false));
-		Queue<Edge> queue = new LinkedList<>();
-		queue.offer(edge);
-		int cnt = 0;
-
-		while (!queue.isEmpty()) {
-			cnt++;
-			Queue<Edge> newQueue = new LinkedList<>();
-			while (!queue.isEmpty()) {
-				Edge currentEdge = queue.poll();
-				int currentIndex = allEdges.indexOf(currentEdge);
-
-				if (visit.get(currentIndex)) {
-					continue;
-				}
-				visit.set(currentIndex, true);
-
-				Node startNode = currentEdge.getStartNode();
-				Node endNode = currentEdge.getEndNode();
-				ArrayList<Node> nodes = new ArrayList<Node>(Arrays.asList(startNode, endNode));
-
-				for (Node node : nodes) {
-					if (node == null)
-						continue;
-					for (Edge nextEdge : node.getSideEdges()) {
-						int nextEdgeIndex = allEdges.indexOf(nextEdge);
-						if (!visit.get(nextEdgeIndex) && nextEdge.getOwner() != null
-								&& nextEdge.getOwner().equals(currentEdge.getOwner())) {
-							newQueue.offer(nextEdge);
-						}
-					}
-				}
-			}
-			queue = newQueue;
+	public static int dfs(boolean[] visited, ArrayList<Edge> allEdges, Edge edge, Node prevNode) {
+		if (edge == null) {
+			return 0;
 		}
 
-		return cnt;
+		int edgeIndex = allEdges.indexOf(edge);
+//		check visit
+		if (visited[edgeIndex]) {
+			return 0;
+		}
+
+//		make it as visited
+		visited[edgeIndex] = true;
+
+//		find next edge that can go
+		int maxDistance = 1;
+		ArrayList<Node> nodes = new ArrayList<>(Arrays.asList(edge.getStartNode(), edge.getEndNode()));
+		for (Node node : nodes) {
+			if (node == null || (prevNode != null && node.equals(prevNode))) {
+				continue;
+			}
+
+			for (Edge nextEdge : node.getSideEdges()) {
+				if (nextEdge == null || visited[allEdges.indexOf(nextEdge)] || nextEdge.getOwner() == null
+						|| !nextEdge.getOwner().equals(edge.getOwner())) {
+					continue;
+				}
+				maxDistance = Math.max(maxDistance, dfs(visited, allEdges, nextEdge, node) + 1);
+			}
+
+		}
+
+//		make it back
+		visited[edgeIndex] = false;
+
+		return maxDistance;
 	}
 
 	public static Player getLongestRoadPlayer() {
+//		init
 		GamePlay gameInstance = GamePlay.getInstance();
-		int maxPath = 0, amountPlayer = 0;
+		ArrayList<Edge> allEdges = gameInstance.getAllEdges();
+
+		int maxPath = 0, amountPlayer = 0, edgeAmount = allEdges.size();
+
+		boolean[] visited = new boolean[edgeAmount];
+		for(boolean vis: visited) {
+			vis = false;
+		}
+
+//		process
 		Player longestRoadPlayer = new Player("NONAME");
 		for (Player player : gameInstance.getAllPlayers()) {
 			int maxPathByPlayer = 0;
 			for (Edge edge : gameInstance.getAllEdges()) {
 				if (edge.getOwner() != null && edge.getOwner().equals(player)) {
-					int maxPathByThisEdge = longestPathByEdge(edge);
+					int maxPathByThisEdge = dfs(visited, allEdges, edge, null);
 					maxPathByPlayer = Math.max(maxPathByThisEdge, maxPathByPlayer);
 				}
 			}
@@ -300,14 +304,14 @@ public class Utilities {
 		}
 		return longestRoadPlayer;
 	}
-	
+
 	public static Place getSelectPlace() {
 		ControlPane paneInstance = ControlPane.getInstance();
-		if(paneInstance.getSelectEdge() != null) {
+		if (paneInstance.getSelectEdge() != null) {
 			return paneInstance.getSelectEdge().getEdge();
-		}else if(paneInstance.getSelectNode() != null) {
+		} else if (paneInstance.getSelectNode() != null) {
 			return paneInstance.getSelectNode().getNode();
-		}else if(paneInstance.getSelectMap() != null) {
+		} else if (paneInstance.getSelectMap() != null) {
 			return paneInstance.getSelectMap().getMap();
 		}
 		return null;
