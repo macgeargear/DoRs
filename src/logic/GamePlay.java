@@ -11,7 +11,6 @@ import buildings.Node;
 import card.BombCard;
 import card.NuclearCard;
 import card.StrongerCard;
-import entities.Entity;
 import javafx.util.Pair;
 import material.Map;
 import type.BuildingType;
@@ -190,20 +189,7 @@ public class GamePlay {
 	public void trade(Player p1, Player p2) {
 	}
 
-	public void addEntity(Entity entity) {
-	}
-
 	public void addPlayer(Player player) {
-	}
-
-	public void removeEntity(Entity entity) {
-	}
-
-	public void bribe(Entity target) {
-	}
-
-	public boolean canBribe(Entity target) {
-		return false;
 	}
 
 	public static GamePlay getInstance() {
