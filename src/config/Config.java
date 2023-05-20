@@ -107,6 +107,24 @@ public class Config {
 	// Video path
 	public static final String ATOMIC = new File("res/video/atomic.mp4").toURI().toString();
 	public static final String EXPLOSION = new File("res/video/explosion.mp4").toURI().toString();
-
 	
+	
+//	GamePlay config
+	public static final int PREPARE_ROUND_1 = -2;
+	public static final int PREPARE_ROUND_2 = -1;
+	public static final int START_ROUND = -2;
+	
+	public static final int DEFAULT_PLAYER_AMOUNT = 4;
+	
+	public static final int SIDE_MAP_AMOUNT = 5;
+	
+	public static final int SCORE_1 = 1;
+	public static final int SCORE_2 = 3;
+	public static final int SCORE_3 = 5;
+	public static final int SCORE_LONGEST_PATH = 7;
+	
+//	Marketplace
+	public static final int TRADE_AMOUNT = 20;
+	public static final int NUMBER_TRADE_LIST = 5;
+	public static final int MAX_RATE = 3;
 }

@@ -11,6 +11,7 @@ import buildings.Node;
 import card.BombCard;
 import card.NuclearCard;
 import card.StrongerCard;
+import config.Config;
 import javafx.util.Pair;
 import material.Map;
 import type.BuildingType;
@@ -19,7 +20,6 @@ import utils.Utilities;
 
 public class GamePlay {
 	public static GamePlay instance;
-	private int roundAmount;
 	private int currentRound;
 	private int playerAmount;
 	private int currentPlayer;
@@ -32,24 +32,19 @@ public class GamePlay {
 	private ArrayList<Map> allMaps;
 
 	public GamePlay() {
-		this.roundAmount = 10;
-		this.currentRound = 0;
-		this.currentPlayer = 0;
-		this.marketplace = new Marketplace();
-		this.allPlayers = new ArrayList<Player>();
-		this.allNodes = new ArrayList<Node>();
-		this.allEdges = new ArrayList<Edge>();
-		this.allMaps = new ArrayList<Map>();
-
-		this.initMaps();
+		this.playerAmount = Config.DEFAULT_PLAYER_AMOUNT;
+		this.initGamePlay();
 	}
 
 	public GamePlay(int playerAmount) {
-		this.isRoll = false;
-		this.roundAmount = 10;
-		this.currentRound = -2;
-		this.currentPlayer = 0;
 		this.playerAmount = playerAmount;
+		this.initGamePlay();
+	}
+
+	private void initGamePlay() {
+		this.isRoll = false;
+		this.currentRound = Config.START_ROUND;
+		this.currentPlayer = 0;
 		this.rollNumber = 0;
 		this.marketplace = new Marketplace();
 		this.allPlayers = new ArrayList<Player>();
@@ -57,17 +52,20 @@ public class GamePlay {
 		this.allEdges = new ArrayList<Edge>();
 		this.allMaps = new ArrayList<Map>();
 
-		for (int i = 0; i < playerAmount; ++i) {
-			allPlayers.add(new Player("P" + Integer.toString(i)));
-		}
-
+		this.initPlayer();
 		this.initMaps();
 		this.initNodes();
 	}
 
+	private void initPlayer() {
+		for (int i = 0; i < playerAmount; ++i) {
+			allPlayers.add(new Player("P" + Integer.toString(i)));
+		}
+	}
+
 	private void initMaps() {
 		ArrayList<MaterialType> allMaterial = Utilities.getAllMaterials();
-		
+
 		for (MaterialType material : allMaterial) {
 			for (int i = 0; i < 5; ++i) {
 				Map newMap = new Map(material);
@@ -79,18 +77,18 @@ public class GamePlay {
 	}
 
 	private void initNodes() {
-		for (int i = 0; i < 36; ++i) {
+		for (int i = 0; i < (int)Math.pow(Config.SIDE_MAP_AMOUNT+1, 2); ++i) {
 			Node newNode = new Node(BuildingType.EMPTYHOUSE);
 			allNodes.add(newNode);
 		}
 
-		for (int i = 0; i < 5; ++i) {
-			for (int j = 0; j < 5; ++j) {
-				int index = i * 5 + j;
+		for (int i = 0; i < Config.SIDE_MAP_AMOUNT; ++i) {
+			for (int j = 0; j < Config.SIDE_MAP_AMOUNT; ++j) {
+				int index = i * Config.SIDE_MAP_AMOUNT + j;
 				Map map = allMaps.get(index);
 
-				Node topLeftNode = allNodes.get(index + i), topRightNode = allNodes.get(index + i + 6),
-						botLeftNode = allNodes.get(index + i + 1), botRightNode = allNodes.get(index + i + 7);
+				Node topLeftNode = allNodes.get(index + i), topRightNode = allNodes.get(index + i + Config.SIDE_MAP_AMOUNT + 1),
+						botLeftNode = allNodes.get(index + i + 1), botRightNode = allNodes.get(index + i + Config.SIDE_MAP_AMOUNT + 2);
 
 //				top left
 				map.setSideNode(0, topLeftNode);
@@ -138,31 +136,42 @@ public class GamePlay {
 		Random random = new Random();
 		int target = random.nextInt(3);
 		Player currentPlayer = Utilities.getCurrentPlayer();
-		if(target == 0) {
+		if (target == 0) {
 			currentPlayer.addEffect(new BombCard());
-		}else if(target == 1) {
+		} else if (target == 1) {
 			currentPlayer.addEffect(new NuclearCard());
-		}else {
+		} else {
 			currentPlayer.addEffect(new StrongerCard());
 		}
 	}
 
 	public boolean goToNextPlayer() {
+//		can not go to next player
 		if (!isRoll && currentRound > 0)
 			return false;
+
 		if (currentRound > 0)
 			isRoll = false;
-		if (currentRound != -1)
+
+		if (currentRound != Config.PREPARE_ROUND_2) {
+//			prepare phase reverse case
 			currentPlayer++;
-		else
+		} else {
+//			normal case
 			currentPlayer--;
-		if (currentPlayer == playerAmount && currentRound != -2) {
+		}
+
+//		end round condition
+		if (currentPlayer == playerAmount && currentRound != Config.PREPARE_ROUND_1) {
+//			normal round
 			currentPlayer = 0;
 			currentRound++;
-		} else if (currentRound == -2 && currentPlayer == playerAmount) {
+		} else if (currentRound == Config.PREPARE_ROUND_1 && currentPlayer == playerAmount) {
+//			prepare phase 1
 			currentRound++;
 			currentPlayer--;
-		} else if (currentPlayer == -1 && currentRound == -1) {
+		} else if (currentPlayer == -1 && currentRound == Config.PREPARE_ROUND_2) {
+//			prepare phase 2
 			currentPlayer++;
 			currentRound = 1;
 			isRoll = false;
@@ -171,8 +180,11 @@ public class GamePlay {
 	}
 
 	public boolean rollDice() {
-		if (isRoll)
-			return false;
+//		already roll the dice
+		if (isRoll) {
+			return false;			
+		}
+		
 		isRoll = true;
 		Random random = new Random();
 		rollNumber = random.nextInt(6) + 1;
@@ -186,12 +198,6 @@ public class GamePlay {
 		return true;
 	}
 
-	public void trade(Player p1, Player p2) {
-	}
-
-	public void addPlayer(Player player) {
-	}
-
 	public static GamePlay getInstance() {
 		if (instance == null) {
 			instance = new GamePlay();
@@ -199,44 +205,44 @@ public class GamePlay {
 		return instance;
 	}
 
-	public static GamePlay getInstance(int roundAmount) {
-		instance = new GamePlay(roundAmount);
+	public static GamePlay getInstance(int playerAmount) {
+		instance = new GamePlay(playerAmount);
 		return instance;
 	}
 
 	public ArrayList<Pair<String, Integer>> getResult() {
 		ArrayList<Pair<String, Integer>> result = new ArrayList<Pair<String, Integer>>();
 		ArrayList<BuildingType> allBuildingType = new ArrayList<BuildingType>();
-		allBuildingType.addAll(Arrays.asList(BuildingType.HOUSE, BuildingType.TOWER, BuildingType.CITY, BuildingType.ROAD, BuildingType.SUPERROAD));
+		allBuildingType.addAll(Arrays.asList(BuildingType.HOUSE, BuildingType.TOWER, BuildingType.CITY,
+				BuildingType.ROAD, BuildingType.SUPERROAD));
 		Player longestRoadPlayer = Utilities.getLongestRoadPlayer();
-		
+
 		for (Player player : allPlayers) {
 			int score = 0;
-			for(BuildingType type: allBuildingType) {
+//			House and Road score SCORE_1
+//			Tower and Super road SCORE_2
+//			City score SCORE_3
+//			have longest road score SCORE_LONGEST_PATH (if have only 1 player)
+			for (BuildingType type : allBuildingType) {
 				int typeCount = Utilities.countBuildingType(player, type);
-				if(type == BuildingType.TOWER || type == BuildingType.SUPERROAD) {
-					score += typeCount*3;
-				}else if(type == BuildingType.CITY) {
-					score += typeCount*5;
-				}else {
-					score += typeCount;
+				if (type == BuildingType.TOWER || type == BuildingType.SUPERROAD) {
+					score += typeCount * Config.SCORE_2;
+				} else if (type == BuildingType.CITY) {
+					score += typeCount * Config.SCORE_3;
+				} else {
+					score += typeCount * Config.SCORE_1;
 				}
-				System.out.println(typeCount);
 			}
-			if(longestRoadPlayer != null && longestRoadPlayer.equals(player)) {
-				score += 7;
+			if (longestRoadPlayer != null && longestRoadPlayer.equals(player)) {
+				score += Config.SCORE_LONGEST_PATH;
 			}
-//			System.out.println(score);
 			result.add(new Pair<String, Integer>(player.getName(), -score));
 		}
-		
+
 		Collections.sort(result, Comparator.comparingInt(Pair::getValue));
+//		end this game
 		instance = null;
 		return result;
-	}
-
-	public int getRoundAmount() {
-		return roundAmount;
 	}
 
 	public int getCurrentRound() {

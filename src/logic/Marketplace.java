@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import config.Config;
 import type.MaterialType;
 import utils.Utilities;
 
@@ -19,17 +20,18 @@ public class Marketplace {
 	public void reMarket() {
 		this.tradeList = new ArrayList<ArrayList<MaterialType>>();
 		this.exchangeRate = new ArrayList<Integer>();
-		this.amount = 20;
+		this.amount = Config.TRADE_AMOUNT;
 		Random random = new Random();
 		ArrayList<MaterialType> allMaterials = Utilities.getAllMaterials();
+		int materialsSize = allMaterials.size();
 		
-		for(int i=0;i<5;++i) {
-			int num1 = random.nextInt(5), num2 = random.nextInt(5);
+		for(int i=0;i<Config.NUMBER_TRADE_LIST;++i) {
+			int num1 = random.nextInt(materialsSize), num2 = random.nextInt(materialsSize);
 			while(num1 == num2) {
-				num2 = random.nextInt(5);
+				num2 = random.nextInt(materialsSize);
 			}
 			tradeList.add(new ArrayList<MaterialType>(Arrays.asList(allMaterials.get(num1), allMaterials.get(num2))));
-			exchangeRate.add(random.nextInt(3)+1);
+			exchangeRate.add(random.nextInt(Config.MAX_RATE)+1);
 		}
 //		random everything
 		return ;
@@ -45,7 +47,7 @@ public class Marketplace {
 	}
 	
 	public boolean canTrade(int idx){
-		if(idx >= 5 || amount <= 0) return false;
+		if(idx >= Config.NUMBER_TRADE_LIST || amount <= 0) return false;
 	
 		Player currentPlayer = Utilities.getCurrentPlayer();
 		MaterialType target = tradeList.get(idx).get(0);
@@ -57,10 +59,6 @@ public class Marketplace {
 	
 	public ArrayList<MaterialType> getTradeListByIdx(int idx){
 		return tradeList.get(idx);
-	}
-	
-	public ArrayList<ArrayList<MaterialType>> getTradeList() {
-		return tradeList;
 	}
 
 	public ArrayList<Integer> getExchangeRate() {
