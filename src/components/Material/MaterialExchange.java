@@ -5,15 +5,19 @@ import config.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import logic.GamePlay;
 import logic.Marketplace;
 import type.MaterialType;
 import utils.Utilities;
 
-public class MaterialExchange extends HBox {
+public class MaterialExchange extends BorderPane {
 	private Button exchangeButton;
 	private Text amount;
 	private int idx;
@@ -39,9 +43,18 @@ public class MaterialExchange extends HBox {
 		HBox.setMargin(targetCard, new Insets(Config.TINY_MARGIN));
 		HBox.setMargin(this.amount, new Insets(Config.TINY_MARGIN));
 		HBox.setMargin(exchangeButton, new Insets(Config.TINY_MARGIN));
+		HBox exchangeRate = new HBox();
+		VBox amountContainer = new VBox();
+		amountContainer.getChildren().add(amount);
+		amountContainer.setAlignment(Pos.CENTER);
+		exchangeRate.getChildren().addAll(sourceCard, amountContainer, targetCard);
+		
+		sourceCard.setAlignment(Pos.CENTER);
+		targetCard.setAlignment(Pos.CENTER);
 
-		this.setAlignment(Pos.CENTER_LEFT);
-		this.getChildren().addAll(sourceCard, this.amount, targetCard, exchangeButton);
+		this.setLeft(exchangeRate);
+		this.setRight(exchangeButton);
+		BorderPane.setAlignment(exchangeButton, Pos.CENTER_RIGHT);
 	}
 	
 	public void initExchangeButton() {

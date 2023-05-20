@@ -49,7 +49,7 @@ public class HomePane extends VBox {
 
 		this.initPlayButton();
 		this.initStartButton();
-		StackPane.setMargin(welcomeText, new Insets(80));
+		StackPane.setMargin(welcomeText, new Insets(Config.HOME_MARGIN));
 		this.getChildren().addAll(welcomeText, playButton, amountSelector, startButton);
 	}
 
@@ -88,13 +88,9 @@ public class HomePane extends VBox {
 
 	private void setupBackgroundImage(String imagePath) {
 		Image image = new Image(imagePath);
-		// new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage,
-		// contain, cover)
-		BackgroundSize backgroundSize = new BackgroundSize(1000, 600, true, true, true, false);
-		// new BackgroundImage(image, repeatX, repeatY, position, size)
+		BackgroundSize backgroundSize = new BackgroundSize(Config.BACKGROUND_IMAGE_HEIGHT, Config.BACKGROUND_IMAGE_WIDTH, true, true, true, false);
 		BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT,
 				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
-		// new Background(images...)
 		this.background = new Background(backgroundImage);
 	}
 }

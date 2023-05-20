@@ -60,7 +60,6 @@ public class BuyCardPopup extends Popup {
 	private void initFooter() {
 		this.footer = new HBox();
 		footer.setAlignment(Pos.CENTER);
-//		footer.setSpacing(20);
 
 		reset = new FooterButton("Reset");
 		confirm = new FooterButton("Confirm");
@@ -79,15 +78,14 @@ public class BuyCardPopup extends Popup {
 			GamePlay.getInstance().draw();
 			System.out.println(Utilities.getCurrentPlayer().getAllEffectCards().size());
 		});
-
+		
+		HBox.setMargin(confirm, new Insets(Config.SMALL_MARGIN));
+		HBox.setMargin(reset, new Insets(Config.SMALL_MARGIN));
 		this.footer.getChildren().addAll(reset, confirm);
 
-//		popupContent.getChildren().add(footer);
 	}
 
 	private void initContent() {
-//		Label messageLabel = new Label("See Your Card");
-//		messageLabel.setFont(Font.font(32));
 		this.allMaterials = Utilities.getCurrentPlayer().getAllMaterials();
 		this.allAmounts = new ArrayList<Integer>();
 
@@ -99,7 +97,6 @@ public class BuyCardPopup extends Popup {
 				new Background(new BackgroundFill(Color.WHITE, new CornerRadii(Config.BORDER_RADIUS), null)));
 		this.header = new Text("Buy Effect Card");
 		this.header.setFont(Font.font(Config.LARGE_FONT));
-//		popupContent.getChildren().add(header);
 
 		this.controlRate = new HBox();
 		this.controlRate.setPrefHeight(Config.BUYCARD_POPUP_HEIGHT);
@@ -115,7 +112,7 @@ public class BuyCardPopup extends Popup {
 			Utilities.updateCard();
 			this.hide();
 		});
-//		Utilities.updateCard();
+		
 		for (MaterialPack material : this.allMaterials) {
 			BuyCardContainer card = new BuyCardContainer(material.getType().getType(), material.getAmount());
 			this.allBuyCardContainers.add(card);
@@ -124,7 +121,6 @@ public class BuyCardPopup extends Popup {
 			this.controlRate.getChildren().add(card);
 		}
 
-//		this.controlRate.getChildren().addAll(closeButton, messageLabel);	
 	}
 
 	public void updateAmount() {
