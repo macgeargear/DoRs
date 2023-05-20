@@ -30,6 +30,12 @@ public class Config {
 	// Entire Screen
 	public static final int SCREEN_WIDTH = 1200;
 	public static final int SCREEN_HEIGH = 750;
+	
+	public static final int GAMERESULT_WIDTH = 200;
+	public static final int GAMERESULT_HEIGHT = 300;
+	
+	public static final int BACKGROUND_IMAGE_WIDTH = 1000;
+	public static final int BACKGROUND_IMAGE_HEIGHT = 600;
 
 	// EffectCard Popup Width
 	public static final int EFFECTCARD_POPUP_WIDTH = 400;
@@ -42,6 +48,8 @@ public class Config {
 	// Size
 	public static final int BUTTON_HEIGHT = 30;
 	public static final int BORDER_RADIUS = 12;
+	
+	public static final int SMALL_LINE_SPACING = 15;
 	
 	public static final int DICE_SIZE = 100;
 

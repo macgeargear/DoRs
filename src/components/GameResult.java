@@ -2,6 +2,7 @@ package components;
 
 import java.util.ArrayList;
 
+import config.Config;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
@@ -22,10 +23,10 @@ public class GameResult extends Popup{
 	private VBox content;
 	public GameResult() {
 		content = new VBox();
-		content.setPrefSize(200, 300);
-		content.setSpacing(15);
+		content.setPrefSize(Config.GAMERESULT_WIDTH, Config.GAMERESULT_HEIGHT);
+		content.setSpacing(Config.SMALL_LINE_SPACING);
 		content.setAlignment(Pos.CENTER);
-		content.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(12), null)));
+		content.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(Config.BORDER_RADIUS), null)));
 		
 		this.initHeader();
 		this.initContent();
@@ -36,7 +37,7 @@ public class GameResult extends Popup{
 	
 	private void initHeader() {
 		Text header = new Text("Ranking");
-		header.setFont(new Font(24));
+		header.setFont(new Font(Config.MEDIUM_FONT));
 		content.getChildren().add(header);
 	}
 	
@@ -49,11 +50,11 @@ public class GameResult extends Popup{
 		for(Pair<String, Integer> player: result) {
 			HBox rank = new HBox();
 			rank.setAlignment(Pos.CENTER);
-			rank.setSpacing(10);
+			rank.setSpacing(Config.SMALL_LINE_SPACING);
 			
-			Font fontSize = new Font(16);
+			Font fontSize = new Font(Config.SMALL_FONT);
 			if(cnt == 1) {
-				fontSize = new Font(20);
+				fontSize = new Font(Config.MEDIUM_FONT);
 			}
 			Text rankNumber = new Text(Integer.toString(cnt));
 			rankNumber.setFont(fontSize);

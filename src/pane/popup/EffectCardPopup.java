@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import card.EffectCard;
 import components.Button.ExitButton;
+import components.Button.FooterButton;
 import config.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,11 +13,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
 import logic.GamePlay;
 import pane.ControlPane;
@@ -42,7 +46,7 @@ public class EffectCardPopup extends Popup {
 
 	private void initContent() {
 		Label messageLabel = new Label("This is Yout Effect Cards");
-		messageLabel.setFont(Font.font(32));
+		messageLabel.setFont(Font.font(Config.LARGE_FONT));
 		this.allEffects = new ArrayList<CardType>(Arrays.asList(CardType.BOMB, CardType.NUCLEAR, CardType.STRONGER));
 		
 		this.popupContent = new VBox();
@@ -59,8 +63,9 @@ public class EffectCardPopup extends Popup {
 		this.popupContent.getChildren().addAll(closeButton, messageLabel);
 		for (CardType effect : this.allEffects) {
 			Label newLabel = new Label(" " + effect);
-			Button useEffectButton = new Button("Use");
-			VBox card = initCard(newLabel, effect, useEffectButton);
+			Button useEffectButton = new FooterButton("Use");
+			HBox.setMargin(useEffectButton, new Insets(0,0,0,2*Config.LARGE_MARGIN));
+			BorderPane card = initCard(newLabel, effect, useEffectButton);
 			newLabel.setFont(Font.font(Config.MEDIUM_FONT));
 			allLabels.add(newLabel);
 			allUseEffectButton.add(useEffectButton);
@@ -108,26 +113,29 @@ public class EffectCardPopup extends Popup {
 		VBox.setMargin(closeButton, new Insets(Config.MEDIUM_MARGIN));
 	}
 
-	private VBox initCard(Label amount, CardType type, Button button) {
-		VBox card = new VBox();
-		
+	private BorderPane initCard(Label amount, CardType type, Button button) {
+		BorderPane card = new BorderPane();
+		card.setPadding(new Insets(Config.SMALL_PADDING));
 		card.setBackground(new Background(new BackgroundFill(Color.BEIGE, new CornerRadii(Config.BORDER_RADIUS), null)));
-		card.setAlignment(Pos.CENTER);
+//		card.setAlignment(Pos.CENTER);
 		button.setDisable(true);
 		card.setPrefWidth(Config.CARD_SIZE);
 		card.setPrefHeight(Config.CARD_SIZE);
 
 		HBox titleCard = new HBox();
-		Label typeLabel = new Label(type.toString());
+		Text typeLabel = new Text(type.toString());
 
 		VBox.setMargin(card, new Insets(Config.MEDIUM_MARGIN));
 		VBox.setMargin(titleCard, new Insets(Config.MEDIUM_MARGIN));
-		typeLabel.setAlignment(Pos.CENTER);
+		typeLabel.setTextAlignment(TextAlignment.CENTER);
 		typeLabel.setFont(Font.font(Config.MEDIUM_FONT));
 
 		titleCard.getChildren().addAll(typeLabel, amount, button);
-			
-		card.getChildren().addAll(titleCard);
+		card.setLeft(typeLabel);	
+		BorderPane.setAlignment(typeLabel, Pos.CENTER_LEFT);
+		card.setCenter(amount);
+		card.setRight(button);
+//		card.getChildren().addAll(titleCard);
 		return card;
 	}
 

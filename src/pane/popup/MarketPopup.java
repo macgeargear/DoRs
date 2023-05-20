@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import components.Button.CustomButton;
 import components.Material.MaterialExchange;
+import config.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -44,11 +45,11 @@ public class MarketPopup extends Popup {
 		this.initTitle();
 		this.initExchanges();
 		this.initBackButton();
-		this.popupContent.setPadding(new Insets(12));
-		this.popupContent.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(12), null)));
+		this.popupContent.setPadding(new Insets(Config.SMALL_PADDING));
+		this.popupContent.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(Config.BORDER_RADIUS), null)));
 
 		for (MaterialExchange exchange : allExchanges) {
-			VBox.setMargin(exchange, new Insets(20));
+			VBox.setMargin(exchange, new Insets(Config.MEDIUM_MARGIN));
 		}
 
 		this.popupContent.getChildren().addAll(backButton, header, exchangeContainer);
@@ -80,8 +81,8 @@ public class MarketPopup extends Popup {
 		
 		this.title = new Text("Exchange Material Market");
 		this.amount = new Text(" " + GamePlay.getInstance().getMarketplace().getAmount());
-		this.title.setFont(Font.font(40));
-		this.amount.setFont(Font.font(40));
+		this.title.setFont(Font.font(Config.LARGE_FONT));
+		this.amount.setFont(Font.font(Config.LARGE_FONT));
 		
 		this.header.getChildren().addAll(title, amount);
 		this.title.setTextAlignment(TextAlignment.CENTER);

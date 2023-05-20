@@ -16,7 +16,7 @@ public class RollDice extends Button {
 
 	public RollDice(String text) {
 		super(text);
-		this.setPadding(new Insets(Config.MEDIUM_PADDING));
+		this.setPadding(new Insets(Config.SMALL_PADDING));
 		this.setMinHeight(Config.DICE_SIZE);
 		this.setMinWidth(Config.DICE_SIZE);
 		this.setFont(Font.font(30));
