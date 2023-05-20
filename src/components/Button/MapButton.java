@@ -56,7 +56,7 @@ public class MapButton extends Button {
 	}
 	
 	private String getColor() {
-		MaterialType type = map.getType().getType();
+		MaterialType type = map.getType();
 		if(type == MaterialType.WOOD) {
 			return Config.WOOD;
 		}else if(type == MaterialType.WATER) {

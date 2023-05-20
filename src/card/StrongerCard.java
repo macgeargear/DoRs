@@ -14,7 +14,6 @@ public class StrongerCard extends EffectCard {
 
 	public StrongerCard() {
 		super(CardType.STRONGER);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

@@ -19,7 +19,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import logic.GamePlay;
 import logic.Player;
-import material.Material;
 import pane.ControlPane;
 import type.BuildingType;
 import type.CardType;
@@ -166,16 +165,9 @@ public class Utilities {
 
 	}
 
-	public static ArrayList<Material> getAllMaterials() {
-		Material wood = new Material(MaterialType.WOOD);
-		Material water = new Material(MaterialType.WATER);
-		Material rock = new Material(MaterialType.ROCK);
-		Material sand = new Material(MaterialType.SAND);
-		Material gunpowder = new Material(MaterialType.GUNPOWDER);
-
-		ArrayList<Material> allMaterial = new ArrayList<Material>();
-		allMaterial.addAll(Arrays.asList(wood, water, rock, sand, gunpowder));
-
+	public static ArrayList<MaterialType> getAllMaterials() {
+		ArrayList<MaterialType> allMaterial = new ArrayList<MaterialType>();
+		allMaterial.addAll(Arrays.asList(MaterialType.values()));
 		return allMaterial;
 	}
 

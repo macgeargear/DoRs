@@ -7,10 +7,8 @@ import logic.Player;
 import type.BuildingType;
 import type.MaterialType;
 import utils.Utilities;
-import utils.getTotalOwners;
 
 public class Node extends Building {
-	private int score;
 	private ArrayList<Edge> sideEdges;
 
 	public Node(BuildingType type) {
@@ -21,23 +19,10 @@ public class Node extends Building {
 		}
 	}
 
-	public int getScore() {
-		return this.score;
-	}
-
-	public ArrayList<Edge> getSideEdges() {
-		return this.sideEdges;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
 	public void destroy() {
 		if(this.getType() != BuildingType.CITY) {			
 			this.setType(BuildingType.EMPTYHOUSE);
 			this.setOwner(null);
-			this.setScore(0);
 		}
 	}
 
@@ -62,10 +47,6 @@ public class Node extends Building {
 		}
 	}
 
-	public void destroySideEdge(int position) {
-		this.sideEdges.get(position).destroy();
-	}
-
 	public void setSideEdge(int position, Edge edge) {
 		this.sideEdges.set(position, edge);
 	}
@@ -81,9 +62,9 @@ public class Node extends Building {
 	@Override
 	public boolean canUpgrade() {
 		Player currentPlayer = Utilities.getCurrentPlayer();
-		if (currentPlayer.getMaterialPack(MaterialType.ROCK).getAmount() >= 1
-				&& currentPlayer.getMaterialPack(MaterialType.WOOD).getAmount() >= 1
-				&& currentPlayer.getMaterialPack(MaterialType.WATER).getAmount() >= 1) {
+		if (currentPlayer.countMaterial(MaterialType.ROCK) >= 1
+				&& currentPlayer.countMaterial(MaterialType.WOOD) >= 1
+				&& currentPlayer.countMaterial(MaterialType.WATER) >= 1) {
 			if (this.getOwner() == null && Utilities.haveSideEdge(this)) {
 				return true;
 			}else if(this.getOwner() != null && this.getOwner().equals(currentPlayer)) {
@@ -93,8 +74,11 @@ public class Node extends Building {
 			}
 		}
 
-		// edit later
 		return false;
+	}
+	
+	public ArrayList<Edge> getSideEdges() {
+		return this.sideEdges;
 	}
 
 }

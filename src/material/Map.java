@@ -8,12 +8,12 @@ import buildings.Place;
 import type.MaterialType;
 
 public class Map extends Place {
-	private Material type;
+	private MaterialType type;
 	private ArrayList<Node> sideNodes;
 	private int number;
 	
 
-	public Map(Material type) {
+	public Map(MaterialType type) {
 		Random random = new Random();
 		this.type = type;
 		this.setNumber(random.nextInt(6)+1);
@@ -28,7 +28,7 @@ public class Map extends Place {
 		if (this.isActive()) {
 			for (Node node : this.sideNodes) {
 				if(node.getOwner() != null) {
-					node.getOwner().increaseMaterial(this.type.getType(), 1);					
+					node.getOwner().increaseMaterial(this.type, 1);					
 				}
 			}
 		}
@@ -52,7 +52,7 @@ public class Map extends Place {
 		return sideNodes;
 	}
 
-	public Material getType() {
+	public MaterialType getType() {
 		return type;
 	}
 

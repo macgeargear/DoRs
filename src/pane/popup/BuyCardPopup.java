@@ -114,7 +114,7 @@ public class BuyCardPopup extends Popup {
 		});
 		
 		for (MaterialPack material : this.allMaterials) {
-			BuyCardContainer card = new BuyCardContainer(material.getType().getType(), material.getAmount());
+			BuyCardContainer card = new BuyCardContainer(material.getType(), material.getAmount());
 			this.allBuyCardContainers.add(card);
 			HBox.setMargin(card, new Insets(Config.SMALL_MARGIN));
 			card.setPadding(new Insets(Config.LARGE_PADDING));

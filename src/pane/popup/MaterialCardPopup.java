@@ -21,7 +21,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
-import material.Material;
 import material.MaterialPack;
 import type.MaterialType;
 import utils.Utilities;
@@ -68,9 +67,9 @@ public class MaterialCardPopup extends Popup {
 		VBox.setMargin(closeButton, new Insets(24));
 	}
 
-	private VBox initCard(Label amount, Material type) {
+	private VBox initCard(Label amount, MaterialType type) {
 		VBox card = new VBox();
-		Paint color = Utilities.getColor(type.getType());
+		Paint color = Utilities.getColor(type);
 		
 		card.setBackground(new Background(new BackgroundFill(color, new CornerRadii(12), null)));
 		card.setAlignment(Pos.CENTER);
@@ -78,7 +77,7 @@ public class MaterialCardPopup extends Popup {
 		card.setPrefHeight(60);
 
 		HBox titleCard = new HBox();
-		Label typeLabel = new Label(type.getType().toString());
+		Label typeLabel = new Label(type.toString());
 
 		VBox.setMargin(card, new Insets(24));
 		VBox.setMargin(titleCard, new Insets(24));
