@@ -3,6 +3,7 @@ package pane.popup;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import buildings.Place;
 import card.EffectCard;
 import components.Button.ExitButton;
 import components.Button.FooterButton;
@@ -22,7 +23,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
-import logic.GamePlay;
+import logic.Player;
 import pane.ControlPane;
 import type.CardType;
 import utils.Utilities;
@@ -40,7 +41,7 @@ public class EffectCardPopup extends Popup {
 		this.centerOnScreen();
 		this.initContent();
 		this.updateLabel();
-		
+
 		this.getContent().add(popupContent);
 	}
 
@@ -48,11 +49,12 @@ public class EffectCardPopup extends Popup {
 		Label messageLabel = new Label("This is Yout Effect Cards");
 		messageLabel.setFont(Font.font(Config.LARGE_FONT));
 		this.allEffects = new ArrayList<CardType>(Arrays.asList(CardType.BOMB, CardType.NUCLEAR, CardType.STRONGER));
-		
+
 		this.popupContent = new VBox();
 //		this.popupContent.setPrefHeight(768);
 		this.popupContent.setPrefWidth(Config.EFFECTCARD_POPUP_WIDTH);
-		this.popupContent.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(Config.BORDER_RADIUS), null)));
+		this.popupContent.setBackground(
+				new Background(new BackgroundFill(Color.WHITE, new CornerRadii(Config.BORDER_RADIUS), null)));
 		this.popupContent.setAlignment(Pos.CENTER);
 
 		this.closeButton = new ExitButton("X");
@@ -64,49 +66,46 @@ public class EffectCardPopup extends Popup {
 		for (CardType effect : this.allEffects) {
 			Label newLabel = new Label(" " + effect);
 			Button useEffectButton = new FooterButton("Use");
-			HBox.setMargin(useEffectButton, new Insets(0,0,0,2*Config.LARGE_MARGIN));
+			HBox.setMargin(useEffectButton, new Insets(0, 0, 0, 2 * Config.LARGE_MARGIN));
 			BorderPane card = initCard(newLabel, effect, useEffectButton);
 			newLabel.setFont(Font.font(Config.MEDIUM_FONT));
 			allLabels.add(newLabel);
 			allUseEffectButton.add(useEffectButton);
-			
-			
-			useEffectButton.setOnAction(e->{
+
+			useEffectButton.setOnAction(e -> {
 				ControlPane paneInstance = ControlPane.getInstance();
-				for(EffectCard effectCard: Utilities.getCurrentPlayer().getAllEffectCards()) {
-					if(effectCard.getType() == effect) {		
-						Utilities.getCurrentPlayer().getAllEffectCards().remove(effectCard);
-						effectCard.play(Utilities.getSelectPlace());
-						break;
-					}
-				}
-				if(effect != CardType.STRONGER) {
-					if(paneInstance.getSelectEdge() != null) {
+				Player currentPlayer = Utilities.getCurrentPlayer();
+				EffectCard effectCard = currentPlayer.getFirstEffectCardType(effect);
+				Place place = Utilities.getSelectPlace();
+				effectCard.play(place);
+
+				if (effect != CardType.STRONGER) {
+					if (paneInstance.getSelectEdge() != null) {
 						paneInstance.getSelectEdge().setDisable(true);
 						paneInstance.getSelectEdge().setupSyle();
-					}else if(paneInstance.getSelectNode() != null) {
+					} else if (paneInstance.getSelectNode() != null) {
 						paneInstance.getSelectNode().setDisable(true);
 						paneInstance.getSelectNode().setupSyle();
-					}else if(paneInstance.getSelectMap() != null) {
+					} else if (paneInstance.getSelectMap() != null) {
 						paneInstance.getSelectMap().setDisable(true);
 					}
-				}else {
-					if(paneInstance.getSelectEdge() != null) {
+				} else {
+					if (paneInstance.getSelectEdge() != null) {
 						paneInstance.getSelectEdge().setupSyle();
-					}else if(paneInstance.getSelectNode() != null) {
+					} else if (paneInstance.getSelectNode() != null) {
 						paneInstance.getSelectNode().setupSyle();
 					}
 				}
 				useEffectButton.setDisable(true);
 				paneInstance.resetSelect();
 				Utilities.updateCard();
-				if(effect == CardType.NUCLEAR) {
+				if (effect == CardType.NUCLEAR) {
 					new VideoPathPopup(Config.ATOMIC);
-				}else if(effect == CardType.BOMB) {
+				} else if (effect == CardType.BOMB) {
 					new VideoPathPopup(Config.EXPLOSION);
 				}
 			});
-			
+
 			this.popupContent.getChildren().add(card);
 		}
 
@@ -116,7 +115,8 @@ public class EffectCardPopup extends Popup {
 	private BorderPane initCard(Label amount, CardType type, Button button) {
 		BorderPane card = new BorderPane();
 		card.setPadding(new Insets(Config.SMALL_PADDING));
-		card.setBackground(new Background(new BackgroundFill(Color.BEIGE, new CornerRadii(Config.BORDER_RADIUS), null)));
+		card.setBackground(
+				new Background(new BackgroundFill(Color.BEIGE, new CornerRadii(Config.BORDER_RADIUS), null)));
 //		card.setAlignment(Pos.CENTER);
 		button.setDisable(true);
 		card.setPrefWidth(Config.CARD_SIZE);
@@ -131,7 +131,7 @@ public class EffectCardPopup extends Popup {
 		typeLabel.setFont(Font.font(Config.MEDIUM_FONT));
 
 		titleCard.getChildren().addAll(typeLabel, amount, button);
-		card.setLeft(typeLabel);	
+		card.setLeft(typeLabel);
 		BorderPane.setAlignment(typeLabel, Pos.CENTER_LEFT);
 		card.setCenter(amount);
 		card.setRight(button);
@@ -143,7 +143,8 @@ public class EffectCardPopup extends Popup {
 		int idx = 0;
 		for (CardType effect : this.allEffects) {
 			allLabels.get(idx).setText(" " + Utilities.countEffectCard(effect));
-			allUseEffectButton.get(idx).setDisable(!Utilities.canUseEffect(effect));
+			allUseEffectButton.get(idx).setDisable(Utilities.getCurrentPlayer().getFirstEffectCardType(effect) == null
+					|| !Utilities.getCurrentPlayer().getFirstEffectCardType(effect).canPlay(Utilities.getSelectPlace()));
 			idx++;
 		}
 	}

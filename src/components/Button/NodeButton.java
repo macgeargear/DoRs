@@ -96,7 +96,7 @@ public class NodeButton extends Button {
 		if (type == BuildingType.EMPTYHOUSE || type == BuildingType.HOUSE) {
 			setShape(new Circle(15));
 		} else if (type == BuildingType.TOWER) {
-			setShape(new Polygon(100.0, 0.0, 0.0, 100.0, 100.0, 100.0));
+			setShape(new Polygon(50.0, 0.0, 0.0, 100.0, 100.0, 100.0));
 		} else {
 			setShape(new Rectangle(100, 100));
 		}

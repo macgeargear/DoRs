@@ -9,7 +9,6 @@ import config.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -29,7 +28,6 @@ public class BuyCardPopup extends Popup {
 	private HBox controlRate;
 	private Button closeButton;
 	private ArrayList<MaterialPack> allMaterials;
-	private ArrayList<Integer> allAmounts;
 	private ArrayList<BuyCardContainer> allBuyCardContainers;
 	private Button reset;
 	private Button confirm;
@@ -76,7 +74,6 @@ public class BuyCardPopup extends Popup {
 			Utilities.updateCard();
 			confirm.setDisable(true);
 			GamePlay.getInstance().draw();
-			System.out.println(Utilities.getCurrentPlayer().getAllEffectCards().size());
 		});
 		
 		HBox.setMargin(confirm, new Insets(Config.SMALL_MARGIN));
@@ -87,7 +84,6 @@ public class BuyCardPopup extends Popup {
 
 	private void initContent() {
 		this.allMaterials = Utilities.getCurrentPlayer().getAllMaterials();
-		this.allAmounts = new ArrayList<Integer>();
 
 		this.popupContent = new BorderPane();
 		this.popupContent.setPrefHeight(400);

@@ -72,6 +72,12 @@ public class EdgeButton extends Rectangle{
 	
 	public void setupSyle() {
 		setFill(Color.web(this.getColor()));
+		if(edge.getType() == BuildingType.SUPERROAD) {
+			setStrokeWidth(2);
+			setStroke(Color.BLACK);
+		}else {
+			setStroke(null);
+		}
 	}
 	
 	private String getColor() {
