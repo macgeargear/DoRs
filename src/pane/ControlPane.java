@@ -15,7 +15,7 @@ import pane.popup.BuyCardPopup;
 import pane.popup.MarketPopup;
 
 public class ControlPane {
-	
+
 	private static ControlPane instance = null;
 	private ArrayList<PlayerContainer> allPlayerContainers;
 	private HeaderGame gameHeader;
@@ -25,17 +25,15 @@ public class ControlPane {
 	private MapButton selectMap;
 	private Scene gameScene;
 	private Scene homeScene;
-	private Scene marketScene;
 	private CardPopup cardPopup;
 	private MarketPopup marketPopup;
 	private BuyCardPopup buyCardPopup;
-	private GamePane gamePane;
-	private HomePane homePane;
-	
+
 	private Stage stage;
-		
+
 	public ControlPane(Stage stage) {
-		if(instance == null) this.instance = this;
+		if (instance == null)
+			this.instance = this;
 		this.selectEdge = null;
 		this.selectNode = null;
 		this.selectMap = null;
@@ -43,56 +41,44 @@ public class ControlPane {
 		this.gameHeader = new HeaderGame();
 		this.allPlayerContainers = new ArrayList<PlayerContainer>();
 
-		
-//		this.gamePane = new GamePane();
-//		this.homePane = new HomePane();
-//		this.marketPane = new MarketPane();
-		
-
 		GamePlay.getInstance(2);
 
-
-		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.HOMEPANE_HEIGHT);	
+		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.HOMEPANE_HEIGHT);
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
-//		marketScene = new Scene(new MarketPane(), Config.SCREEN_HEIGH , Config.SCREEN_HEIGH);
-		// TODO: showMaterialCardScene, showMaterialCardScene;
+
 		this.showHomeScene();
-//		this.showMarketScene();
-		
-		
-//		this.showGameScene();
 	}
-	
+
 	public void addPlayerContainer(PlayerContainer container) {
 		allPlayerContainers.add(container);
 	}
-	
+
 	public static ControlPane getInstance() {
 		return instance;
 	}
-	
+
 	public static ControlPane getInstance(Stage stage) {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new ControlPane(stage);
 		}
 		return instance;
 	}
-	
+
 	public void showHomeScene() {
 		stage.setScene(homeScene);
 	}
-	
+
 	public void showGameScene() {
 		GamePlay.getInstance(2);
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
 		stage.setScene(gameScene);
 	}
-	
+
 	public void backToGameScene() {
 		stage.setScene(gameScene);
 		stage.centerOnScreen();
 	}
-	
+
 	public Scene getGameScene() {
 		return gameScene;
 	}
@@ -112,7 +98,7 @@ public class ControlPane {
 	public void setGameHeader(HeaderGame gameHeader) {
 		this.gameHeader = gameHeader;
 	}
-	
+
 	public Stage getStage() {
 		return this.stage;
 	}
@@ -140,7 +126,7 @@ public class ControlPane {
 	public void setSelectEdge(EdgeButton selectEdge) {
 		this.selectEdge = selectEdge;
 	}
-	
+
 	public MapButton getSelectMap() {
 		return selectMap;
 	}
@@ -158,19 +144,19 @@ public class ControlPane {
 	}
 
 	public void resetSelect() {
-		if(selectEdge != null) {
+		if (selectEdge != null) {
 			selectEdge.resetSize();
 			selectEdge = null;
 		}
-		if(selectNode != null) {
+		if (selectNode != null) {
 			selectNode.resetSize();
 			selectNode = null;
 		}
-		if(selectMap != null) {
+		if (selectMap != null) {
 			selectMap.resetSize();
 			selectMap = null;
 		}
-		
+
 		footer.setBuyNodeDisable(true);
 		footer.setBuyEdgeDisable(true);
 	}
@@ -190,8 +176,5 @@ public class ControlPane {
 	public void setBuyCardPopup(BuyCardPopup buyCardPopup) {
 		this.buyCardPopup = buyCardPopup;
 	}
-	
-	
-	
-	
+
 }

@@ -11,8 +11,9 @@ import javafx.scene.paint.Paint;
 
 public class FooterButton extends Button {
 	private Background bg = new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(12), null));
-	private Background bg_hover = new Background(new BackgroundFill(Color.DEEPPINK, new CornerRadii(Config.BORDER_RADIUS), null));
-	
+	private Background bg_hover = new Background(
+			new BackgroundFill(Color.DEEPPINK, new CornerRadii(Config.BORDER_RADIUS), null));
+
 	public FooterButton(String text, Paint bg, Paint bg_hover) {
 		super(text);
 		this.bg = new Background(new BackgroundFill(bg, new CornerRadii(Config.BORDER_RADIUS), null));
@@ -27,7 +28,7 @@ public class FooterButton extends Button {
 		this.setOnMouseExited(e -> {
 			this.setBackground(this.bg);
 		});
-		
+
 	}
 
 	public FooterButton(String text) {

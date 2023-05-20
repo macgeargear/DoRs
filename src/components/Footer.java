@@ -60,7 +60,7 @@ public class Footer extends HBox {
 	private void initBuyCardButton() {
 		this.buyCardButton = new FooterButton("Buy Card");
 		buyCardPopup = new BuyCardPopup();
-		
+
 		this.buyCardButton.setOnAction(e -> {
 			if (buyCardPopup == null) {
 				buyCardPopup.show(ControlPane.getInstance().getStage());
@@ -182,7 +182,7 @@ public class Footer extends HBox {
 
 			gameInstance.getMarketplace().reMarket();
 			Utilities.updateCard();
-			if (gameInstance.getCurrentRound() == 5) {
+			if (gameInstance.getCurrentRound() == Config.MAX_ROUND) {
 				GameResult gameResult = new GameResult();
 				gameResult.show(paneInstance.getStage());
 

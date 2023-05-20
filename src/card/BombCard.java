@@ -1,11 +1,9 @@
 package card;
 
 import buildings.Building;
-import buildings.Edge;
-import buildings.Node;
 import buildings.Place;
-import logic.GamePlay;
 import logic.Player;
+import material.Map;
 import type.BuildingType;
 import type.CardType;
 import type.MaterialType;
@@ -18,12 +16,22 @@ public class BombCard extends EffectCard {
 
 	@Override
 	public boolean canPlay(Place place) {
-		GamePlay gameInstance = GamePlay.getInstance();
-		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
-		if ((place instanceof Node || place instanceof Edge) && ((Building) (place)).getOwner().equals(currentPlayer)
-				&& currentPlayer.countMaterial(MaterialType.SAND) >= 1
-				&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 1
-				&& !(((Building)place).getType().equals(BuildingType.EMPTYHOUSE) || ((Building)place).getType().equals(BuildingType.EMPTYROAD))) {
+//		if map can not use bomb
+		if (place == null || place instanceof Map) {
+			return false;
+		}
+
+//		if place is CITY, SUPERROAD or EMPTY can not use bomb
+		BuildingType type = ((Building) place).getType();
+		if (type == BuildingType.CITY || type == BuildingType.SUPERROAD || type == BuildingType.EMPTYHOUSE
+				|| type == BuildingType.EMPTYROAD) {
+			return false;
+		}
+
+//		check material
+		Player currentPlayer = Utilities.getCurrentPlayer();
+		if (currentPlayer.countMaterial(MaterialType.SAND) >= 1
+				&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 1) {
 			return true;
 		}
 		return false;
@@ -31,11 +39,12 @@ public class BombCard extends EffectCard {
 
 	@Override
 	public void play(Place place) {
-		((Building)place).destroy();
+		((Building) place).destroy();
 		Player currentPlayer = Utilities.getCurrentPlayer();
 		currentPlayer.getMaterialPack(MaterialType.SAND).decrease(1);
 		currentPlayer.getMaterialPack(MaterialType.GUNPOWDER).decrease(2);
 		place.setActive(false);
+		Utilities.getCurrentPlayer().removeEffect(this);
 	}
 
 }

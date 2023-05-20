@@ -32,6 +32,15 @@ public class Player {
 		allEffectCards.add(card);
 	}
 
+	public EffectCard getFirstEffectCardType(CardType type) {
+		for (EffectCard card : allEffectCards) {
+			if (card.getType() == type) {
+				return card;
+			}
+		}
+		return null;
+	}
+
 	public void increaseMaterial(MaterialType material, int amount) {
 		for (MaterialPack pack : allMaterials) {
 			if (pack.getType() == material) {
@@ -48,13 +57,8 @@ public class Player {
 		}
 	}
 
-	public void removeEffect(CardType type) {
-		for(EffectCard card: allEffectCards) {
-			if(card.getType() == type) {
-				allEffectCards.remove(card);
-				return ;
-			}
-		}
+	public void removeEffect(EffectCard card) {
+		allEffectCards.remove(card);
 	}
 
 	public int countMaterial(MaterialType material) {
@@ -63,7 +67,7 @@ public class Player {
 
 	public MaterialPack getMaterialPack(MaterialType material) {
 		for (MaterialPack pack : this.allMaterials) {
-			if (pack.getType() ==  material) {
+			if (pack.getType() == material) {
 				return pack;
 			}
 		}

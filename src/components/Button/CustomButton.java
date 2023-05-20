@@ -7,7 +7,7 @@ import javafx.scene.text.Font;
 public class CustomButton extends Button {
 
 	public CustomButton(String text) {
-		
+
 		this.setText(text);
 		this.setPrefHeight(40);
 		this.setPrefWidth(340);
@@ -17,13 +17,12 @@ public class CustomButton extends Button {
 		this.setFont(Font.font(32));
 
 		this.setOnMouseMoved(e -> {
-			 this.setStyle(Config.onMouseMoveButtonStyle);
+			this.setStyle(Config.onMouseMoveButtonStyle);
 		});
-		
+
 		this.setOnMouseExited(e -> {
 			this.setStyle(Config.initialButtonStyle);
 		});
 	}
-	
 
 }

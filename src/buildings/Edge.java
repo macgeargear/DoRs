@@ -49,10 +49,12 @@ public class Edge extends Building {
 
 	public boolean canUpgrade() {
 		Player currentPlayer = Utilities.getCurrentPlayer();
-		if (currentPlayer.countMaterial(MaterialType.ROCK) >= 1
-				&& currentPlayer.countMaterial(MaterialType.SAND) >= 1
+		if (currentPlayer.countMaterial(MaterialType.ROCK) >= 1 && currentPlayer.countMaterial(MaterialType.SAND) >= 1
 				&& currentPlayer.countMaterial(MaterialType.WATER) >= 1) {
 			if (this.getOwner() == null && Utilities.canCreateEdge(this)) {
+				return true;
+			} else if (this.getOwner() != null && this.getOwner().equals(currentPlayer)
+					&& this.getType() != BuildingType.SUPERROAD) {
 				return true;
 			}
 		}

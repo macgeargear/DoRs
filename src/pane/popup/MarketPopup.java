@@ -21,7 +21,6 @@ import javafx.stage.Popup;
 import logic.GamePlay;
 import pane.ControlPane;
 
-
 public class MarketPopup extends Popup {
 	private VBox popupContent;
 	private HBox header;
@@ -46,7 +45,8 @@ public class MarketPopup extends Popup {
 		this.initExchanges();
 		this.initBackButton();
 		this.popupContent.setPadding(new Insets(Config.SMALL_PADDING));
-		this.popupContent.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(Config.BORDER_RADIUS), null)));
+		this.popupContent.setBackground(
+				new Background(new BackgroundFill(Color.WHITE, new CornerRadii(Config.BORDER_RADIUS), null)));
 
 		for (MaterialExchange exchange : allExchanges) {
 			VBox.setMargin(exchange, new Insets(Config.MEDIUM_MARGIN));
@@ -58,8 +58,8 @@ public class MarketPopup extends Popup {
 	private void initExchanges() {
 
 		this.exchangeContainer = new VBox();
-		
-		for(int i=0;i<5;++i) {
+
+		for (int i = 0; i < 5; ++i) {
 			MaterialExchange newExchange = new MaterialExchange(i);
 			allExchanges.add(newExchange);
 			exchangeContainer.getChildren().add(newExchange);
@@ -78,12 +78,12 @@ public class MarketPopup extends Popup {
 	private void initTitle() {
 		this.header = new HBox();
 		this.header.setAlignment(Pos.CENTER);
-		
+
 		this.title = new Text("Exchange Material Market");
 		this.amount = new Text(" " + GamePlay.getInstance().getMarketplace().getAmount());
 		this.title.setFont(Font.font(Config.LARGE_FONT));
 		this.amount.setFont(Font.font(Config.LARGE_FONT));
-		
+
 		this.header.getChildren().addAll(title, amount);
 		this.title.setTextAlignment(TextAlignment.CENTER);
 	}

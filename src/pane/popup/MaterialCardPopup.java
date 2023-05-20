@@ -2,10 +2,7 @@ package pane.popup;
 
 import java.util.ArrayList;
 
-import org.w3c.dom.Text;
-
 import components.Button.ExitButton;
-import config.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,10 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -70,7 +65,7 @@ public class MaterialCardPopup extends Popup {
 	private VBox initCard(Label amount, MaterialType type) {
 		VBox card = new VBox();
 		Paint color = Utilities.getColor(type);
-		
+
 		card.setBackground(new Background(new BackgroundFill(color, new CornerRadii(12), null)));
 		card.setAlignment(Pos.CENTER);
 		card.setPrefWidth(60);

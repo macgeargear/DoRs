@@ -77,7 +77,7 @@ public class GamePlay {
 	}
 
 	private void initNodes() {
-		for (int i = 0; i < (int)Math.pow(Config.SIDE_MAP_AMOUNT+1, 2); ++i) {
+		for (int i = 0; i < (int) Math.pow(Config.SIDE_MAP_AMOUNT + 1, 2); ++i) {
 			Node newNode = new Node(BuildingType.EMPTYHOUSE);
 			allNodes.add(newNode);
 		}
@@ -87,8 +87,10 @@ public class GamePlay {
 				int index = i * Config.SIDE_MAP_AMOUNT + j;
 				Map map = allMaps.get(index);
 
-				Node topLeftNode = allNodes.get(index + i), topRightNode = allNodes.get(index + i + Config.SIDE_MAP_AMOUNT + 1),
-						botLeftNode = allNodes.get(index + i + 1), botRightNode = allNodes.get(index + i + Config.SIDE_MAP_AMOUNT + 2);
+				Node topLeftNode = allNodes.get(index + i),
+						topRightNode = allNodes.get(index + i + Config.SIDE_MAP_AMOUNT + 1),
+						botLeftNode = allNodes.get(index + i + 1),
+						botRightNode = allNodes.get(index + i + Config.SIDE_MAP_AMOUNT + 2);
 
 //				top left
 				map.setSideNode(0, topLeftNode);
@@ -182,9 +184,9 @@ public class GamePlay {
 	public boolean rollDice() {
 //		already roll the dice
 		if (isRoll) {
-			return false;			
+			return false;
 		}
-		
+
 		isRoll = true;
 		Random random = new Random();
 		rollNumber = random.nextInt(6) + 1;
