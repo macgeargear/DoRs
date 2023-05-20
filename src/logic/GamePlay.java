@@ -9,7 +9,6 @@ import java.util.Random;
 import buildings.Edge;
 import buildings.Node;
 import card.BombCard;
-import card.EffectCard;
 import card.NuclearCard;
 import card.StrongerCard;
 import entities.Entity;
@@ -17,7 +16,6 @@ import javafx.util.Pair;
 import material.Map;
 import material.Material;
 import type.BuildingType;
-import type.MaterialType;
 import utils.Utilities;
 
 public class GamePlay {
@@ -33,8 +31,6 @@ public class GamePlay {
 	private ArrayList<Node> allNodes;
 	private ArrayList<Edge> allEdges;
 	private ArrayList<Map> allMaps;
-	private ArrayList<EffectCard> cardInDeck;
-	private ArrayList<Entity> allEntities;
 
 	public GamePlay() {
 		this.roundAmount = 10;
@@ -45,8 +41,6 @@ public class GamePlay {
 		this.allNodes = new ArrayList<Node>();
 		this.allEdges = new ArrayList<Edge>();
 		this.allMaps = new ArrayList<Map>();
-		this.cardInDeck = new ArrayList<EffectCard>();
-		this.allEntities = new ArrayList<Entity>();
 
 		this.initMaps();
 	}
@@ -63,8 +57,6 @@ public class GamePlay {
 		this.allNodes = new ArrayList<Node>();
 		this.allEdges = new ArrayList<Edge>();
 		this.allMaps = new ArrayList<Map>();
-		this.cardInDeck = new ArrayList<EffectCard>();
-		this.allEntities = new ArrayList<Entity>();
 
 		for (int i = 0; i < playerAmount; ++i) {
 			allPlayers.add(new Player("P" + Integer.toString(i)));
@@ -75,14 +67,6 @@ public class GamePlay {
 	}
 
 	private void initMaps() {
-		Material wood = new Material(MaterialType.WOOD);
-		Material water = new Material(MaterialType.WATER);
-		Material rock = new Material(MaterialType.ROCK);
-		Material sand = new Material(MaterialType.SAND);
-		Material gunpowder = new Material(MaterialType.GUNPOWDER);
-
-//		ArrayList<Material> allMaterial = new ArrayList<Material>();
-//		allMaterial.addAll(Arrays.asList(wood, water, rock, sand, gunpowder));
 		ArrayList<Material> allMaterial = Utilities.getAllMaterials();
 		
 		for (Material material : allMaterial) {
@@ -302,10 +286,6 @@ public class GamePlay {
 
 	public ArrayList<Map> getAllMaps() {
 		return allMaps;
-	}
-
-	public ArrayList<Entity> getAllEntities() {
-		return allEntities;
 	}
 
 }

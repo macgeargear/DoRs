@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 import material.Material;
+import type.MaterialType;
 import utils.Utilities;
 
 public class Marketplace {
@@ -21,14 +22,14 @@ public class Marketplace {
 		this.exchangeRate = new ArrayList<Integer>();
 		this.amount = 20;
 		Random random = new Random();
-		ArrayList<Material> allMaterials = Utilities.getAllMaterials();
+		ArrayList<MaterialType> allMaterials = Utilities.getAllMaterials();
 		
 		for(int i=0;i<5;++i) {
 			int num1 = random.nextInt(5), num2 = random.nextInt(5);
 			while(num1 == num2) {
 				num2 = random.nextInt(5);
 			}
-			tradeList.add(new ArrayList<Material>(Arrays.asList(allMaterials.get(num1), allMaterials.get(num2))));
+			tradeList.add(new ArrayList<MaterialType>(Arrays.asList(allMaterials.get(num1), allMaterials.get(num2))));
 			exchangeRate.add(random.nextInt(3)+1);
 		}
 //		random everything
