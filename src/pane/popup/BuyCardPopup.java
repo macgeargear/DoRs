@@ -75,7 +75,7 @@ public class BuyCardPopup extends Popup {
 			confirm.setDisable(true);
 			GamePlay.getInstance().draw();
 		});
-		
+
 		HBox.setMargin(confirm, new Insets(Config.SMALL_MARGIN));
 		HBox.setMargin(reset, new Insets(Config.SMALL_MARGIN));
 		this.footer.getChildren().addAll(reset, confirm);
@@ -108,7 +108,7 @@ public class BuyCardPopup extends Popup {
 			Utilities.updateCard();
 			this.hide();
 		});
-		
+
 		for (MaterialPack material : this.allMaterials) {
 			BuyCardContainer card = new BuyCardContainer(material.getType(), material.getAmount());
 			this.allBuyCardContainers.add(card);

@@ -143,8 +143,9 @@ public class EffectCardPopup extends Popup {
 		int idx = 0;
 		for (CardType effect : this.allEffects) {
 			allLabels.get(idx).setText(" " + Utilities.countEffectCard(effect));
-			allUseEffectButton.get(idx).setDisable(Utilities.getCurrentPlayer().getFirstEffectCardType(effect) == null
-					|| !Utilities.getCurrentPlayer().getFirstEffectCardType(effect).canPlay(Utilities.getSelectPlace()));
+			allUseEffectButton.get(idx)
+					.setDisable(Utilities.getCurrentPlayer().getFirstEffectCardType(effect) == null || !Utilities
+							.getCurrentPlayer().getFirstEffectCardType(effect).canPlay(Utilities.getSelectPlace()));
 			idx++;
 		}
 	}

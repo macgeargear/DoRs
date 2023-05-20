@@ -17,7 +17,7 @@ public class NuclearCard extends EffectCard {
 	@Override
 	public boolean canPlay(Place place) {
 //		check place is map and it active
-		if ( place == null || !(place instanceof Map) || !place.isActive()) {
+		if (place == null || !(place instanceof Map) || !place.isActive()) {
 			return false;
 		}
 

@@ -1,7 +1,6 @@
 package pane;
 
 import components.AmountSelector;
-import components.Footer;
 import components.Button.CustomButton;
 import config.Config;
 import javafx.event.EventHandler;
@@ -14,22 +13,17 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import pane.popup.VideoPathPopup;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class HomePane extends VBox {
 
 	private Button playButton;
 	private Button startButton;
-	private Button buyNodeButton;
-	private Button buyEdgeButton;
 	private HBox amountSelector;
 	private Background background;
 
@@ -88,7 +82,8 @@ public class HomePane extends VBox {
 
 	private void setupBackgroundImage(String imagePath) {
 		Image image = new Image(imagePath);
-		BackgroundSize backgroundSize = new BackgroundSize(Config.BACKGROUND_IMAGE_HEIGHT, Config.BACKGROUND_IMAGE_WIDTH, true, true, true, false);
+		BackgroundSize backgroundSize = new BackgroundSize(Config.BACKGROUND_IMAGE_HEIGHT,
+				Config.BACKGROUND_IMAGE_WIDTH, true, true, true, false);
 		BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT,
 				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
 		this.background = new Background(backgroundImage);

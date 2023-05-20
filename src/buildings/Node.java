@@ -20,7 +20,7 @@ public class Node extends Building {
 	}
 
 	public void destroy() {
-		if(this.getType() != BuildingType.CITY) {			
+		if (this.getType() != BuildingType.CITY) {
 			this.setType(BuildingType.EMPTYHOUSE);
 			this.setOwner(null);
 		}
@@ -28,8 +28,8 @@ public class Node extends Building {
 
 	public void upgrade() {
 		Player currentPlayer = Utilities.getCurrentPlayer();
-		
-		if(GamePlay.getInstance().getCurrentRound() > 0) {			
+
+		if (GamePlay.getInstance().getCurrentRound() > 0) {
 			currentPlayer.decreaseMaterial(MaterialType.ROCK, 1);
 			currentPlayer.decreaseMaterial(MaterialType.WOOD, 1);
 			currentPlayer.decreaseMaterial(MaterialType.WATER, 1);
@@ -62,13 +62,12 @@ public class Node extends Building {
 	@Override
 	public boolean canUpgrade() {
 		Player currentPlayer = Utilities.getCurrentPlayer();
-		if (currentPlayer.countMaterial(MaterialType.ROCK) >= 1
-				&& currentPlayer.countMaterial(MaterialType.WOOD) >= 1
+		if (currentPlayer.countMaterial(MaterialType.ROCK) >= 1 && currentPlayer.countMaterial(MaterialType.WOOD) >= 1
 				&& currentPlayer.countMaterial(MaterialType.WATER) >= 1) {
 			if (this.getOwner() == null && Utilities.haveSideEdge(this)) {
 				return true;
-			}else if(this.getOwner() != null && this.getOwner().equals(currentPlayer)) {
-				if(this.getType() != BuildingType.CITY) {
+			} else if (this.getOwner() != null && this.getOwner().equals(currentPlayer)) {
+				if (this.getType() != BuildingType.CITY) {
 					return true;
 				}
 			}
@@ -76,7 +75,7 @@ public class Node extends Building {
 
 		return false;
 	}
-	
+
 	public ArrayList<Edge> getSideEdges() {
 		return this.sideEdges;
 	}

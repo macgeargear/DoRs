@@ -132,6 +132,5 @@ public class CardPopup extends Popup {
 	public void setShowEffectCardButton(Button showEffectCardButton) {
 		this.showEffectCardButton = showEffectCardButton;
 	}
-	
 
 }

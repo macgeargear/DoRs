@@ -30,7 +30,7 @@ public class NodeButton extends Button {
 			setScaleX(1.5);
 			setScaleY(1.5);
 			ControlPane paneInstance = ControlPane.getInstance();
-			
+
 			paneInstance.resetSelect();
 			paneInstance.setSelectNode(thisNode);
 //			System.out.println(node.getSideEdges());
@@ -51,16 +51,16 @@ public class NodeButton extends Button {
 	private void initOnHover() {
 		ControlPane paneInstance = ControlPane.getInstance();
 		NodeButton thisButton = this;
-		
+
 		setOnMouseEntered(event -> {
 			setScaleX(1.5);
 			setScaleY(1.5);
 		});
 
-		setOnMouseExited(event -> {				
-			if(paneInstance.getSelectNode() == null || !paneInstance.getSelectNode().equals(thisButton)) {
+		setOnMouseExited(event -> {
+			if (paneInstance.getSelectNode() == null || !paneInstance.getSelectNode().equals(thisButton)) {
 				setScaleX(1.0);
-				setScaleY(1.0);	
+				setScaleY(1.0);
 			}
 		});
 	}
@@ -72,7 +72,7 @@ public class NodeButton extends Button {
 
 	private String getColor() {
 		BuildingType type = node.getType();
-		if(!node.isActive()) {
+		if (!node.isActive()) {
 			return "#000000";
 		}
 		if (type == BuildingType.EMPTYHOUSE) {
@@ -101,14 +101,14 @@ public class NodeButton extends Button {
 			setShape(new Rectangle(100, 100));
 		}
 	}
-	
+
 	public void resetSize() {
 		setScaleX(1.0);
-		setScaleY(1.0);	
+		setScaleY(1.0);
 	}
 
 	public Node getNode() {
 		return node;
 	}
-	
+
 }

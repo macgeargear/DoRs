@@ -2,11 +2,6 @@ package utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
-
 import buildings.Building;
 import buildings.Edge;
 import buildings.Node;
@@ -18,7 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.util.Pair;
+
 import logic.GamePlay;
 import logic.Player;
 import pane.ControlPane;
@@ -244,9 +239,6 @@ public class Utilities {
 		int maxPath = 0, amountPlayer = 0, edgeAmount = allEdges.size();
 
 		boolean[] visited = new boolean[edgeAmount];
-		for (boolean vis : visited) {
-			vis = false;
-		}
 
 //		process
 		Player longestRoadPlayer = new Player("NONAME");

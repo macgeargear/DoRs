@@ -31,10 +31,10 @@ public class Player {
 	public void addEffect(EffectCard card) {
 		allEffectCards.add(card);
 	}
-	
+
 	public EffectCard getFirstEffectCardType(CardType type) {
-		for(EffectCard card: allEffectCards) {
-			if(card.getType() == type) {
+		for (EffectCard card : allEffectCards) {
+			if (card.getType() == type) {
 				return card;
 			}
 		}
@@ -67,7 +67,7 @@ public class Player {
 
 	public MaterialPack getMaterialPack(MaterialType material) {
 		for (MaterialPack pack : this.allMaterials) {
-			if (pack.getType() ==  material) {
+			if (pack.getType() == material) {
 				return pack;
 			}
 		}

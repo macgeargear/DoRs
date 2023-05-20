@@ -60,7 +60,7 @@ public class Footer extends HBox {
 	private void initBuyCardButton() {
 		this.buyCardButton = new FooterButton("Buy Card");
 		buyCardPopup = new BuyCardPopup();
-		
+
 		this.buyCardButton.setOnAction(e -> {
 			if (buyCardPopup == null) {
 				buyCardPopup.show(ControlPane.getInstance().getStage());
