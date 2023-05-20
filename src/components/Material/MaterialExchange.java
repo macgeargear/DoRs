@@ -29,8 +29,8 @@ public class MaterialExchange extends HBox {
 		this.initAmountText(marketplace.getExchangeRate().get(idx));
 		this.initExchangeButton();
 		
-		MaterialType firstMaterial = marketplace.getTradeListByIdx(idx).get(0).getType();
-		MaterialType secondMaterial = marketplace.getTradeListByIdx(idx).get(1).getType();
+		MaterialType firstMaterial = marketplace.getTradeListByIdx(idx).get(0);
+		MaterialType secondMaterial = marketplace.getTradeListByIdx(idx).get(1);
 		
 		this.sourceCard = new MaterialCard(firstMaterial);
 		this.targetCard = new MaterialCard(secondMaterial);
@@ -62,8 +62,8 @@ public class MaterialExchange extends HBox {
 	
 	public void updateExchangeStatus() {
 		Marketplace marketplace = GamePlay.getInstance().getMarketplace();
-		MaterialType firstMaterial = marketplace.getTradeListByIdx(idx).get(0).getType();
-		MaterialType secondMaterial = marketplace.getTradeListByIdx(idx).get(1).getType();
+		MaterialType firstMaterial = marketplace.getTradeListByIdx(idx).get(0);
+		MaterialType secondMaterial = marketplace.getTradeListByIdx(idx).get(1);
 		
 		this.sourceCard.setMaterial(firstMaterial);
 		this.targetCard.setMaterial(secondMaterial);

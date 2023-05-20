@@ -1,13 +1,12 @@
 package logic;
 
 import java.util.ArrayList;
-import card.*;
-import java.util.Arrays;
 
 import card.EffectCard;
-import material.Material;
 import material.MaterialPack;
+import type.CardType;
 import type.MaterialType;
+import utils.Utilities;
 
 public class Player {
 	private String name;
@@ -22,21 +21,8 @@ public class Player {
 		this.allMaterials = new ArrayList<MaterialPack>();
 		this.allEffectCards = new ArrayList<EffectCard>();
 
-		Material wood = new Material(MaterialType.WOOD);
-		Material water = new Material(MaterialType.WATER);
-		Material rock = new Material(MaterialType.ROCK);
-		Material sand = new Material(MaterialType.SAND);
-		Material gunpowder = new Material(MaterialType.GUNPOWDER);
-
-//		EffectCard bombCard = new BombCard();
-//		EffectCard nuclearCard = new NuclearCard();
-//		EffectCard strongerCard = new StrongerCard();
-//
-//		this.allEffectCards.addAll(Arrays.asList(bombCard, nuclearCard, strongerCard));
-
-		ArrayList<Material> allMaterial = new ArrayList<Material>();
-		allMaterial.addAll(Arrays.asList(wood, water, rock, sand, gunpowder));
-		for (Material material : allMaterial) {
+		ArrayList<MaterialType> allMaterial = Utilities.getAllMaterials();
+		for (MaterialType material : allMaterial) {
 			allMaterials.add(new MaterialPack(material));
 		}
 
@@ -48,7 +34,7 @@ public class Player {
 
 	public void increaseMaterial(MaterialType material, int amount) {
 		for (MaterialPack pack : allMaterials) {
-			if (pack.getType().getType().equals(material)) {
+			if (pack.getType() == material) {
 				pack.increase(amount);
 			}
 		}
@@ -56,16 +42,19 @@ public class Player {
 
 	public void decreaseMaterial(MaterialType material, int amount) {
 		for (MaterialPack pack : allMaterials) {
-			if (pack.getType().getType().equals(material)) {
+			if (pack.getType() == material) {
 				pack.decrease(amount);
 			}
 		}
 	}
 
-	public void removeEffect(EffectCard card) {
-	}
-
-	public void removeMaterial(Material material) {
+	public void removeEffect(CardType type) {
+		for(EffectCard card: allEffectCards) {
+			if(card.getType() == type) {
+				allEffectCards.remove(card);
+				return ;
+			}
+		}
 	}
 
 	public int countMaterial(MaterialType material) {
@@ -74,7 +63,7 @@ public class Player {
 
 	public MaterialPack getMaterialPack(MaterialType material) {
 		for (MaterialPack pack : this.allMaterials) {
-			if (pack.getType().getType().equals(material)) {
+			if (pack.getType() ==  material) {
 				return pack;
 			}
 		}

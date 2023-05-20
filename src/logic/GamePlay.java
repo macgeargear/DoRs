@@ -14,8 +14,8 @@ import card.StrongerCard;
 import entities.Entity;
 import javafx.util.Pair;
 import material.Map;
-import material.Material;
 import type.BuildingType;
+import type.MaterialType;
 import utils.Utilities;
 
 public class GamePlay {
@@ -67,9 +67,9 @@ public class GamePlay {
 	}
 
 	private void initMaps() {
-		ArrayList<Material> allMaterial = Utilities.getAllMaterials();
+		ArrayList<MaterialType> allMaterial = Utilities.getAllMaterials();
 		
-		for (Material material : allMaterial) {
+		for (MaterialType material : allMaterial) {
 			for (int i = 0; i < 5; ++i) {
 				Map newMap = new Map(material);
 				allMaps.add(newMap);
@@ -163,9 +163,6 @@ public class GamePlay {
 		} else if (currentRound == -2 && currentPlayer == playerAmount) {
 			currentRound++;
 			currentPlayer--;
-
-//			currentRound = 1;
-//			currentPlayer = 0;
 		} else if (currentPlayer == -1 && currentRound == -1) {
 			currentPlayer++;
 			currentRound = 1;

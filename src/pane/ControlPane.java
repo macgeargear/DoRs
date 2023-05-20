@@ -31,7 +31,6 @@ public class ControlPane {
 	private BuyCardPopup buyCardPopup;
 	private GamePane gamePane;
 	private HomePane homePane;
-	private MarketPane marketPane;
 	
 	private Stage stage;
 		
@@ -91,12 +90,6 @@ public class ControlPane {
 	
 	public void backToGameScene() {
 		stage.setScene(gameScene);
-		stage.centerOnScreen();
-	}
-	
-	public void showMarketScene() {
-		marketScene = new Scene(new MarketPane(), Config.SCREEN_HEIGH, Config.SCREEN_HEIGH);
-		stage.setScene(marketScene);
 		stage.centerOnScreen();
 	}
 	
@@ -180,14 +173,6 @@ public class ControlPane {
 		
 		footer.setBuyNodeDisable(true);
 		footer.setBuyEdgeDisable(true);
-	}
-
-	public MarketPane getMarketPane() {
-		return marketPane;
-	}
-
-	public void setMarketPane(MarketPane marketPane) {
-		this.marketPane = marketPane;
 	}
 
 	public MarketPopup getMarketPopup() {

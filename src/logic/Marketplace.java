@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-import material.Material;
 import type.MaterialType;
 import utils.Utilities;
 
 public class Marketplace {
 	private int amount;
-	private ArrayList<ArrayList<Material>> tradeList;
+	private ArrayList<ArrayList<MaterialType>> tradeList;
 	private ArrayList<Integer> exchangeRate;
 	
 	public Marketplace() {
@@ -18,7 +17,7 @@ public class Marketplace {
 	}
 	
 	public void reMarket() {
-		this.tradeList = new ArrayList<ArrayList<Material>>();
+		this.tradeList = new ArrayList<ArrayList<MaterialType>>();
 		this.exchangeRate = new ArrayList<Integer>();
 		this.amount = 20;
 		Random random = new Random();
@@ -39,8 +38,8 @@ public class Marketplace {
 	public void trade(int target) {
 		if(amount == 0) return ;
 		Player currentPlayer = Utilities.getCurrentPlayer();
-		currentPlayer.decreaseMaterial(tradeList.get(target).get(0).getType(), exchangeRate.get(target));
-		currentPlayer.increaseMaterial(tradeList.get(target).get(1).getType(), 1);
+		currentPlayer.decreaseMaterial(tradeList.get(target).get(0), exchangeRate.get(target));
+		currentPlayer.increaseMaterial(tradeList.get(target).get(1), 1);
 		amount--;
 		return ;
 	}
@@ -49,18 +48,18 @@ public class Marketplace {
 		if(idx >= 5 || amount <= 0) return false;
 	
 		Player currentPlayer = Utilities.getCurrentPlayer();
-		Material target = tradeList.get(idx).get(0);
-		if(currentPlayer.countMaterial(target.getType()) >= exchangeRate.get(idx)) {
+		MaterialType target = tradeList.get(idx).get(0);
+		if(currentPlayer.countMaterial(target) >= exchangeRate.get(idx)) {
 			return true;
 		}
 		return false;
 	}
 	
-	public ArrayList<Material> getTradeListByIdx(int idx){
+	public ArrayList<MaterialType> getTradeListByIdx(int idx){
 		return tradeList.get(idx);
 	}
 	
-	public ArrayList<ArrayList<Material>> getTradeList() {
+	public ArrayList<ArrayList<MaterialType>> getTradeList() {
 		return tradeList;
 	}
 
