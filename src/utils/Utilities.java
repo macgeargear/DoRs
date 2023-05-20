@@ -183,39 +183,6 @@ public class Utilities {
 		return cnt;
 	}
 
-	public static boolean canUseEffect(CardType type) {
-		ControlPane paneInstance = ControlPane.getInstance();
-		Player currentPlayer = getCurrentPlayer();
-		if (countEffectCard(type) == 0) {
-			return false;
-		}
-		if (type == CardType.STRONGER || type == CardType.BOMB) {
-			if (paneInstance.getSelectEdge() != null || paneInstance.getSelectNode() != null) {
-				if (type == CardType.STRONGER) {
-					if (paneInstance.getSelectEdge() != null) {
-						Edge edge = paneInstance.getSelectEdge().getEdge();
-						return edge.getOwner() == null
-								|| (edge.getOwner().equals(currentPlayer) && edge.getType() != BuildingType.SUPERROAD);
-					}
-					Node node = paneInstance.getSelectNode().getNode();
-					return node.getOwner() == null
-							|| (node.getOwner().equals(currentPlayer) && node.getType() != BuildingType.CITY);
-
-				}
-				if (paneInstance.getSelectEdge() != null) {
-					return paneInstance.getSelectEdge().getEdge().getOwner() != null;
-				}
-				return paneInstance.getSelectNode().getNode().getOwner() != null
-						&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 1
-						&& currentPlayer.countMaterial(MaterialType.SAND) >= 1;
-			}
-			return false;
-		}
-		return paneInstance.getSelectMap() != null && paneInstance.getSelectMap().getMap().isActive()
-				&& currentPlayer.countMaterial(MaterialType.GUNPOWDER) >= 2
-				&& currentPlayer.countMaterial(MaterialType.SAND) >= 1;
-	}
-
 	public static Paint getColor(MaterialType type) {
 		if (type == MaterialType.WOOD) {
 			return Config.WoodColor;
@@ -277,7 +244,7 @@ public class Utilities {
 		int maxPath = 0, amountPlayer = 0, edgeAmount = allEdges.size();
 
 		boolean[] visited = new boolean[edgeAmount];
-		for(boolean vis: visited) {
+		for (boolean vis : visited) {
 			vis = false;
 		}
 
