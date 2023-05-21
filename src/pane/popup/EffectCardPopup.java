@@ -30,7 +30,6 @@ import utils.Utilities;
 
 public class EffectCardPopup extends Popup {
 	private VBox popupContent;
-	private Button closeButton;
 	private ArrayList<CardType> allEffects;
 	private ArrayList<Label> allLabels;
 	private ArrayList<Button> allUseEffectButton;
@@ -57,9 +56,9 @@ public class EffectCardPopup extends Popup {
 				new Background(new BackgroundFill(Color.WHITE, new CornerRadii(Config.BORDER_RADIUS), null)));
 		this.popupContent.setAlignment(Pos.CENTER);
 
-		this.closeButton = new ExitButton("X");
-		this.closeButton.setAlignment(Pos.TOP_LEFT);
-		this.closeButton.setOnAction(e -> {
+		Button closeButton = new ExitButton("X");
+		closeButton.setAlignment(Pos.TOP_LEFT);
+		closeButton.setOnAction(e -> {
 			this.hide();
 		});
 		this.popupContent.getChildren().addAll(closeButton, messageLabel);
