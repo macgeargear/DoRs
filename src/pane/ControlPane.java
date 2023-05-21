@@ -28,12 +28,13 @@ public class ControlPane {
 	private CardPopup cardPopup;
 	private MarketPopup marketPopup;
 	private BuyCardPopup buyCardPopup;
-
+	
+	private HomePane homePane;
 	private Stage stage;
 
 	public ControlPane(Stage stage) {
 		if (instance == null)
-			this.instance = this;
+			instance = this;
 		this.selectEdge = null;
 		this.selectNode = null;
 		this.selectMap = null;
@@ -42,7 +43,8 @@ public class ControlPane {
 		this.allPlayerContainers = new ArrayList<PlayerContainer>();
 
 		GamePlay.getInstance(2);
-
+//		this.homePane = new HomePane();
+		
 		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.HOMEPANE_HEIGHT);
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
 
@@ -69,7 +71,7 @@ public class ControlPane {
 	}
 
 	public void showGameScene() {
-		GamePlay.getInstance(2);
+//		GamePlay.getInstance(2);
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
 		stage.setScene(gameScene);
 	}
@@ -177,4 +179,11 @@ public class ControlPane {
 		this.buyCardPopup = buyCardPopup;
 	}
 
+	public HomePane getHomePane() {
+		return homePane;
+	}
+
+	public void setHomePane(HomePane homePane) {
+		this.homePane = homePane;
+	}
 }
