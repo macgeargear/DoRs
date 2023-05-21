@@ -1,15 +1,13 @@
 package buildings;
 
-
 import logic.Player;
 import type.BuildingType;
-
 
 public abstract class Building extends Place implements Upgradeable, Destroyable {
 
 	private BuildingType type;
 	private Player owner;
-	
+
 	public Building(BuildingType type) {
 		this.type = type;
 	}
@@ -25,10 +23,9 @@ public abstract class Building extends Place implements Upgradeable, Destroyable
 	public BuildingType getType() {
 		return type;
 	}
-	
+
 	public void setType(BuildingType type) {
 		this.type = type;
 	}
-	
-	
+
 }

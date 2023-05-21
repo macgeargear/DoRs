@@ -1,16 +1,16 @@
 package components;
 
+
 import components.Button.CustomButton;
 import components.Button.FooterButton;
 import pane.popup.ExitPopup;
+
 import config.Config;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -51,8 +51,8 @@ public class HeaderGame extends HBox {
 
 	private void initAddAllMaterial() {
 		Button addAllBtn = new Button("+");
-		
-		addAllBtn.setOnAction(e->{
+
+		addAllBtn.setOnAction(e -> {
 			Player currentPlayer = Utilities.getCurrentPlayer();
 			currentPlayer.increaseMaterial(MaterialType.WOOD, 1);
 			currentPlayer.increaseMaterial(MaterialType.WATER, 1);
@@ -61,10 +61,10 @@ public class HeaderGame extends HBox {
 			currentPlayer.increaseMaterial(MaterialType.GUNPOWDER, 1);
 			Utilities.updateCard();
 		});
-		
+
 		getChildren().add(addAllBtn);
 	}
-	
+
 	private void initRollText() {
 		rollNumber = new Text(Integer.toString(GamePlay.getInstance().getRollNumber()));
 		rollNumber.setFont(new Font(16));
@@ -76,7 +76,7 @@ public class HeaderGame extends HBox {
 		setHgrow(rollNumberDisplay, Priority.ALWAYS);
 		getChildren().add(rollNumberDisplay);
 	}
-	
+
 	private void initRoundText() {
 		HBox roundDisplay = new HBox();
 		roundDisplay.setAlignment(Pos.CENTER);
@@ -97,32 +97,28 @@ public class HeaderGame extends HBox {
 		exitButton.setText("X");
 		setAlignment(Pos.CENTER_RIGHT);
 		setHgrow(exitButton, Priority.ALWAYS);
-//		exitButton.setOnAction(new EventHandler<ActionEvent>() {
-//			
-//			@Override
-//			public void handle(ActionEvent arg0) {
-//				Utilities.alertGenerate(AlertType.CONFIRMATION, "Exit", "Sure to leave?", ()->{Utilities.exitGame();});
-//			}
-//		});
+
 		exitButton.setOnAction(e -> {
 			this.exitPopup = new ExitPopup();
 			this.exitPopup.show(ControlPane.getInstance().getStage());
+
 		});
-		
+
 		getChildren().add(exitButton);
 	}
-	
+
 	public void updateRoundCount() {
 		roundCount = GamePlay.getInstance().getCurrentRound();
-		if(roundCount == -2) {
-			roundAmount.setText("Prepare 1");;
-		}else if(roundCount == -1) {
+		if (roundCount == -2) {
+			roundAmount.setText("Prepare 1");
+			;
+		} else if (roundCount == -1) {
 			roundAmount.setText("Prepare 2");
-		}else {
-			roundAmount.setText(Integer.toString(roundCount));			
+		} else {
+			roundAmount.setText(Integer.toString(roundCount));
 		}
 	}
-	
+
 	public void updateDiceNumber() {
 		rollNumber.setText(Integer.toString(GamePlay.instance.getRollNumber()));
 	}

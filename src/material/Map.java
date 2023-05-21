@@ -8,32 +8,31 @@ import buildings.Place;
 import type.MaterialType;
 
 public class Map extends Place {
-	private Material type;
+	private MaterialType type;
 	private ArrayList<Node> sideNodes;
 	private int number;
-	
 
-	public Map(Material type) {
+	public Map(MaterialType type) {
 		Random random = new Random();
 		this.type = type;
-		this.setNumber(random.nextInt(6)+1);
+		this.setNumber(random.nextInt(6) + 1);
 		this.sideNodes = new ArrayList<Node>();
-		for(int i=0;i<4;++i) {
+		for (int i = 0; i < 4; ++i) {
 			sideNodes.add(null);
 		}
 	}
-	
+
 	public void produce() {
 		// TODO
 		if (this.isActive()) {
 			for (Node node : this.sideNodes) {
-				if(node.getOwner() != null) {
-					node.getOwner().increaseMaterial(this.type.getType(), 1);					
+				if (node.getOwner() != null) {
+					node.getOwner().increaseMaterial(this.type, 1);
 				}
 			}
 		}
 	}
-	
+
 	public void setSideNode(int position, Node node) {
 		// TODO
 		this.sideNodes.set(position, node);
@@ -44,7 +43,8 @@ public class Map extends Place {
 	}
 
 	public void setNumber(int number) {
-		if (number < 0 || number > 6) return;
+		if (number < 0 || number > 6)
+			return;
 		this.number = number;
 	}
 
@@ -52,7 +52,7 @@ public class Map extends Place {
 		return sideNodes;
 	}
 
-	public Material getType() {
+	public MaterialType getType() {
 		return type;
 	}
 

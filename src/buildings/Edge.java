@@ -1,7 +1,6 @@
 package buildings;
 
 import utils.Utilities;
-import utils.getTotalOwners;
 import logic.GamePlay;
 import logic.Player;
 import type.BuildingType;
@@ -42,7 +41,7 @@ public class Edge extends Building {
 	}
 
 	public boolean canDestroy() {
-		if (this.getType().equals(BuildingType.EMPTYROAD) || this.getType().equals(BuildingType.SUPERROAD)) {
+		if (this.getType() == BuildingType.EMPTYROAD || this.getType() == BuildingType.SUPERROAD) {
 			return false;
 		}
 		return true;
@@ -50,10 +49,12 @@ public class Edge extends Building {
 
 	public boolean canUpgrade() {
 		Player currentPlayer = Utilities.getCurrentPlayer();
-		if (currentPlayer.getMaterialPack(MaterialType.ROCK).getAmount() >= 1
-				&& currentPlayer.getMaterialPack(MaterialType.SAND).getAmount() >= 1
-				&& currentPlayer.getMaterialPack(MaterialType.WATER).getAmount() >= 1) {
+		if (currentPlayer.countMaterial(MaterialType.ROCK) >= 1 && currentPlayer.countMaterial(MaterialType.SAND) >= 1
+				&& currentPlayer.countMaterial(MaterialType.WATER) >= 1) {
 			if (this.getOwner() == null && Utilities.canCreateEdge(this)) {
+				return true;
+			} else if (this.getOwner() != null && this.getOwner().equals(currentPlayer)
+					&& this.getType() != BuildingType.SUPERROAD) {
 				return true;
 			}
 		}
