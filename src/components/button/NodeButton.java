@@ -3,7 +3,6 @@ package components.button;
 import buildings.Node;
 import config.Config;
 import javafx.scene.control.Button;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;

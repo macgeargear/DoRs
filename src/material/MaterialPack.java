@@ -25,7 +25,7 @@ public class MaterialPack {
 
 	public void decrease(int number) {
 		if (this.getAmount() - number < 0) {
-			return;			
+			return;
 		}
 		amount -= number;
 	}

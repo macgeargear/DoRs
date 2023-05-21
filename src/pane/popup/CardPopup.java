@@ -23,7 +23,7 @@ public class CardPopup extends Popup {
 	private VBox popupContent;
 	private MaterialCardPopup showMaterialCard;
 	private EffectCardPopup showEffectCard;
-	
+
 	public CardPopup() {
 		this.centerOnScreen();
 		this.initShowEffectCardButton();

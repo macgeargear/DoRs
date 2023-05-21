@@ -58,7 +58,7 @@ public class MarketPopup extends Popup {
 			allExchanges.add(newExchange);
 			exchangeContainer.getChildren().add(newExchange);
 		}
-		
+
 		this.popupContent.getChildren().add(exchangeContainer);
 	}
 
@@ -83,7 +83,7 @@ public class MarketPopup extends Popup {
 
 		header.getChildren().addAll(title, amount);
 		title.setTextAlignment(TextAlignment.CENTER);
-		
+
 		this.popupContent.getChildren().add(header);
 	}
 

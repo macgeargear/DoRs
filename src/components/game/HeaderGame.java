@@ -1,9 +1,6 @@
 package components.game;
 
 import pane.popup.ExitPopup;
-import card.BombCard;
-import card.NuclearCard;
-import card.StrongerCard;
 import components.button.FooterButton;
 import config.Config;
 import javafx.geometry.Insets;
@@ -18,10 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.GamePlay;
-import logic.Player;
 import pane.ControlPane;
-import type.MaterialType;
-import utils.Utilities;
 
 public class HeaderGame extends HBox {
 
@@ -37,29 +31,9 @@ public class HeaderGame extends HBox {
 		setPadding(new Insets(10));
 		setPrefSize(Config.SCREEN_WIDTH, 50);
 		setBackground(new Background(new BackgroundFill(Color.web("#777777"), CornerRadii.EMPTY, Insets.EMPTY)));
-		initAddAllMaterial();
 		initRoundText();
 		initExitButton();
 		ControlPane.getInstance().setGameHeader(this);
-	}
-
-	private void initAddAllMaterial() {
-		Button addAllBtn = new Button("+");
-
-		addAllBtn.setOnAction(e -> {
-			Player currentPlayer = Utilities.getCurrentPlayer();
-			currentPlayer.increaseMaterial(MaterialType.WOOD, 1);
-			currentPlayer.increaseMaterial(MaterialType.WATER, 1);
-			currentPlayer.increaseMaterial(MaterialType.ROCK, 1);
-			currentPlayer.increaseMaterial(MaterialType.SAND, 1);
-			currentPlayer.increaseMaterial(MaterialType.GUNPOWDER, 1);
-			currentPlayer.addEffect(new BombCard());
-			currentPlayer.addEffect(new StrongerCard());
-			currentPlayer.addEffect(new NuclearCard());
-			Utilities.updateCard();
-		});
-
-		getChildren().add(addAllBtn);
 	}
 
 	private void initRoundText() {

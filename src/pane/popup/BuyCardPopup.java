@@ -27,7 +27,7 @@ public class BuyCardPopup extends Popup {
 	private ArrayList<BuyCardContainer> allBuyCardContainers;
 	private Button reset;
 	private Button confirm;
-	
+
 	public BuyCardPopup() {
 		allBuyCardContainers = new ArrayList<BuyCardContainer>();
 		this.centerOnScreen();
@@ -101,15 +101,14 @@ public class BuyCardPopup extends Popup {
 			card.setPadding(new Insets(Config.LARGE_PADDING));
 			controlRate.getChildren().add(card);
 		}
-		
+
 		this.popupContent.setTop(header);
 		this.popupContent.setTop(closeButton);
 
 		BorderPane.setAlignment(closeButton, Pos.TOP_LEFT);
 		BorderPane.setAlignment(header, Pos.TOP_CENTER);
-		
-		this.popupContent.setCenter(controlRate);
 
+		this.popupContent.setCenter(controlRate);
 
 	}
 
