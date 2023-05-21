@@ -45,7 +45,7 @@ public class EffectCardPopup extends Popup {
 	}
 
 	private void initContent() {
-		Label messageLabel = new Label("This is Yout Effect Cards");
+		Label messageLabel = new Label("This is Your Effect Cards");
 		messageLabel.setFont(Font.font(Config.LARGE_FONT));
 		this.allEffects = new ArrayList<CardType>(Arrays.asList(CardType.BOMB, CardType.NUCLEAR, CardType.STRONGER));
 

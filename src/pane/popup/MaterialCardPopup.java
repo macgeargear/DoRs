@@ -34,7 +34,7 @@ public class MaterialCardPopup extends Popup {
 	}
 
 	private void initContent() {
-		Label messageLabel = new Label("This is Yout Material Cards");
+		Label messageLabel = new Label("This is Your Material Cards");
 		messageLabel.setFont(Font.font(32));
 		this.allMaterials = Utilities.getCurrentPlayer().getAllMaterials();
 
