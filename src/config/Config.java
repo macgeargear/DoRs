@@ -2,6 +2,9 @@ package config;
 
 import java.io.File;
 
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -21,6 +24,10 @@ public class Config {
 	public static String onMouseExitedButtonStyle = "-fx-background-radius: 12px; " + "-fx-background-color: #D9D9D9;";
 	
 	public static final int HOMEPANE_HEIGHT = 678;
+	
+	public static Background bg(Paint white, CornerRadii radius) {
+		return new Background(new BackgroundFill(white, radius, null));
+	}
 
 	
 	/**

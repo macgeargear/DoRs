@@ -1,7 +1,8 @@
 package components;
 
 import components.Button.CustomButton;
-
+import components.Button.FooterButton;
+import pane.popup.ExitPopup;
 import config.Config;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -17,6 +18,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.GamePlay;
@@ -30,6 +32,7 @@ public class HeaderGame extends HBox {
 	private int roundCount;
 	private Text roundAmount;
 	private Text rollNumber;
+	private ExitPopup exitPopup;
 
 	public HeaderGame() {
 		roundCount = GamePlay.getInstance().getCurrentRound();
@@ -87,19 +90,23 @@ public class HeaderGame extends HBox {
 	}
 
 	private void initExitButton() {
-		Button exitButton = new Button("X");
+		Button exitButton = new FooterButton("X");
 		exitButton.setPrefHeight(20);
 		exitButton.setPrefWidth(20);
 		exitButton.setBackground(new Background(new BackgroundFill(Config.BackGroundColor, new CornerRadii(12), null)));
 		exitButton.setText("X");
 		setAlignment(Pos.CENTER_RIGHT);
 		setHgrow(exitButton, Priority.ALWAYS);
-		exitButton.setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent arg0) {
-				Utilities.alertGenerate(AlertType.CONFIRMATION, "Exit", "Sure to leave?", ()->{Utilities.exitGame();});
-			}
+//		exitButton.setOnAction(new EventHandler<ActionEvent>() {
+//			
+//			@Override
+//			public void handle(ActionEvent arg0) {
+//				Utilities.alertGenerate(AlertType.CONFIRMATION, "Exit", "Sure to leave?", ()->{Utilities.exitGame();});
+//			}
+//		});
+		exitButton.setOnAction(e -> {
+			this.exitPopup = new ExitPopup();
+			this.exitPopup.show(ControlPane.getInstance().getStage());
 		});
 		
 		getChildren().add(exitButton);

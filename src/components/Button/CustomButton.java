@@ -14,7 +14,7 @@ public class CustomButton extends Button {
 		this.setVisible(true);
 		this.setStyle(Config.initialButtonStyle);
 		this.setPrefWidth(USE_COMPUTED_SIZE);
-		this.setFont(Font.font(32));
+		this.setFont(Font.font(Config.MEDIUM_FONT));
 
 		this.setOnMouseMoved(e -> {
 			 this.setStyle(Config.onMouseMoveButtonStyle);
