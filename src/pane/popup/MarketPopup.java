@@ -2,8 +2,8 @@ package pane.popup;
 
 import java.util.ArrayList;
 
-import components.Button.CustomButton;
-import components.Material.MaterialExchange;
+import components.button.CustomButton;
+import components.material.MaterialExchange;
 import config.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

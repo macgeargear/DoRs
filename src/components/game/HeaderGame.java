@@ -1,10 +1,8 @@
-package components;
+package components.game;
 
-
-import components.Button.CustomButton;
-import components.Button.FooterButton;
 import pane.popup.ExitPopup;
-
+import components.button.CustomButton;
+import components.button.FooterButton;
 import config.Config;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

@@ -2,9 +2,8 @@ package pane.popup;
 
 import java.util.ArrayList;
 import components.BuyCardContainer;
-
-import components.Button.ExitButton;
-import components.Button.FooterButton;
+import components.button.ExitButton;
+import components.button.FooterButton;
 import config.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

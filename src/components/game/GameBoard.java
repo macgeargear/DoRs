@@ -1,10 +1,10 @@
-package components;
+package components.game;
 
 import java.util.ArrayList;
 
-import components.Button.EdgeButton;
-import components.Button.MapButton;
-import components.Button.NodeButton;
+import components.button.EdgeButton;
+import components.button.MapButton;
+import components.button.NodeButton;
 import config.Config;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -61,7 +61,7 @@ public class GameBoard extends GridPane {
 					edgeButtons.add(rightEdge);
 					add(rightEdge, 2 * i + 2, 2 * j + 1);
 				}
-				
+
 //        		setup node
 				Button nodeTopLeft = new NodeButton(map.getSideNodes().get(0));
 				nodeButtons.add(nodeTopLeft);

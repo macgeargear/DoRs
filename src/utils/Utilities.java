@@ -7,7 +7,7 @@ import buildings.Edge;
 import buildings.Node;
 import buildings.Place;
 import card.EffectCard;
-import components.PlayerContainer;
+import components.player.PlayerContainer;
 import config.Config;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

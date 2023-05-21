@@ -1,4 +1,4 @@
-package components;
+package components.player;
 
 import config.Config;
 import javafx.geometry.Insets;

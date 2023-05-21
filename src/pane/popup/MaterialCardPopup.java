@@ -2,7 +2,7 @@ package pane.popup;
 
 import java.util.ArrayList;
 
-import components.Button.ExitButton;
+import components.button.ExitButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
