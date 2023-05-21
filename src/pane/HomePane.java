@@ -26,14 +26,17 @@ public class HomePane extends VBox {
 	private Button startButton;
 	private HBox amountSelector;
 	private Background background;
-
+	private Button selectChoice;
+	
 	public HomePane() {
 //		setup pane
 
 		// TODO: Setup Background
 		String imagePath = ClassLoader.getSystemResource("images/background.png").toString();
+		ControlPane.getInstance().setHomePane(this);
 		this.setupBackgroundImage(imagePath);
 		this.setBackground(background);
+		this.selectChoice = null;
 
 		setAlignment(Pos.CENTER);
 		setSpacing(20);
@@ -59,7 +62,7 @@ public class HomePane extends VBox {
 				playButton.setVisible(false);
 				amountSelector.setVisible(true);
 				startButton.setVisible(true);
-				ControlPane.getInstance().showGameScene();
+//				ControlPane.getInstance().showGameScene();
 			}
 		});
 	}
@@ -69,6 +72,7 @@ public class HomePane extends VBox {
 
 		startButton = new CustomButton("Start");
 		startButton.setVisible(false);
+		startButton.setDisable(true);
 		startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
@@ -88,4 +92,19 @@ public class HomePane extends VBox {
 				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
 		this.background = new Background(backgroundImage);
 	}
+
+	public Button getSelectChoice() {
+		return selectChoice;
+	}
+
+	public void setSelectChoice(Button selectChoice) {
+		this.selectChoice = selectChoice;
+	}
+
+	public Button getStartButton() {
+		return startButton;
+	}
+	
+	
+	
 }

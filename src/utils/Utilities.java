@@ -41,7 +41,6 @@ public class Utilities {
 	}
 
 	public static void exitGame() {
-		GamePlay.getInstance().getResult();
 		ControlPane.getInstance().showHomeScene();
 	}
 

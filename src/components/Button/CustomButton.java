@@ -3,6 +3,8 @@ package components.Button;
 import config.Config;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
+import pane.ControlPane;
+import pane.HomePane;
 
 public class CustomButton extends Button {
 
@@ -16,13 +18,17 @@ public class CustomButton extends Button {
 		this.setPrefWidth(USE_COMPUTED_SIZE);
 		this.setFont(Font.font(32));
 
+		HomePane homePane = ControlPane.getInstance().getHomePane();
+		
 		this.setOnMouseMoved(e -> {
 			this.setStyle(Config.onMouseMoveButtonStyle);
 		});
 
 		this.setOnMouseExited(e -> {
-			this.setStyle(Config.initialButtonStyle);
+			if(homePane.getSelectChoice() == null || !homePane.getSelectChoice().equals(this)) {				
+				this.setStyle(Config.initialButtonStyle);
+			}
 		});
+	
 	}
-
 }
