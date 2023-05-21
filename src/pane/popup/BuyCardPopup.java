@@ -24,38 +24,22 @@ import utils.Utilities;
 
 public class BuyCardPopup extends Popup {
 	private BorderPane popupContent;
-	private HBox controlRate;
-	private Button closeButton;
-	private ArrayList<MaterialPack> allMaterials;
 	private ArrayList<BuyCardContainer> allBuyCardContainers;
 	private Button reset;
 	private Button confirm;
-	private Text header;
-	private HBox footer;
-
+	
 	public BuyCardPopup() {
 		allBuyCardContainers = new ArrayList<BuyCardContainer>();
 		this.centerOnScreen();
 		this.initContent();
 		this.initFooter();
-		this.popupContent.setPadding(new Insets(18));
 
 		this.getContent().add(popupContent);
-//		this.updateAmount();
-//		this.popupContent.setLeft(closeButton);
-		this.popupContent.setBottom(footer);
-		this.popupContent.setTop(header);
-		this.popupContent.setTop(closeButton);
-
-		BorderPane.setAlignment(closeButton, Pos.TOP_LEFT);
-		BorderPane.setAlignment(header, Pos.TOP_CENTER);
-
-		this.popupContent.setCenter(controlRate);
 		ControlPane.getInstance().setBuyCardPopup(this);
 	}
 
 	private void initFooter() {
-		this.footer = new HBox();
+		HBox footer = new HBox();
 		footer.setAlignment(Pos.CENTER);
 
 		reset = new FooterButton("Reset");
@@ -77,44 +61,55 @@ public class BuyCardPopup extends Popup {
 
 		HBox.setMargin(confirm, new Insets(Config.SMALL_MARGIN));
 		HBox.setMargin(reset, new Insets(Config.SMALL_MARGIN));
-		this.footer.getChildren().addAll(reset, confirm);
+		footer.getChildren().addAll(reset, confirm);
+		this.popupContent.setBottom(footer);
 
 	}
 
 	private void initContent() {
-		this.allMaterials = Utilities.getCurrentPlayer().getAllMaterials();
+		ArrayList<MaterialPack> allMaterials = Utilities.getCurrentPlayer().getAllMaterials();
 
 		this.popupContent = new BorderPane();
+		this.popupContent.setPadding(new Insets(18));
 		this.popupContent.setPrefHeight(400);
 		this.popupContent.setPrefWidth(800);
 		BorderPane.setAlignment(this.popupContent, Pos.CENTER);
 		this.popupContent.setBackground(
 				new Background(new BackgroundFill(Color.WHITE, new CornerRadii(Config.BORDER_RADIUS), null)));
-		this.header = new Text("Buy Effect Card");
-		this.header.setFont(Font.font(Config.LARGE_FONT));
+		Text header = new Text("Buy Effect Card");
+		header.setFont(Font.font(Config.LARGE_FONT));
 
-		this.controlRate = new HBox();
-		this.controlRate.setPrefHeight(Config.BUYCARD_POPUP_HEIGHT);
-		this.controlRate.setPrefWidth(Config.BUYCARD_POPUP_WIDTH);
-		this.controlRate.setAlignment(Pos.CENTER);
+		HBox controlRate = new HBox();
+		controlRate.setPrefHeight(Config.BUYCARD_POPUP_HEIGHT);
+		controlRate.setPrefWidth(Config.BUYCARD_POPUP_WIDTH);
+		controlRate.setAlignment(Pos.CENTER);
 
-		HBox.setMargin(this.controlRate, new Insets(Config.MEDIUM_MARGIN));
-		this.controlRate.setPadding(new Insets(Config.LARGE_PADDING));
+		HBox.setMargin(controlRate, new Insets(Config.MEDIUM_MARGIN));
+		controlRate.setPadding(new Insets(Config.LARGE_PADDING));
 
-		this.closeButton = new ExitButton("X");
-		this.closeButton.setOnAction(e -> {
+		Button closeButton = new ExitButton("X");
+		closeButton.setOnAction(e -> {
 			this.resetValue();
 			Utilities.updateCard();
 			this.hide();
 		});
 
-		for (MaterialPack material : this.allMaterials) {
+		for (MaterialPack material : allMaterials) {
 			BuyCardContainer card = new BuyCardContainer(material.getType(), material.getAmount());
 			this.allBuyCardContainers.add(card);
 			HBox.setMargin(card, new Insets(Config.SMALL_MARGIN));
 			card.setPadding(new Insets(Config.LARGE_PADDING));
-			this.controlRate.getChildren().add(card);
+			controlRate.getChildren().add(card);
 		}
+		
+		this.popupContent.setTop(header);
+		this.popupContent.setTop(closeButton);
+
+		BorderPane.setAlignment(closeButton, Pos.TOP_LEFT);
+		BorderPane.setAlignment(header, Pos.TOP_CENTER);
+		
+		this.popupContent.setCenter(controlRate);
+
 
 	}
 
