@@ -9,8 +9,6 @@ import buildings.Place;
 import card.EffectCard;
 import components.player.PlayerContainer;
 import config.Config;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -25,28 +23,6 @@ import type.MaterialType;
 public class Utilities {
 	public static final VideoPathPopup ATOMIC_VIDEO = new VideoPathPopup(Config.ATOMIC);
 	public static final VideoPathPopup EXPLOSION_VIDEO = new VideoPathPopup(Config.EXPLOSION);
-	
-	public static void alertGenerate(Alert.AlertType alertType, String title, String content, Runnable methodYes) {
-		Alert alert = new Alert(alertType);
-		alert.setTitle(title);
-		alert.setHeaderText(content);
-
-		ButtonType buttonTypeYes = new ButtonType("Yes");
-		ButtonType buttonTypeNo = new ButtonType("No");
-
-		alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
-
-		alert.showAndWait();
-
-		if (alert.getResult().equals(buttonTypeYes)) {
-			// User clicked Yes
-			methodYes.run();
-		}
-	}
-
-	public static void exitGame() {
-		ControlPane.getInstance().showHomeScene();
-	}
 
 	public static Player getCurrentPlayer() {
 		GamePlay instance = GamePlay.getInstance();
@@ -89,7 +65,7 @@ public class Utilities {
 	public static int buyEdgeCondition(Edge edge) {
 		GamePlay gameInstance = GamePlay.getInstance();
 		Player currentPlayer = getCurrentPlayer();
-		if (!canCreateEdge(edge)) {
+		if (!canCreateEdge(edge) && !(edge.getOwner() != null && edge.getOwner().equals(currentPlayer))) {
 			return 0;
 		} else if ((currentPlayer.getEdgeCount() < 2 && gameInstance.getCurrentRound() == -2)
 				|| (currentPlayer.getEdgeCount() < 4 && gameInstance.getCurrentRound() == -1)) {
