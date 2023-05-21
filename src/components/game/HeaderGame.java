@@ -1,22 +1,20 @@
 package components.game;
 
 import pane.popup.ExitPopup;
-import components.button.CustomButton;
+import card.BombCard;
+import card.NuclearCard;
+import card.StrongerCard;
 import components.button.FooterButton;
 import config.Config;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.GamePlay;
@@ -29,7 +27,6 @@ public class HeaderGame extends HBox {
 
 	private int roundCount;
 	private Text roundAmount;
-	private Text rollNumber;
 	private ExitPopup exitPopup;
 
 	public HeaderGame() {
@@ -40,7 +37,6 @@ public class HeaderGame extends HBox {
 		setPadding(new Insets(10));
 		setPrefSize(Config.SCREEN_WIDTH, 50);
 		setBackground(new Background(new BackgroundFill(Color.web("#777777"), CornerRadii.EMPTY, Insets.EMPTY)));
-		initRollText();
 		initAddAllMaterial();
 		initRoundText();
 		initExitButton();
@@ -57,27 +53,19 @@ public class HeaderGame extends HBox {
 			currentPlayer.increaseMaterial(MaterialType.ROCK, 1);
 			currentPlayer.increaseMaterial(MaterialType.SAND, 1);
 			currentPlayer.increaseMaterial(MaterialType.GUNPOWDER, 1);
+			currentPlayer.addEffect(new BombCard());
+			currentPlayer.addEffect(new StrongerCard());
+			currentPlayer.addEffect(new NuclearCard());
 			Utilities.updateCard();
 		});
 
 		getChildren().add(addAllBtn);
 	}
 
-	private void initRollText() {
-		rollNumber = new Text(Integer.toString(GamePlay.getInstance().getRollNumber()));
-		rollNumber.setFont(new Font(16));
-		HBox rollNumberDisplay = new HBox();
-		rollNumberDisplay.setAlignment(Pos.CENTER);
-		Text rollText = new Text("Number : ");
-		rollText.setFont(new Font(16));
-		rollNumberDisplay.getChildren().addAll(rollText, rollNumber);
-		setHgrow(rollNumberDisplay, Priority.ALWAYS);
-		getChildren().add(rollNumberDisplay);
-	}
-
 	private void initRoundText() {
 		HBox roundDisplay = new HBox();
 		roundDisplay.setAlignment(Pos.CENTER);
+		roundDisplay.setBackground(Config.bg(Color.WHITE, new CornerRadii(Config.BORDER_RADIUS)));
 		Text roundText = new Text("Round : ");
 		roundText.setFont(new Font(16));
 		roundAmount = new Text("Prepare 1");
@@ -117,7 +105,4 @@ public class HeaderGame extends HBox {
 		}
 	}
 
-	public void updateDiceNumber() {
-		rollNumber.setText(Integer.toString(GamePlay.instance.getRollNumber()));
-	}
 }

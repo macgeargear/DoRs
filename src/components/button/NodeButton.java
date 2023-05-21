@@ -3,6 +3,7 @@ package components.button;
 import buildings.Node;
 import config.Config;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -98,6 +99,7 @@ public class NodeButton extends Button {
 		} else if (type == BuildingType.TOWER) {
 			setShape(new Polygon(50.0, 0.0, 0.0, 100.0, 100.0, 100.0));
 		} else {
+			setStyle(getStyle() + "-fx-border-color: black; -fx-border-width: 2px;");
 			setShape(new Rectangle(100, 100));
 		}
 	}

@@ -22,7 +22,6 @@ import utils.Utilities;
 
 public class MaterialCardPopup extends Popup {
 	private VBox popupContent;
-	private Button closeButton;
 	private ArrayList<MaterialPack> allMaterials;
 	private ArrayList<Label> allLabels;
 
@@ -45,9 +44,9 @@ public class MaterialCardPopup extends Popup {
 		this.popupContent.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(14), null)));
 		this.popupContent.setAlignment(Pos.CENTER);
 
-		this.closeButton = new ExitButton("X");
-		this.closeButton.setAlignment(Pos.TOP_LEFT);
-		this.closeButton.setOnAction(e -> {
+		Button closeButton = new ExitButton("X");
+		closeButton.setAlignment(Pos.TOP_LEFT);
+		closeButton.setOnAction(e -> {
 			this.hide();
 		});
 		this.popupContent.getChildren().addAll(closeButton, messageLabel);

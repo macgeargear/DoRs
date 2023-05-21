@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Popup;
-import utils.Utilities;
+import pane.ControlPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.image.Image;
@@ -49,7 +49,7 @@ public class ExitPopup extends Popup {
 
 		confirmButton.setOnAction(e -> {
 			// Perform any exit actions here if needed
-			Utilities.exitGame();
+			ControlPane.getInstance().showHomeScene();
 			this.hide();
 		});
 
