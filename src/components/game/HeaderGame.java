@@ -27,7 +27,6 @@ public class HeaderGame extends HBox {
 
 	private int roundCount;
 	private Text roundAmount;
-	private Text rollNumber;
 	private ExitPopup exitPopup;
 
 	public HeaderGame() {
@@ -38,7 +37,6 @@ public class HeaderGame extends HBox {
 		setPadding(new Insets(10));
 		setPrefSize(Config.SCREEN_WIDTH, 50);
 		setBackground(new Background(new BackgroundFill(Color.web("#777777"), CornerRadii.EMPTY, Insets.EMPTY)));
-		initRollText();
 		initAddAllMaterial();
 		initRoundText();
 		initExitButton();
@@ -64,21 +62,10 @@ public class HeaderGame extends HBox {
 		getChildren().add(addAllBtn);
 	}
 
-	private void initRollText() {
-		rollNumber = new Text(Integer.toString(GamePlay.getInstance().getRollNumber()));
-		rollNumber.setFont(new Font(16));
-		HBox rollNumberDisplay = new HBox();
-		rollNumberDisplay.setAlignment(Pos.CENTER);
-		Text rollText = new Text("Number : ");
-		rollText.setFont(new Font(16));
-		rollNumberDisplay.getChildren().addAll(rollText, rollNumber);
-		setHgrow(rollNumberDisplay, Priority.ALWAYS);
-		getChildren().add(rollNumberDisplay);
-	}
-
 	private void initRoundText() {
 		HBox roundDisplay = new HBox();
 		roundDisplay.setAlignment(Pos.CENTER);
+		roundDisplay.setBackground(Config.bg(Color.WHITE, new CornerRadii(Config.BORDER_RADIUS)));
 		Text roundText = new Text("Round : ");
 		roundText.setFont(new Font(16));
 		roundAmount = new Text("Prepare 1");
@@ -118,7 +105,4 @@ public class HeaderGame extends HBox {
 		}
 	}
 
-	public void updateDiceNumber() {
-		rollNumber.setText(Integer.toString(GamePlay.instance.getRollNumber()));
-	}
 }

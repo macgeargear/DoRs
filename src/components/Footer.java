@@ -3,7 +3,6 @@ package components;
 import components.button.FooterButton;
 import components.button.RollDice;
 import components.game.GameResult;
-import components.game.HeaderGame;
 import components.player.PlayerContainer;
 import config.Config;
 import javafx.geometry.Insets;
@@ -103,8 +102,6 @@ public class Footer extends HBox {
 		this.rollDiceButton.setOnAction(e -> {
 			GamePlay instance = GamePlay.getInstance();
 			if (instance.rollDice()) {
-				HeaderGame gameHeader = ControlPane.getInstance().getGameHeader();
-				gameHeader.updateDiceNumber();
 				this.setRollDiceButton(instance.getRollNumber());
 				rollDiceButton.setDisable(true);
 

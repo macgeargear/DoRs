@@ -9,7 +9,6 @@ import components.button.*;
 import config.Config;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import logic.GamePlay;
 import pane.popup.CardPopup;
 import pane.popup.BuyCardPopup;
 import pane.popup.MarketPopup;
