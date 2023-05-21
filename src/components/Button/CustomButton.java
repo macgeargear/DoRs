@@ -19,16 +19,16 @@ public class CustomButton extends Button {
 		this.setFont(Font.font(Config.MEDIUM_FONT));
 
 		HomePane homePane = ControlPane.getInstance().getHomePane();
-		
+
 		this.setOnMouseMoved(e -> {
 			this.setStyle(Config.onMouseMoveButtonStyle);
 		});
 
 		this.setOnMouseExited(e -> {
-			if(homePane.getSelectChoice() == null || !homePane.getSelectChoice().equals(this)) {				
+			if (homePane.getSelectChoice() == null || !homePane.getSelectChoice().equals(this)) {
 				this.setStyle(Config.initialButtonStyle);
 			}
 		});
-	
+
 	}
 }

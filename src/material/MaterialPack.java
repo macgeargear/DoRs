@@ -8,26 +8,26 @@ public class MaterialPack {
 
 	public MaterialPack(MaterialType type) {
 		this.type = type;
-		this.setAmount(0);
+		this.amount = 0;
 	}
 
 	public MaterialPack(MaterialType type, int amount) {
 		this.type = type;
-		this.setAmount(amount);
+		this.amount = amount;
 	}
 
 	public void increase(int number) {
-		this.setAmount(this.getAmount() + number);
+		if (number < 0) {
+			return;
+		}
+		amount += number;
 	}
 
 	public void decrease(int number) {
-		if (this.getAmount() - number < 0)
-			return;
-		this.setAmount(this.getAmount() - number);
-	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
+		if (this.getAmount() - number < 0) {
+			return;			
+		}
+		amount -= number;
 	}
 
 	public int getAmount() {

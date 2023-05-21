@@ -28,7 +28,7 @@ public class ControlPane {
 	private CardPopup cardPopup;
 	private MarketPopup marketPopup;
 	private BuyCardPopup buyCardPopup;
-	
+
 	private HomePane homePane;
 	private Stage stage;
 
@@ -44,7 +44,7 @@ public class ControlPane {
 
 		GamePlay.getInstance(2);
 //		this.homePane = new HomePane();
-		
+
 		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.HOMEPANE_HEIGHT);
 		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
 

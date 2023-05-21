@@ -27,7 +27,7 @@ public class HomePane extends VBox {
 	private HBox amountSelector;
 	private Background background;
 	private Button selectChoice;
-	
+
 	public HomePane() {
 //		setup pane
 
@@ -104,7 +104,5 @@ public class HomePane extends VBox {
 	public Button getStartButton() {
 		return startButton;
 	}
-	
-	
-	
+
 }

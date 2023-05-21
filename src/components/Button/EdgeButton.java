@@ -91,7 +91,7 @@ public class EdgeButton extends Rectangle {
 		}
 
 		GamePlay instance = GamePlay.getInstance();
-		int playerIndex = instance.findPlayerIndex(edge.getOwner());
+		int playerIndex = instance.getPlayerIndex(edge.getOwner());
 		if (playerIndex == 0) {
 			return Config.P1;
 		} else if (playerIndex == 1) {
