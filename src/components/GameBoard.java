@@ -30,8 +30,6 @@ public class GameBoard extends GridPane {
 		setPrefSize(Config.BOARD_WIDTH, Config.BOARD_HEIGH);
 		setAlignment(Pos.CENTER);
 		setBackground(new Background(new BackgroundFill(Config.BackGroundColor, null, null)));
-//		setHgap(25); // Set horizontal gap between cells
-//        setVgap(25); // Set vertical gap between cells
 
 		GamePlay instance = GamePlay.getInstance();
 		ArrayList<Map> allMaps = instance.getAllMaps();
@@ -44,6 +42,26 @@ public class GameBoard extends GridPane {
 				mapButtons.add(mapButton);
 				add(mapButton, 2 * i + 1, 2 * j + 1);
 
+//        		setup edge
+				Rectangle topEdge = new EdgeButton(map.getSideNodes().get(0).getSideEdges().get(1), 0);
+				edgeButtons.add(topEdge);
+				add(topEdge, 2 * i + 1, 2 * j);
+
+				Rectangle leftEdge = new EdgeButton(map.getSideNodes().get(0).getSideEdges().get(2), 1);
+				edgeButtons.add(leftEdge);
+				add(leftEdge, 2 * i, 2 * j + 1);
+
+				if (j == 4) {
+					Rectangle botEdge = new EdgeButton(map.getSideNodes().get(3).getSideEdges().get(3), 0);
+					edgeButtons.add(botEdge);
+					add(botEdge, 2 * i + 1, 2 * j + 2);
+				}
+				if (i == 4) {
+					Rectangle rightEdge = new EdgeButton(map.getSideNodes().get(3).getSideEdges().get(0), 1);
+					edgeButtons.add(rightEdge);
+					add(rightEdge, 2 * i + 2, 2 * j + 1);
+				}
+				
 //        		setup node
 				Button nodeTopLeft = new NodeButton(map.getSideNodes().get(0));
 				nodeButtons.add(nodeTopLeft);
@@ -64,26 +82,6 @@ public class GameBoard extends GridPane {
 						nodeButtons.add(nodeBotRight);
 						add(nodeBotRight, 2 * i + 2, 2 * j + 2);
 					}
-				}
-
-//        		setup edge
-				Rectangle topEdge = new EdgeButton(map.getSideNodes().get(0).getSideEdges().get(1), 0);
-				edgeButtons.add(topEdge);
-				add(topEdge, 2 * i + 1, 2 * j);
-
-				Rectangle leftEdge = new EdgeButton(map.getSideNodes().get(0).getSideEdges().get(2), 1);
-				edgeButtons.add(leftEdge);
-				add(leftEdge, 2 * i, 2 * j + 1);
-
-				if (j == 4) {
-					Rectangle botEdge = new EdgeButton(map.getSideNodes().get(3).getSideEdges().get(3), 0);
-					edgeButtons.add(botEdge);
-					add(botEdge, 2 * i + 1, 2 * j + 2);
-				}
-				if (i == 4) {
-					Rectangle rightEdge = new EdgeButton(map.getSideNodes().get(3).getSideEdges().get(0), 1);
-					edgeButtons.add(rightEdge);
-					add(rightEdge, 2 * i + 2, 2 * j + 1);
 				}
 
 			}

@@ -181,12 +181,11 @@ public class Footer extends HBox {
 			paneInstance.resetSelect();
 
 			gameInstance.getMarketplace().reMarket();
-			Utilities.updateCard();
-			if (gameInstance.getCurrentRound() == Config.MAX_ROUND) {
+			if (gameInstance.getCurrentRound() > Config.MAX_ROUND) {
 				GameResult gameResult = new GameResult();
 				gameResult.show(paneInstance.getStage());
-
 			}
+			Utilities.updateCard();
 		});
 	}
 
