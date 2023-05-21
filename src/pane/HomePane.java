@@ -53,7 +53,7 @@ public class HomePane extends VBox {
 
 	private void initPlayButton() {
 		// set style
-		playButton = new CustomButton("Select Mode");
+		playButton = new CustomButton("Select number of players");
 		// setSelectPlayerAction
 		playButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 

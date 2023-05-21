@@ -34,8 +34,8 @@ public class NuclearCard extends EffectCard {
 	public void play(Place place) {
 		GamePlay gameInstance = GamePlay.getInstance();
 		Player currentPlayer = gameInstance.getAllPlayers().get(gameInstance.getCurrentPlayer());
-		currentPlayer.getMaterialPack(MaterialType.SAND).decrease(3);
-		currentPlayer.getMaterialPack(MaterialType.GUNPOWDER).decrease(5);
+		currentPlayer.getMaterialPack(MaterialType.SAND).decrease(1);
+		currentPlayer.getMaterialPack(MaterialType.GUNPOWDER).decrease(2);
 
 		place.setActive(false);
 		Utilities.getCurrentPlayer().removeEffect(this);
