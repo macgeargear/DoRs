@@ -99,9 +99,9 @@ public class EffectCardPopup extends Popup {
 				paneInstance.resetSelect();
 				Utilities.updateCard();
 				if (effect == CardType.NUCLEAR) {
-					new VideoPathPopup(Config.ATOMIC);
+					Utilities.ATOMIC_VIDEO.play();
 				} else if (effect == CardType.BOMB) {
-					new VideoPathPopup(Config.EXPLOSION);
+					Utilities.EXPLOSION_VIDEO.play();
 				}
 			});
 

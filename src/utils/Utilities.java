@@ -17,11 +17,15 @@ import javafx.scene.paint.Paint;
 import logic.GamePlay;
 import logic.Player;
 import pane.ControlPane;
+import pane.popup.VideoPathPopup;
 import type.BuildingType;
 import type.CardType;
 import type.MaterialType;
 
 public class Utilities {
+	public static final VideoPathPopup ATOMIC_VIDEO = new VideoPathPopup(Config.ATOMIC);
+	public static final VideoPathPopup EXPLOSION_VIDEO = new VideoPathPopup(Config.EXPLOSION);
+	
 	public static void alertGenerate(Alert.AlertType alertType, String title, String content, Runnable methodYes) {
 		Alert alert = new Alert(alertType);
 		alert.setTitle(title);
@@ -274,4 +278,5 @@ public class Utilities {
 		}
 		return null;
 	}
+	
 }

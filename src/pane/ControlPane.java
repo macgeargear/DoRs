@@ -15,7 +15,6 @@ import pane.popup.BuyCardPopup;
 import pane.popup.MarketPopup;
 
 public class ControlPane {
-
 	private static ControlPane instance = null;
 	private ArrayList<PlayerContainer> allPlayerContainers;
 	private HeaderGame gameHeader;
