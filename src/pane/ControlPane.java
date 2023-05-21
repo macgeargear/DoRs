@@ -38,14 +38,9 @@ public class ControlPane {
 		this.selectNode = null;
 		this.selectMap = null;
 		this.stage = stage;
-		this.gameHeader = new HeaderGame();
 		this.allPlayerContainers = new ArrayList<PlayerContainer>();
 
-		GamePlay.getInstance(2);
-//		this.homePane = new HomePane();
-
 		homeScene = new Scene(new HomePane(), Config.SCREEN_WIDTH, Config.HOMEPANE_HEIGHT);
-		gameScene = new Scene(new GamePane(), Config.SCREEN_WIDTH, Config.SCREEN_HEIGH);
 
 		this.showHomeScene();
 	}
@@ -55,13 +50,6 @@ public class ControlPane {
 	}
 
 	public static ControlPane getInstance() {
-		return instance;
-	}
-
-	public static ControlPane getInstance(Stage stage) {
-		if (instance == null) {
-			instance = new ControlPane(stage);
-		}
 		return instance;
 	}
 
@@ -78,14 +66,6 @@ public class ControlPane {
 	public void backToGameScene() {
 		stage.setScene(gameScene);
 		stage.centerOnScreen();
-	}
-
-	public Scene getGameScene() {
-		return gameScene;
-	}
-
-	public Scene getHomeScene() {
-		return homeScene;
 	}
 
 	public ArrayList<PlayerContainer> getAllPlayerContainers() {
