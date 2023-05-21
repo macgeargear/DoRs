@@ -23,12 +23,8 @@ import pane.ControlPane;
 
 public class MarketPopup extends Popup {
 	private VBox popupContent;
-	private HBox header;
-	private Text title;
 	private Text amount;
-	private Button backButton;
 	private ArrayList<MaterialExchange> allExchanges;
-	private VBox exchangeContainer;
 
 	public MarketPopup() {
 		allExchanges = new ArrayList<MaterialExchange>();
@@ -41,9 +37,9 @@ public class MarketPopup extends Popup {
 
 	private void initContent() {
 		this.popupContent = new VBox();
+		this.initBackButton();
 		this.initTitle();
 		this.initExchanges();
-		this.initBackButton();
 		this.popupContent.setPadding(new Insets(Config.SMALL_PADDING));
 		this.popupContent.setBackground(
 				new Background(new BackgroundFill(Color.WHITE, new CornerRadii(Config.BORDER_RADIUS), null)));
@@ -51,41 +47,44 @@ public class MarketPopup extends Popup {
 		for (MaterialExchange exchange : allExchanges) {
 			VBox.setMargin(exchange, new Insets(Config.MEDIUM_MARGIN));
 		}
-
-		this.popupContent.getChildren().addAll(backButton, header, exchangeContainer);
 	}
 
 	private void initExchanges() {
 
-		this.exchangeContainer = new VBox();
+		VBox exchangeContainer = new VBox();
 
 		for (int i = 0; i < 5; ++i) {
 			MaterialExchange newExchange = new MaterialExchange(i);
 			allExchanges.add(newExchange);
 			exchangeContainer.getChildren().add(newExchange);
 		}
+		
+		this.popupContent.getChildren().add(exchangeContainer);
 	}
 
 	private void initBackButton() {
-		this.backButton = new CustomButton("back");
-		this.backButton.setFont(Font.font(18));
+		Button backButton = new CustomButton("back");
+		backButton.setFont(Font.font(18));
 
-		this.backButton.setOnAction(e -> {
+		backButton.setOnAction(e -> {
 			this.hide();
 		});
+		this.popupContent.getChildren().add(backButton);
 	}
 
 	private void initTitle() {
-		this.header = new HBox();
-		this.header.setAlignment(Pos.CENTER);
+		HBox header = new HBox();
+		header.setAlignment(Pos.CENTER);
 
-		this.title = new Text("Exchange Material Market");
+		Text title = new Text("Exchange Material Market");
 		this.amount = new Text(" " + GamePlay.getInstance().getMarketplace().getAmount());
-		this.title.setFont(Font.font(Config.LARGE_FONT));
+		title.setFont(Font.font(Config.LARGE_FONT));
 		this.amount.setFont(Font.font(Config.LARGE_FONT));
 
-		this.header.getChildren().addAll(title, amount);
-		this.title.setTextAlignment(TextAlignment.CENTER);
+		header.getChildren().addAll(title, amount);
+		title.setTextAlignment(TextAlignment.CENTER);
+		
+		this.popupContent.getChildren().add(header);
 	}
 
 	public void updateExchange() {
