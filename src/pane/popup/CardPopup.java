@@ -18,20 +18,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class CardPopup extends Popup {
-	private Label label;
 	private Button showMaterialCardButton;
 	private Button showEffectCardButton;
 	private VBox popupContent;
 	private MaterialCardPopup showMaterialCard;
 	private EffectCardPopup showEffectCard;
-	private Button closeButton;
-
+	
 	public CardPopup() {
 		this.centerOnScreen();
 		this.initShowEffectCardButton();
 		this.initShowMaterialButton();
 		this.initContent();
-		this.getPopupContent().getChildren().addAll(this.showEffectCardButton, this.showMaterialCardButton);
+		this.popupContent.getChildren().addAll(this.showEffectCardButton, this.showMaterialCardButton);
 
 		this.getContent().add(popupContent);
 		ControlPane.getInstance().setCardPopup(this);
@@ -79,13 +77,13 @@ public class CardPopup extends Popup {
 		this.popupContent.setPrefWidth(400);
 		this.popupContent.setAlignment(Pos.CENTER);
 
-		this.closeButton = new ExitButton("X");
-		this.closeButton.setOnAction(e -> {
+		Button closeButton = new ExitButton("X");
+		closeButton.setOnAction(e -> {
 			this.hide();
 		});
 
 		HBox title = new HBox();
-		this.closeButton.setAlignment(Pos.TOP_CENTER);
+		closeButton.setAlignment(Pos.TOP_CENTER);
 
 		HBox.setMargin(messageLabel, new Insets(0, 0, 0, this.popupContent.getPrefWidth() / 6));
 		VBox.setMargin(title, new Insets(12));
@@ -97,10 +95,6 @@ public class CardPopup extends Popup {
 		this.popupContent.getChildren().addAll(title);
 	}
 
-	public Label getLabel() {
-		return label;
-	}
-
 	public Button getShowMaterialCardButton() {
 		return showMaterialCardButton;
 	}
@@ -109,28 +103,12 @@ public class CardPopup extends Popup {
 		return showEffectCardButton;
 	}
 
-	public VBox getPopupContent() {
-		return popupContent;
-	}
-
 	public MaterialCardPopup getShowMaterialCard() {
 		return showMaterialCard;
 	}
 
-	public void setShowMaterialCard(MaterialCardPopup showMaterialCard) {
-		this.showMaterialCard = showMaterialCard;
-	}
-
 	public EffectCardPopup getShowEffectCard() {
 		return showEffectCard;
-	}
-
-	public void setShowEffectCard(EffectCardPopup showEffectCard) {
-		this.showEffectCard = showEffectCard;
-	}
-
-	public void setShowEffectCardButton(Button showEffectCardButton) {
-		this.showEffectCardButton = showEffectCardButton;
 	}
 
 }
