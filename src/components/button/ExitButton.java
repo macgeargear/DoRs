@@ -1,4 +1,4 @@
-package components.Button;
+package components.button;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;

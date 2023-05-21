@@ -1,4 +1,4 @@
-package components.Material;
+package components.material;
 
 import config.Config;
 import javafx.geometry.Insets;

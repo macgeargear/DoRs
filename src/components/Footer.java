@@ -1,7 +1,10 @@
 package components;
 
-import components.Button.FooterButton;
-import components.Button.RollDice;
+import components.button.FooterButton;
+import components.button.RollDice;
+import components.game.GameResult;
+import components.game.HeaderGame;
+import components.player.PlayerContainer;
 import config.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

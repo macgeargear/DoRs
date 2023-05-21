@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 import buildings.Place;
 import card.EffectCard;
-import components.Button.ExitButton;
-import components.Button.FooterButton;
+import components.button.ExitButton;
+import components.button.FooterButton;
 import config.Config;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

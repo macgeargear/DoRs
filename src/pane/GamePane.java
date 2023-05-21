@@ -3,9 +3,9 @@ package pane;
 import java.util.ArrayList;
 
 import components.Footer;
-import components.GameBoard;
-import components.HeaderGame;
-import components.PlayerInfo;
+import components.game.GameBoard;
+import components.game.HeaderGame;
+import components.player.PlayerInfo;
 import javafx.scene.layout.BorderPane;
 import logic.GamePlay;
 import logic.Player;
