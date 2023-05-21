@@ -29,15 +29,15 @@ public class AmountSelector extends HBox {
 		newButton.setPadding(new Insets(20));
 		newButton.setPrefWidth(68);
 		newButton.setFont(Font.font(32));
-		newButton.setOnMouseClicked(e->{
+		newButton.setOnMouseClicked(e -> {
 			HomePane homePane = ControlPane.getInstance().getHomePane();
 			Button prevChoice = homePane.getSelectChoice();
 			GamePlay.getInstance(amount);
-			
-			if(prevChoice != null) {
+
+			if (prevChoice != null) {
 				prevChoice.setStyle(Config.initialButtonStyle);
 			}
-			
+
 			homePane.setSelectChoice(newButton);
 			homePane.getStartButton().setDisable(false);
 		});

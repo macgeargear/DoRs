@@ -80,7 +80,7 @@ public class NodeButton extends Button {
 		}
 
 		GamePlay instance = GamePlay.getInstance();
-		int playerIndex = instance.findPlayerIndex(node.getOwner());
+		int playerIndex = instance.getPlayerIndex(node.getOwner());
 		if (playerIndex == 0) {
 			return Config.P1;
 		} else if (playerIndex == 1) {

@@ -1,6 +1,5 @@
 package components;
 
-
 import components.Button.CustomButton;
 import components.Button.FooterButton;
 import pane.popup.ExitPopup;

@@ -15,7 +15,7 @@ public class Map extends Place {
 	public Map(MaterialType type) {
 		Random random = new Random();
 		this.type = type;
-		this.setNumber(random.nextInt(6) + 1);
+		this.number = random.nextInt(6) + 1;
 		this.sideNodes = new ArrayList<Node>();
 		for (int i = 0; i < 4; ++i) {
 			sideNodes.add(null);
@@ -23,7 +23,6 @@ public class Map extends Place {
 	}
 
 	public void produce() {
-		// TODO
 		if (this.isActive()) {
 			for (Node node : this.sideNodes) {
 				if (node.getOwner() != null) {
@@ -34,18 +33,11 @@ public class Map extends Place {
 	}
 
 	public void setSideNode(int position, Node node) {
-		// TODO
 		this.sideNodes.set(position, node);
 	}
 
 	public int getNumber() {
 		return number;
-	}
-
-	public void setNumber(int number) {
-		if (number < 0 || number > 6)
-			return;
-		this.number = number;
 	}
 
 	public ArrayList<Node> getSideNodes() {

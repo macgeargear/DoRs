@@ -54,7 +54,7 @@ public class GamePlay {
 
 		this.initPlayer();
 		this.initMaps();
-		this.initNodes();
+		this.initNodesEdges();
 	}
 
 	private void initPlayer() {
@@ -76,7 +76,7 @@ public class GamePlay {
 		Collections.shuffle(allMaps);
 	}
 
-	private void initNodes() {
+	private void initNodesEdges() {
 		for (int i = 0; i < (int) Math.pow(Config.SIDE_MAP_AMOUNT + 1, 2); ++i) {
 			Node newNode = new Node(BuildingType.EMPTYHOUSE);
 			allNodes.add(newNode);
@@ -130,7 +130,7 @@ public class GamePlay {
 		}
 	}
 
-	public int findPlayerIndex(Player p) {
+	public int getPlayerIndex(Player p) {
 		return allPlayers.indexOf(p);
 	}
 
